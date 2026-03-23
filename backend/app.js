@@ -1,52 +1,54 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-let mongoose = require('mongoose')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const morgan = require('morgan');
+const connectDatabase = require('./config/database');
+const corsOptions = require('./config/cors');
+const errorHandler = require('./middlewares/errorHandler');
+const AppError = require('./utils/AppError');
 
+// Connect to MongoDB
+connectDatabase();
 
+const app = express();
 
-var app = express();
+// Middleware
+app.use(cors(corsOptions));
+app.use(morgan('dev'));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-mongoose.connect('mongodb://localhost:27017/NNPTUD-C2');
-mongoose.connection.on('connected', () => {
-  console.log("connected");
-})
-
-app.use('/api/v1/', require('./routes/index'));
-app.use('/api/v1/users', require('./routes/users'));
-app.use('/api/v1/roles', require('./routes/roles'));
-app.use('/api/v1/products', require('./routes/products'));
-app.use('/api/v1/categories', require('./routes/categories'));
-app.use('/api/v1/auth', require('./routes/auth'));
-app.use('/api/v1/inventories', require('./routes/inventories'));
-app.use('/api/v1/carts', require('./routes/carts'));
-app.use('/api/v1/upload', require('./routes/upload'));
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+// Health check
+app.get('/api/v1', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Luxury Watch Store API is running 🚀',
+    version: '1.0.0',
+  });
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// Routes
+app.use('/api/v1/auth', require('./routes/auth.routes'));
+app.use('/api/v1/users', require('./routes/users.routes'));
+app.use('/api/v1/roles', require('./routes/roles.routes'));
+app.use('/api/v1/categories', require('./routes/categories.routes'));
+app.use('/api/v1/collections', require('./routes/collections.routes'));
+app.use('/api/v1/products', require('./routes/products.routes'));
+app.use('/api/v1/cart', require('./routes/cart.routes'));
+app.use('/api/v1/orders', require('./routes/orders.routes'));
+app.use('/api/v1/payments', require('./routes/payments.routes'));
+app.use('/api/v1/coupons', require('./routes/coupons.routes'));
+app.use('/api/v1/upload', require('./routes/upload.routes'));
+app.use('/api/v1/dashboard', require('./routes/dashboard.routes'));
 
-  // render the error page
-  res.status(err.status || 500);
-  res.send(err.message);
+// 404 handler
+app.use((req, res, next) => {
+  next(new AppError(`Không tìm thấy ${req.originalUrl}`, 404));
 });
+
+// Error handler
+app.use(errorHandler);
 
 module.exports = app;

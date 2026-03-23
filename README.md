@@ -365,26 +365,53 @@ NNPTUD_DoAn/
 # Clone project
 git clone <repository-url>
 cd NNPTUD_DoAn
+```
 
-# Backend
+### 🐳 Cách 1: Docker — Chạy tất cả (Dành cho GV / người hỗ trợ)
+
+> Chỉ cần Docker Desktop, **không cần cài Node.js**
+
+```bash
+# Chạy toàn bộ (MongoDB + Backend + Frontend)
+docker-compose --profile full up -d --build
+
+# Seed data
+docker-compose --profile full exec backend npm run seed
+
+# Xem logs
+docker-compose --profile full logs -f
+
+# Truy cập:
+# Frontend: http://localhost:5173
+# Backend:  http://localhost:3000/api/v1
+```
+
+### 💻 Cách 2: Dev Mode (Dành cho developer)
+
+> Chỉ MongoDB trong Docker, BE + FE chạy trực tiếp (hot reload nhanh)
+
+```bash
+# 1. Chạy MongoDB container
+docker-compose up -d
+
+# 2. Backend (terminal 1)
 cd backend
-npm install
 cp .env.example .env    # Cấu hình env variables
-npm run dev             # http://localhost:3000
+npm install
+npm run seed            # Seed data (lần đầu)
+npm start               # http://localhost:3000
 
-# Frontend (terminal mới)
+# 3. Frontend (terminal 2)
 cd frontend
 npm install
-cp .env.example .env
 npm run dev             # http://localhost:5173
 ```
 
-### Docker Compose
-
-```bash
-docker-compose up -d    # Khởi chạy tất cả services
-docker-compose exec backend npm run seed  # Seed data
-```
+### Tài khoản test
+| Role | Email | Password |
+|:-----|:------|:---------|
+| Admin | admin@luxurywatch.vn | admin123 |
+| Customer | customer@gmail.com | 123456 |
 
 ---
 

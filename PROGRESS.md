@@ -11,67 +11,90 @@
 |:--|:--|
 | **Dự án** | Website E-Commerce bán đồng hồ cao cấp |
 | **Deadline** | 06/04/2026 |
-| **Ngày hiện tại** | D1 — 23/03/2026 ✅ DONE |
-| **Phase hiện tại** | Phase 1: Foundation (23/03 → 25/03) |
-| **Trạng thái** | 🟢 Đúng tiến độ (vượt kế hoạch D1) |
+| **Ngày hiện tại** | D4 — 23/03/2026 ✅ DONE |
+| **Phase hiện tại** | Phase 2: Backend API (D4-D8) — 26% |
+| **Phase tiếp** | D5: Users + Categories + Collections |
+| **Trạng thái** | 🟢 Vượt tiến độ (D1-D4 xong cùng ngày!) |
 
 ---
 
 ## 📊 PROGRESS
 
 ```
-Phase 1 (Foundation):  ████████░░ 38% ── D1 DONE ✅, D2-D3 TODO
-Phase 2 (Backend):     ░░░░░░░░░░  0% ── 26/03 → 30/03
-Phase 3 (Frontend):    ░░░░░░░░░░  0% ── 31/03 → 03/04
-Phase 4 (Polish):      ░░░░░░░░░░  0% ── 04/04 → 05/04
+Phase 1 (Foundation):  ██████████ 100% ✅ DONE
+Phase 2 (Backend):     ███░░░░░░░  26% ── D4 DONE ✅, D5-D8 TODO
+Phase 3 (Frontend):    ░░░░░░░░░░   0% ── D9-D12
+Phase 4 (Polish):      ░░░░░░░░░░   0% ── D13-D14
 ──────────────────────────────────────────────────────
-OVERALL:               ██░░░░░░░░ 11% ── 17/159 tasks
+OVERALL:               ████░░░░░░  36% ── 57/159 tasks
 ```
 
 ---
 
 ## ✅ ĐÃ HOÀN THÀNH
 
-### D1 — 23/03 (Phase 1) — 17 tasks ✅
+### Phase 1: Foundation — 45/45 tasks ✅
+
+#### D1 — 23/03 — Planning & Docs (17 tasks)
 - ✅ Agent setup (14 skills, rules, workflows)
 - ✅ Docs structure (6 thư mục, 61 files, điền 38 files)
 - ✅ PROJECT_REQUIREMENTS.md (12 modules, 65+ chức năng)
-- ✅ Design System chốt: Luxury / Editorial
+- ✅ Design System: Luxury / Editorial
 - ✅ Database Design (11 models, 45 edge cases, SNAPSHOT)
-- ✅ README.md (kiến trúc, luồng nghiệp vụ)
 - ✅ ke-hoach.md + task.md (159 tasks)
-- ✅ 2 Layouts riêng biệt (Customer + Admin, CSS isolation)
-- ✅ PROGRESS.md + daily-start workflow
-- ✅ Workflow global 9 bước (module planning)
-- ✅ Restructure modules → thư mục con (BE + FE)
-- ✅ D2 implementation_plan + task (27 tasks)
-- ✅ Xác nhận kỹ thuật: Docker, rewrite code, Mailtrap
+- ✅ 2 Layouts (Customer + Admin, CSS isolation)
+- ✅ Workflows (global 9 bước, daily-start)
+
+#### D2 — 23/03 — Project Setup (13 tasks)
+- ✅ Docker Compose → MongoDB 8 container `luxury-watch-db`
+- ✅ Backend: viết lại `app.js`, config/ (database, cloudinary, cors)
+- ✅ Backend: .env + .env.example (Mailtrap, Cloudinary, VNPay)
+- ✅ Frontend: Vite + React 19 + TS + TailwindCSS v4
+- ✅ Design tokens: Playfair Display + Inter, Luxury palette
+- ✅ Packages: dotenv, cors, axios, zustand, react-query, zod...
+- ✅ Backup code GV → `_backup_gv/`
+
+#### D3 — 23/03 — Schemas + Seed + Middleware (15 tasks)
+- ✅ 10 schemas viết lại hoàn toàn (Mongoose 9 compatible)
+- ✅ Middleware đầy đủ: auth (JWT), role (RBAC), validate, errorHandler
+- ✅ Seed: 2 roles, 2 users, 8 brands, 4 BST, 15 watches, 15 inventories, 3 coupons
+- ✅ API health check: `GET /api/v1` → success
+
+---
+
+#### D4 — 23/03 — Auth Module (12 tasks)
+- ✅ Config: mailer.js (Mailtrap), sendEmail.js, generateToken.js
+- ✅ Controller: register, login, forgotPassword, resetPassword
+- ✅ Routes: 4 POST + validation + validate middleware
+- ✅ Test: register, login, duplicate, wrong PW, BR-06 forgot
+- ✅ Packages: nodemailer, express-validator
 
 ---
 
 ## 📌 VIỆC TIẾP THEO
 
-### D2 — 24/03 (Phase 1 tiếp) — 27 tasks
-> Chi tiết: [`docs/00-project-init/implementation_plan.md`](./docs/00-project-init/implementation_plan.md)
-> Tasks: [`docs/00-project-init/task.md`](./docs/00-project-init/task.md)
+### D5 — Users + Categories + Collections
+> Cần tạo: `docs/02-back-end/modules/auth/implementation_plan.md` + `task.md`
 
-| Phase | Task | Estimate |
-|:------|:-----|:---------|
-| A | Docker Compose — MongoDB container | 15' |
-| B | Backend — Backup GV + rewrite app.js + config/ + .env | 45' |
-| C | Frontend — Init Vite + TailwindCSS + design tokens | 30' |
-| D | Git + Verify CORS | 10' |
+| Task | Priority |
+|:-----|:---------|
+| `POST /api/v1/auth/register` | 🔴 |
+| `POST /api/v1/auth/login` | 🔴 |
+| `POST /api/v1/auth/forgot-password` | 🔴 |
+| `POST /api/v1/auth/reset-password/:token` | 🔴 |
+| Config Nodemailer (Mailtrap) | 🔴 |
+| Test Auth APIs (Postman) | 🔴 |
 
-### Quyết định kỹ thuật D2:
-- 🐳 Docker chỉ MongoDB (BE+FE chạy trực tiếp)
-- 📝 Code GV backup → viết lại hoàn toàn
-- 📧 Mailtrap cho email dev
-- ☁️ Cloudinary + VNPay → placeholder env
+---
 
-### D3 — 25/03 (Phase 1 cuối)
-- Tạo/viết lại tất cả Mongoose schemas (11 models)
-- Seed data (roles, brands, collections, watches)
-- Middleware stubs (auth, role, validate)
+## ⚠️ LƯU Ý KỸ THUẬT
+
+| Vấn đề | Giải pháp |
+|:-------|:----------|
+| Mongoose 9: `pre()` hooks | Không dùng `next()`, dùng async/return |
+| Mongoose 9: `collection` reserved | Rename → `collectionRef` |
+| Docker Compose: `version` | Obsolete trong v2+, đã bỏ (warning) |
+| `dropDatabase()` trước seed | Để clear stale indexes |
 
 ---
 
@@ -83,24 +106,8 @@ OVERALL:               ██░░░░░░░░ 11% ── 17/159 tasks
 | `ke-hoach.md` | Kế hoạch 4 phases | Khi cần xem scope |
 | `task.md` | 159 tasks chi tiết | Khi cần biết task cụ thể |
 | `PROJECT_REQUIREMENTS.md` | Yêu cầu + modules | Khi cần xem tính năng |
-| `README.md` | Kiến trúc + flows | Khi cần xem tổng quan kỹ thuật |
 | `docs/01-system-design/database-design.md` | DB + Edge Cases | Khi code liên quan DB |
 | `docs/03-frontend/design-system.md` | Luxury style | Khi code frontend |
-
----
-
-## 📂 TRẠNG THÁI DOCS
-
-| Thư mục | Files có nội dung | Tổng | % |
-|:--------|:-----------------|:-----|:--|
-| 00-project-init | 7/8 | 8 | 88% |
-| 01-system-design | 6/7 | 7 | 86% |
-| 02-back-end | 14/14 | 14 | 100% |
-| 03-frontend | 7/18 | 18 | 39% |
-| 04-testing | 1/6 | 6 | 17% |
-| 05-deployment | 2/4 | 4 | 50% |
-
-> Frontend pages + testing docs sẽ điền khi code Phase 3-4.
 
 ---
 

@@ -1,77 +1,80 @@
-const mongoose = require("mongoose");
-let bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema(
-    {
-        username: {
-            type: String,
-            required: [true, "Username is required"],
-            unique: true
-        },
-
-        password: {
-            type: String,
-            required: [true, "Password is required"]
-        },
-
-        email: {
-            type: String,
-            required: [true, "Email is required"],
-            unique: true,
-            lowercase: true,
-            match: [/^\S+@\S+\.\S+$/, "Invalid email format"]
-        },
-
-        fullName: {
-            type: String,
-            default: ""
-        },
-
-        avatarUrl: {
-            type: String,
-            default: "https://i.sstatic.net/l60Hf.png"
-        },
-
-        status: {
-            type: Boolean,
-            default: false
-        },
-
-        role: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "role",
-            required: true
-        },
-
-        loginCount: {
-            type: Number,
-            default: 0,
-            min: [0, "Login count cannot be negative"]
-        },
-        isDeleted: {
-            type: Boolean,
-            default: false
-        },
-        forgotpasswordToken: String,
-        forgotpasswordTokenExp: Date
+  {
+    username: {
+      type: String,
+      required: [true, 'Username là bắt buộc'],
+      unique: true,
+      trim: true,
+      minlength: [3, 'Username tối thiểu 3 ký tự'],
+      maxlength: [30, 'Username tối đa 30 ký tự'],
     },
-    {
-        timestamps: true
-    }
+    email: {
+      type: String,
+      required: [true, 'Email là bắt buộc'],
+      unique: true,
+      lowercase: true,
+      trim: true,
+      match: [/^\S+@\S+\.\S+$/, 'Email không hợp lệ'],
+    },
+    password: {
+      type: String,
+      required: [true, 'Mật khẩu là bắt buộc'],
+      minlength: [6, 'Mật khẩu tối thiểu 6 ký tự'],
+      select: false,
+    },
+    fullName: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    phone: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    avatar: {
+      type: String,
+      default: '',
+    },
+    address: {
+      street: { type: String, default: '' },
+      ward: { type: String, default: '' },
+      district: { type: String, default: '' },
+      city: { type: String, default: '' },
+    },
+    role: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Role',
+      required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    resetPasswordToken: {
+      type: String,
+      default: undefined,
+    },
+    resetPasswordExpire: {
+      type: Date,
+      default: undefined,
+    },
+  },
+  { timestamps: true }
 );
 
-userSchema.index({
-    username: 1,
-    email: 1
-})
+// Hash password before save
+userSchema.pre('save', async function () {
+  if (!this.isModified('password')) return;
+  this.password = await bcrypt.hash(this.password, 12);
+});
 
-userSchema.pre('save', function () {
-    if (this.isModified('password')) {
-        let salt = bcrypt.genSaltSync(10);
-        this.password = bcrypt.hashSync(
-            this.password, salt
-        )
-    }
-})
+// Compare password method
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model('User', userSchema);

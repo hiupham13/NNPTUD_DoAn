@@ -12,10 +12,10 @@ PORT=3000
 NODE_ENV=development
 
 # Database
-MONGODB_URI=mongodb://localhost:27017/nnptud-ecommerce
+MONGODB_URI=mongodb://localhost:27017/luxury-watch-store
 
 # JWT
-JWT_SECRET=your_jwt_secret_key_here
+JWT_SECRET=your_jwt_secret_key_change_this_in_production
 JWT_EXPIRE=24h
 
 # Cloudinary
@@ -30,13 +30,13 @@ VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
 VNP_RETURN_URL=http://localhost:5173/payment/vnpay-return
 VNP_IPN_URL=http://localhost:3000/api/v1/payments/vnpay-ipn
 
-# Email (Nodemailer)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
+# Mailtrap (Email dev/test)
+SMTP_HOST=sandbox.smtp.mailtrap.io
+SMTP_PORT=2525
+SMTP_USER=your_mailtrap_user
+SMTP_PASS=your_mailtrap_pass
 
-# Frontend URL (for reset password link)
+# Frontend URL
 FRONTEND_URL=http://localhost:5173
 ```
 
@@ -47,7 +47,12 @@ VITE_API_URL=http://localhost:3000/api/v1
 ```
 
 ## ⚠️ Lưu ý
-- **KHÔNG** commit `.env` lên Git
-- Tạo `.env.example` (không có giá trị thật) để team reference
+- **KHÔNG** commit `.env` lên Git (đã có trong `.gitignore`)
+- Tạo `.env` từ `.env.example`: `cp backend/.env.example backend/.env`
 - VNPay Sandbox dùng test credentials
-- Gmail cần "App Password" (bật 2FA trước)
+- Mailtrap: email không gửi thật, xem trên dashboard mailtrap.io
+- Cloudinary: đăng ký free tại cloudinary.com
+
+## 🐳 Docker Note
+- Khi chạy **full Docker** (`--profile full`), `MONGODB_URI` tự override thành `mongodb://mongo:27017/luxury-watch-store`
+- Khi dev **local** (chỉ MongoDB Docker), dùng `mongodb://localhost:27017/luxury-watch-store`

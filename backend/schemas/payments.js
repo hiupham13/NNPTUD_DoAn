@@ -1,81 +1,47 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Types.ObjectId,
-      ref: "user",
-      required: true
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
+      required: true,
     },
-
-    reservation: {
-      type: mongoose.Types.ObjectId,
-      ref: "reservation",
-      required: true
-    },
-
     method: {
       type: String,
-      enum: ["cod", "bank_transfer", "momo"],
+      enum: ['cod', 'vnpay'],
       required: true,
-      default: "cod",
     },
-
-    status: {
-      type: String,
-      enum: ["pending", "paid", "failed", "cancelled", "refunded"],
-      default: "pending"
-    },
-
     amount: {
       type: Number,
       required: true,
-      min: 0,
     },
-
-    currency: {
+    status: {
       type: String,
-      default: "VND"
+      enum: ['pending', 'success', 'failed', 'refunded'],
+      default: 'pending',
     },
-
-    transactionId: {
+    // VNPay specific
+    vnpayTransactionId: {
       type: String,
-      default: ""
+      default: '',
     },
-
-    providerResponse: {
-      type: mongoose.Schema.Types.Mixed,
-      default: null,
+    vnpayResponseCode: {
+      type: String,
+      default: '',
     },
-
+    vnpayBankCode: {
+      type: String,
+      default: '',
+    },
     paidAt: {
       type: Date,
       default: null,
-    },
-
-    failedAt: {
-      type: Date,
-      default: null,
-    },
-
-    cancelledAt: {
-      type: Date,
-      default: null,
-    },
-
-    refundedAt: {
-      type: Date,
-      default: null,
-    },
-
-    note: {
-      type: String,
-      default: ""
     },
   },
   { timestamps: true }
 );
 
+paymentSchema.index({ order: 1 });
 
-
-module.exports = mongoose.model("Payment", paymentSchema);
+module.exports = mongoose.model('Payment', paymentSchema);

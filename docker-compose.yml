@@ -1,0 +1,65 @@
+services:
+  # === DATABASE ===
+  mongo:
+    image: mongo:8
+    container_name: luxury-watch-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # === BACKEND API ===
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: luxury-watch-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./backend/uploads:/app/uploads
+    env_file:
+      - ./backend/.env
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/luxury-watch-store
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+    restart: unless-stopped
+    profiles:
+      - full
+
+  # === FRONTEND ===
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: luxury-watch-web
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:3000/api/v1
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
+    profiles:
+      - full
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
