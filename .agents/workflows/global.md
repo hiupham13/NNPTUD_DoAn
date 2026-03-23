@@ -207,6 +207,9 @@ description: Luồng làm việc chính của Agent — Đảm bảo đọc Skil
      → Cập nhật module-module.md (nếu có thay đổi so với plan)
      → Cập nhật docs khác nếu liên quan
 
+  6. docs/00-project-init/timeline.md
+     → Cập nhật đồ thị timeline, tổng quan và đánh dấu ✅ các task/phase đã hoàn thành
+
 - Mapping module → docs cần update:
   Setup project / Docker        → docs/00-project-init/ + docs/05-deployment/
   Thiết kế database / API       → docs/01-system-design/

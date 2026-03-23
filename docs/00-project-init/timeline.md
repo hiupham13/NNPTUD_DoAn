@@ -1,7 +1,7 @@
 # 📅 Timeline — 14 Ngày
 
 > Xem chi tiết tại [`ke-hoach.md`](../../ke-hoach.md) và [`task.md`](../../task.md)
-> Cập nhật lần cuối: **23/03/2026 — 00:07**
+> Cập nhật lần cuối: **24/03/2026 — 00:36**
 
 ---
 
@@ -12,7 +12,7 @@
   │  Phase 1  │    Phase 2    │     Phase 3      │  Phase 4  │ Submit │
   │  3 ngày   │    5 ngày     │     4 ngày       │  2 ngày   │        │
   │ Foundation│  Backend API  │  Frontend React  │  Polish   │  📦    │
-  ▲ ✅ DONE   ▲ 26% ──────→
+  ▲ ✅ DONE   ▲ ✅ DONE   ──────→
   (D1-D4)
 ```
 
@@ -29,10 +29,10 @@
 | Ngày | Task | Status |
 |:-----|:-----|:-------|
 | D4 (23/03) | Auth: Register, Login, Forgot/Reset PW + Mailtrap email + JWT | ✅ 12/12 |
-| D5 (24/03) | Users CRUD + Categories CRUD + Collections CRUD | ☐ 0/12 |
-| D6 (25/03) | Products CRUD + Upload Cloudinary + Filter/Search/Sort | ☐ |
-| D7 (26/03) | Cart + Orders (SNAPSHOT) + Inventory + Coupons | ☐ |
-| D8 (27/03) | VNPay Sandbox + Error handling + API polish | ☐ |
+| D5 (24/03) | Users CRUD + Categories CRUD + Collections CRUD | ✅ 12/12 |
+| D6 (24/03) | Products CRUD + Upload Cloudinary + Filter/Search/Sort | ✅ 9/9 |
+| D7 (24/03) | Cart + Orders (SNAPSHOT) + Inventory + Coupons | ✅ 6/6 |
+| D8 (24/03) | VNPay Sandbox + Error handling + API polish | ✅ 6/6 |
 
 ## Phase 3: Frontend React (28/03 → 31/03)
 | Ngày | Task | Status |
@@ -54,11 +54,11 @@
 
 ```
 Phase 1: ██████████ 100% ✅
-Phase 2: ███░░░░░░░  26% ← Đang ở đây
+Phase 2: ██████████ 100% ✅ ← XONG BACKEND
 Phase 3: ░░░░░░░░░░   0%
 Phase 4: ░░░░░░░░░░   0%
 ─────────────────────────
-OVERALL:  ████░░░░░░  36% (57/159 tasks)
+OVERALL:  ███████░░░  65% (102/159 tasks)
 ```
 
 > 🎯 Vượt tiến độ ~3 ngày so với kế hoạch ban đầu!

@@ -9,7 +9,9 @@ const errorHandler = require('./middlewares/errorHandler');
 const AppError = require('./utils/AppError');
 
 // Connect to MongoDB
-connectDatabase();
+if (process.env.NODE_ENV !== 'test') {
+  connectDatabase();
+}
 
 const app = express();
 
@@ -32,15 +34,14 @@ app.get('/api/v1', (req, res) => {
 // Routes
 app.use('/api/v1/auth', require('./routes/auth.routes'));
 app.use('/api/v1/users', require('./routes/users.routes'));
-app.use('/api/v1/roles', require('./routes/roles.routes'));
 app.use('/api/v1/categories', require('./routes/categories.routes'));
 app.use('/api/v1/collections', require('./routes/collections.routes'));
+app.use('/api/v1/upload', require('./routes/upload.routes'));
 app.use('/api/v1/products', require('./routes/products.routes'));
 app.use('/api/v1/cart', require('./routes/cart.routes'));
 app.use('/api/v1/orders', require('./routes/orders.routes'));
-app.use('/api/v1/payments', require('./routes/payments.routes'));
 app.use('/api/v1/coupons', require('./routes/coupons.routes'));
-app.use('/api/v1/upload', require('./routes/upload.routes'));
+app.use('/api/v1/payments', require('./routes/payments.routes'));
 app.use('/api/v1/dashboard', require('./routes/dashboard.routes'));
 
 // 404 handler
@@ -50,5 +51,11 @@ app.use((req, res, next) => {
 
 // Error handler
 app.use(errorHandler);
+
+// Bắt đầu CronSweeper Dọn rác
+const { startCleanupCron } = require('./cron/orderCleanup');
+if (process.env.NODE_ENV !== 'test') {
+  startCleanupCron();
+}
 
 module.exports = app;
