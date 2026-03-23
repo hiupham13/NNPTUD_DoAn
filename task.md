@@ -151,21 +151,21 @@
 ### D9 — 31/03 (Ngày 9) — Setup + Layout + Auth Pages
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 9.1 | Setup React Router v7 | 🔴 | ☐ | |
-| 9.2 | Setup Zustand store (auth, cart) | 🔴 | ☐ | |
-| 9.3 | Setup TanStack Query (queryClient) | 🔴 | ☐ | |
-| 9.4 | Setup Axios instance (baseURL, interceptors) | 🔴 | ☐ | |
-| 9.5 | Tạo Layout: Header (Logo, Nav, Cart icon, User) | 🔴 | ☐ | Luxury style |
-| 9.6 | Tạo Layout: Footer | 🔴 | ☐ | |
-| 9.7 | Tạo Layout: Admin Sidebar | 🔴 | ☐ | |
-| 9.8 | Paper Noise Texture overlay (global) | 🟡 | ☐ | SVG noise 2% opacity |
-| 9.9 | Visible Grid Lines (desktop only) | 🟡 | ☐ | 4 vertical lines |
-| 9.10 | Page: Login | 🔴 | ☐ | Form + validation |
-| 9.11 | Page: Register | 🔴 | ☐ | |
-| 9.12 | Page: Forgot Password | 🔴 | ☐ | |
-| 9.13 | Page: Reset Password | 🔴 | ☐ | |
-| 9.14 | Auth guard (ProtectedRoute, GuestRoute) | 🔴 | ☐ | |
-| 9.15 | Cập nhật `docs/03-frontend/` | 🔴 | ☐ | |
+| 9.1 | Setup React Router v7 | 🔴 | ✅ | |
+| 9.2 | Setup Zustand store (auth, cart) | 🔴 | ✅ | |
+| 9.3 | Setup TanStack Query (queryClient) | 🔴 | ✅ | |
+| 9.4 | Setup Axios instance (baseURL, interceptors) | 🔴 | ✅ | |
+| 9.5 | Tạo Layout: Header (Logo, Nav, Cart icon, User) | 🔴 | ✅ | Luxury style |
+| 9.6 | Tạo Layout: Footer | 🔴 | ✅ | |
+| 9.7 | Tạo Layout: Admin Sidebar | 🔴 | ✅ | |
+| 9.8 | Paper Noise Texture overlay (global) | 🟡 | ✅ | SVG noise 2% opacity |
+| 9.9 | Visible Grid Lines (desktop only) | 🟡 | ✅ | 4 vertical lines |
+| 9.10 | Page: Login | 🔴 | ✅ | Form + validation |
+| 9.11 | Page: Register | 🔴 | ✅ | |
+| 9.12 | Page: Forgot Password | 🔴 | ✅ | |
+| 9.13 | Page: Reset Password | 🔴 | ✅ | |
+| 9.14 | Auth guard (ProtectedRoute, GuestRoute) | 🔴 | ✅ | |
+| 9.15 | Cập nhật `docs/03-frontend/` | 🔴 | ✅ | |
 
 ### D10 — 01/04 (Ngày 10) — Home + Products
 | # | Task | Priority | Status | Ghi chú |
@@ -259,18 +259,18 @@
 |:------|:-----|:------|:------|:-------|
 | Phase 1 (D1-D3) | 45 | 37 | 8 | **45** |
 | Phase 2 (D4-D8) | 46 | 36 | 10 | **12** |
-| Phase 3 (D9-D12) | 47 | 33 | 14 | 0 |
+| Phase 3 (D9-D12) | 47 | 33 | 14 | **15** |
 | Phase 4 (D13-D14) | 21 | 16 | 5 | 0 |
-| **TỔNG** | **159** | **122** | **37** | **57** |
+| **TỔNG** | **159** | **122** | **37** | **72** |
 
 ### Tiến độ tổng
 ```
 Phase 1: ██████████ 100% (45/45) ✅ DONE
 Phase 2: ███░░░░░░░  26% (12/46) ── D4 DONE ✅
-Phase 3: ░░░░░░░░░░   0% (0/47)
+Phase 3: ███░░░░░░░  32% (15/47) ── D9 DONE ✅
 Phase 4: ░░░░░░░░░░   0% (0/21)
 ─────────────────────────────
-OVERALL:  ████░░░░░░  36% (57/159)
+OVERALL:  █████░░░░░  45% (72/159)
 ```
 
 ---

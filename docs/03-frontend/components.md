@@ -7,17 +7,22 @@
 
 ## Base UI Components
 
-### Button
-- Border-radius: 0px
-- Uppercase, letter-spacing 0.2em, Inter font
-- Primary: charcoal bg, alabaster text, gold slide on hover (500ms)
-- Secondary: transparent bg, charcoal border, charcoal text
+> Vị trí: `src/components/ui/`
 
-### Input
+### `Button.tsx`
 - Border-radius: 0px
-- Border-bottom only (1px rgba(26,26,26,0.15))
-- Focus: gold border-bottom (#D4AF37), transition 500ms
-- Label: uppercase, small, Inter, tracking-wider
+- Hỗ trợ các variant: `primary`, `outline`, `ghost`.
+- Animation: Hiệu ứng Cinematic Gold Slide Effect (lấp đầy màu Gold trượt từ trái sang trong 700ms khi hover).
+- Trạng thái loading: Hỗ trợ thuộc tính `isLoading` tự động vô hiệu hoá nút và hiển thị text "ĐANG XỬ LÝ...".
+- Typography: Uppercase, letter-spacing 0.2em, Inter font.
+
+### `Input.tsx`
+- Border-radius: 0px
+- Tích hợp chuẩn label (tiêu đề nhỏ), input (nhập văn bản), error (tin nhắn lỗi đỏ) cho React Hook Form.
+- Border-bottom only (`border-outline-variant/30`).
+- Focus: gold border-bottom (`#D4AF37`), transition 500ms.
+- Placeholder styles: Font Playfair Display, in nghiêng, tracking normal.
+- User input style: Khi gõ chữ, văn bản tự động chia letter-spacing cực rộng (`0.2em` hoặc `widest`).
 
 ### Card (Product)
 - **Grayscale image** → **color on hover** (1500-2000ms transition)
@@ -96,7 +101,8 @@
 ## Product Components
 
 ### ProductCard
-- Image: grayscale default, color on hover (1500ms)
+- Image: **Studio shot nền trắng**, grayscale default, color on hover (1500ms)
+- Tỷ lệ khung: `aspect-[3/4]` hoặc `aspect-[4/5]`
 - Overlay text on hover: title + price
 - No rounded corners
 
@@ -105,9 +111,11 @@
 - Gap: generous spacing
 
 ### ProductFilter
-- Sidebar on desktop, drawer on mobile
-- Accordion sections: Brand, Gender, Movement, Price Range
-- Checkbox + range slider
+- **Off-canvas Drawer** từ bên trái (không phải Sidebar cố định)
+- Nút "Bộ lọc" góc trái trên Product Grid
+- Accordion sections: Thương hiệu, Giới tính, Loại máy, Khoảng giá
+- Overlay nền tối 50% opacity + animation `translateX` 500ms
+- Mobile: Full-width overlay drawer
 
 ## Animation Tokens
 
@@ -116,4 +124,8 @@
 --transition-button: 500ms ease-out;
 --transition-color: 700ms ease-out;
 --transition-image: 1500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+/* Cinematic Sliding Animations (used via Tailwind) */
+--animate-slide-in-left: slide-in-left 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+--animate-slide-in-right: slide-in-right 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 ```

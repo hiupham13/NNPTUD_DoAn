@@ -95,3 +95,60 @@ Border Strong:     #1A1A1A
 | Mobile < 768px | text-4xl - 5xl | px-8, py-20 | 1 col |
 | Tablet 768-1024px | text-5xl - 6xl | px-16, py-24 | 2-3 col |
 | Desktop > 1024px | text-7xl - 9xl | px-16, py-32 | 12 col asymmetric |
+
+---
+
+## 8. LOCALIZATION (NGÔN NGỮ GIAO DIỆN)
+
+> **QUY TẮC TỐI THƯỢNG:** Mọi giao diện hướng tới người dùng (Customer / Admin) trên Frontend đều **BẮT BUỘC PHẢI DÙNG TIẾNG VIỆT 100%**.
+
+1. **Labels & Placeholders**: Phải được dịch chuẩn ngữ cảnh thương mại điện tử đồng hồ (Ví dụ: "Địa chỉ Email", "Mật khẩu", "Họ và tên"). 
+2. **Buttons & Actions**: "Thêm vào giỏ", "Thanh toán", "Đăng ký". KHÔNG được để text tiếng Anh mặc định (như "Submit", "Send Link").
+3. **Exceptions**: Tên thương hiệu đặc hữu (Rolex, Omega, "Luxury Watch Store" brand) hoặc technical terms (Quartz, Automatic).
+4. **Quy trình làm việc**: Nếu copy UI/template từ Figma/Stitch (thường giao diện sẽ để text tiếng Anh), Agent **BẮT BUỘC phải dịch toàn bộ sang Tiếng Việt ngay trong lúc code React Object/Component**. Không bao giờ được đưa thẳng hardcode tiếng Anh lên layout.
+
+---
+
+## 9. PRODUCT IMAGE STANDARDS (ẢNH SẢN PHẨM)
+
+> **Phong cách chính thức**: Studio Shot trên nền trắng/xám nhạt — giống cách Rolex, Omega trưng bày trên chính trang web của họ.
+
+| Yếu tố | Quy chuẩn |
+|:--------|:---------|
+| **Kiểu chụp** | Studio shot nền trắng/xám nhạt, rõ sản phẩm, không nhiễu bối cảnh |
+| **Tỷ lệ khung** | `aspect-[3/4]` hoặc `aspect-[4/5]` (chân dung, cao hơn rộng) |
+| **Hiệu ứng mặc định** | `grayscale(100%)` + `contrast-125` |
+| **Hiệu ứng hover** | Grayscale → Full Color + `scale(1.05)` trong `1500ms` |
+| **Shadow** | `shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]` → deepen on hover |
+| **Nguồn ảnh (dev)** | Unsplash (`luxury watch`, `wristwatch studio`). Production dùng Cloudinary |
+
+---
+
+## 10. PRODUCT FILTER — OFF-CANVAS DRAWER
+
+> **Quyết định**: Dùng **Off-canvas Drawer** (trượt từ trái) thay vì sidebar cố định, giữ cho layout tảng thoáng đãng và luôn đẹp như trang tạp chí.
+
+| Yếu tố | Mô tả |
+|:--------|:------|
+| **Nút mở** | Nút "Bộ lọc" góc trên bên trái khu vực Product Grid |
+| **Panel** | Trượt từ bên trái, overlay nền tối 50% opacity |
+| **Nội dung** | Thương hiệu, Giới tính, Loại máy, Khoảng giá, Sắp xếp |
+| **Animation** | `translateX` + `duration-500ms` cinematic |
+| **Mobile** | Full-width overlay drawer |
+
+---
+
+## 11. ADMIN LAYOUT — MINIMALIST DATA-HEAVY
+
+> **Nguyên tắc**: Không cần quá chú trọng vào mỹ thuật. Chỉ cần hiển thị đúng data, gọn gàng, trực quan, dễ thao tác.
+
+| Yếu tố | Customer Layout | Admin Layout |
+|:--------|:---------------|:-------------|
+| Paper Noise Texture | ✅ Có | ❌ Không |
+| Grayscale Images | ✅ Có | ❌ Không |
+| Gold Slide Button | ✅ Có | ❌ Không |
+| Vertical Grid Lines | ✅ Có | ❌ Không |
+| Border-radius | 0px | 0px (giữ đồng bộ) |
+| Font | Playfair + Inter | Inter only |
+| Sidebar | Không | Charcoal `#1A1A1A`, cố định trái |
+| Trọng tâm | Ảnh đẹp + Typography | Data Table + Stats Cards |

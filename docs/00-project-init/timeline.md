@@ -37,7 +37,7 @@
 ## Phase 3: Frontend React (28/03 → 31/03)
 | Ngày | Task | Status |
 |:-----|:-----|:-------|
-| D9 (28/03) | Setup + Layout + Design System + Auth pages | ☐ |
+| D9 (28/03) | Setup + Layout + Design System + Auth pages | ✅ 15/15 |
 | D10 (29/03) | Home + Product List + Product Detail | ☐ |
 | D11 (30/03) | Cart + Checkout + Orders + Profile | ☐ |
 | D12 (31/03) | Admin: Dashboard + Products + Orders + Users + Categories | ☐ |
