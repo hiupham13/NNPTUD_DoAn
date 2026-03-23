@@ -86,8 +86,9 @@ Sau khi đã hiểu context → followBƯỚC 1→8 trong global.md workflow
 Sau khi hoàn thành task:
 1. Cập nhật task.md: ☐ → ✅ cho tasks đã xong
 2. Cập nhật PROGRESS.md: cập nhật progress bar + completed tasks
-3. Cập nhật docs/ tương ứng (theo global.md bước 8)
-4. Tóm tắt cho user: "Hôm nay đã xong X, Y, Z"
+3. Cập nhật docs/00-project-init/timeline.md: cập nhật tiến độ, đánh dấu module/ngày đã hoàn thành
+4. Cập nhật docs/ tương ứng (theo global.md bước 8)
+5. Tóm tắt cho user: "Hôm nay đã xong X, Y, Z"
 ```
 
 ---

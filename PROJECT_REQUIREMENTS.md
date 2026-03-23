@@ -203,12 +203,13 @@
 - CORS chỉ allow frontend origin
 - Sanitize input chống NoSQL injection
 
-### Code Quality
+### Code Quality & Localization
 - Response format chuẩn `{ success, data, message, pagination }`
 - Try-catch + centralized error handler
 - Soft delete (`isDeleted` flag)
 - TypeScript strict mode (frontend)
 - Responsive design (mobile-first)
+- **NGÔN NGỮ GIAO DIỆN (BẮT BUỘC): Toàn bộ UI Labels, Messages, Placeholders trên hệ thống bắt buộc phải được dịch ra Tiếng Việt hoàn toàn. Không được phép để sót tiếng Anh trong Component, Placeholder hay form (Ví dụ: phải dùng "Địa chỉ Email" thay vì "Email Address", "Đăng nhập" thay vì "Sign In"). Ngoại lệ duy nhất là các danh từ riêng/brand (như Luxury Watch Store, Rolex).**
 
 ---
 

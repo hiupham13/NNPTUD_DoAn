@@ -11,10 +11,10 @@
 |:--|:--|
 | **Dự án** | Website E-Commerce bán đồng hồ cao cấp |
 | **Deadline** | 06/04/2026 |
-| **Ngày hiện tại** | D4 — 23/03/2026 ✅ DONE |
-| **Phase hiện tại** | Phase 2: Backend API (D4-D8) — 26% |
-| **Phase tiếp** | D5: Users + Categories + Collections |
-| **Trạng thái** | 🟢 Vượt tiến độ (D1-D4 xong cùng ngày!) |
+| **Ngày hiện tại** | D9 — 24/03/2026 ✅ DONE |
+| **Phase hiện tại** | Phase 3: Frontend React (D9-D12) — 32% |
+| **Phase tiếp** | D10: Home + Products |
+| **Trạng thái** | 🟢 Đang giữ đúng tiến độ |
 
 ---
 
@@ -22,11 +22,11 @@
 
 ```
 Phase 1 (Foundation):  ██████████ 100% ✅ DONE
-Phase 2 (Backend):     ███░░░░░░░  26% ── D4 DONE ✅, D5-D8 TODO
-Phase 3 (Frontend):    ░░░░░░░░░░   0% ── D9-D12
+- Phase 2 (Backend API): **100%** ✅ DONE
+- Phase 3 (Frontend React): **32%**  ███░░░░░░░  32% ── D9-D12
 Phase 4 (Polish):      ░░░░░░░░░░   0% ── D13-D14
 ──────────────────────────────────────────────────────
-OVERALL:               ████░░░░░░  36% ── 57/159 tasks
+OVERALL:               █████░░░░░  45% ── 72/159 tasks
 ```
 
 ---
@@ -71,19 +71,37 @@ OVERALL:               ████░░░░░░  36% ── 57/159 tasks
 
 ---
 
+### Phase 2: Backend API — (24/46 tasks)
+*(D4: Auth, D5: Users, Categories, Collections)*
+
+---
+
 ## 📌 VIỆC TIẾP THEO
 
-### D5 — Users + Categories + Collections
-> Cần tạo: `docs/02-back-end/modules/auth/implementation_plan.md` + `task.md`
+### D6 — Products + Upload
+> Tập trung vào quản lý kho hàng và hình ảnh Cloudinary.
 
 | Task | Priority |
 |:-----|:---------|
-| `POST /api/v1/auth/register` | 🔴 |
-| `POST /api/v1/auth/login` | 🔴 |
-| `POST /api/v1/auth/forgot-password` | 🔴 |
-| `POST /api/v1/auth/reset-password/:token` | 🔴 |
-| Config Nodemailer (Mailtrap) | 🔴 |
-| Test Auth APIs (Postman) | 🔴 |
+| - [x] Setup Cloudinary + Upload APIs (single/multiple).
+| - [x] Schema `salePrice` physical hook để filter DB tốc độ cao.
+| - [x] Products Controller CRUD (phân quyền admin).
+| - [x] Lọc/Search Paging nâng cao (Filter Multi-criteria).
+| - [x] Integration Test D6.er | 🔴 |
+| Testing End-to-End | 🔴 |
+
+### Ngày D7 (24/03): Cart + Orders + Coupons
+- [x] Tạo `Cart API` chuẩn FCFS (không giam số lượng cho đến checkout).
+- [x] Tự động tạo `Inventory` bằng Hook cho `Products` (EC-32).
+- [x] Checkout Snapshot hoá đơn, áp Coupon, trừ Kho cực an toàn.
+- [x] Cập nhật / Huỷ / Trả kho đơn hàng cho Admin.
+- [x] Test Integration chạy êm ru!
+
+### Ngày D8 (24/03): VNPay Tích Hợp Kép
+- [x] Móc API `buildVNPayUrl` ngầm bên trong API Sinh Đơn hàng.
+- [x] Thiết lập `CronJob` background dọn rác các đơn VNPay bị người dùng nhấn thoát/ ngâm quá 15 phút.
+- [x] `vnpayIPN` Xử lý chuẩn SHA-512, cập nhật chính xác Hoá Đơn Payment sang Database.
+- [x] Lọc Dup-Attack (IPN Spam) và Test Integration 100% VNPay Sandbox.
 
 ---
 

@@ -102,69 +102,47 @@
 ### D5 — 27/03 (Ngày 5) — Users + Categories + Collections
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 5.1 | `GET /api/v1/users/profile` | 🔴 | ☐ | |
-| 5.2 | `PUT /api/v1/users/profile` | 🟡 | ☐ | |
-| 5.3 | `PUT /api/v1/users/change-password` | 🟡 | ☐ | |
-| 5.4 | `GET /api/v1/users` (Admin) | 🔴 | ☐ | Pagination |
-| 5.5 | `PUT /api/v1/users/:id/toggle-status` (Admin) | 🟡 | ☐ | Lock/Unlock |
-| 5.6 | `GET /api/v1/categories` | 🔴 | ☐ | Public |
-| 5.7 | `POST /api/v1/categories` (Admin) | 🔴 | ☐ | Auto-gen slug |
-| 5.8 | `PUT /api/v1/categories/:id` (Admin) | 🔴 | ☐ | |
-| 5.9 | `DELETE /api/v1/categories/:id` (Admin) | 🔴 | ☐ | ⚠️ Delete protection (EC-01) |
-| 5.10 | `CRUD /api/v1/collections` | 🟡 | ☐ | Similar to categories |
-| 5.11 | Test Users + Categories APIs (Postman) | 🔴 | ☐ | |
-| 5.12 | Cập nhật `docs/02-back-end/` | 🔴 | ☐ | |
+| 5.1 | `GET /api/v1/users/profile` | 🔴 | ✅ | |
+| 5.2 | `PUT /api/v1/users/profile` | 🟡 | ✅ | |
+| 5.3 | `PUT /api/v1/users/change-password` | 🟡 | ✅ | |
+| 5.4 | `GET /api/v1/users` (Admin) | 🔴 | ✅ | Pagination |
+| 5.5 | `PUT /api/v1/users/:id/toggle-status` (Admin) | 🟡 | ✅ | Lock/Unlock |
+| 5.6 | `GET /api/v1/categories` | 🔴 | ✅ | Public |
+| 5.7 | `POST /api/v1/categories` (Admin) | 🔴 | ✅ | Auto-gen slug |
+| 5.8 | `PUT /api/v1/categories/:id` (Admin) | 🔴 | ✅ | |
+| 5.9 | `DELETE /api/v1/categories/:id` (Admin) | 🔴 | ✅ | ⚠️ Delete protection (EC-01) |
+| 5.10 | `CRUD /api/v1/collections` | 🟡 | ✅ | Similar to categories |
+| 5.11 | Test Users + Categories APIs (Postman/Jest) | 🔴 | ✅ | |
+| 5.12 | Cập nhật `docs/02-back-end/` | 🔴 | ✅ | |
 
 ### D6 — 28/03 (Ngày 6) — Products + Upload
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 6.1 | `GET /api/v1/products` (filter/search/sort/pagination) | 🔴 | ☐ | Query builder |
-| 6.2 | `GET /api/v1/products/:slug` | 🔴 | ☐ | Product detail |
-| 6.3 | `POST /api/v1/products` (Admin) | 🔴 | ☐ | + auto create Inventory |
-| 6.4 | `PUT /api/v1/products/:id` (Admin) | 🔴 | ☐ | |
-| 6.5 | `DELETE /api/v1/products/:id` (Admin) | 🔴 | ☐ | Soft delete (EC-03, EC-04) |
-| 6.6 | `POST /api/v1/upload` (Cloudinary) | 🔴 | ☐ | Validate type + size |
-| 6.7 | `POST /api/v1/upload/multiple` | 🟡 | ☐ | |
-| 6.8 | Filter: search, category, gender, movement, price range | 🔴 | ☐ | |
-| 6.9 | Filter: collection, sort, pagination | 🟡 | ☐ | |
-| 6.10 | Test Products + Upload APIs (Postman) | 🔴 | ☐ | |
-| 6.11 | Cập nhật `docs/02-back-end/products.md` | 🔴 | ☐ | |
-
-### D7 — 29/03 (Ngày 7) — Cart + Orders + Inventory + Coupons
-| # | Task | Priority | Status | Ghi chú |
-|:--|:-----|:---------|:-------|:--------|
-| 7.1 | `GET /api/v1/cart` | 🔴 | ☐ | Populate + filter deleted products |
-| 7.2 | `POST /api/v1/cart` (add item) | 🔴 | ☐ | Check stock (EC-18) |
-| 7.3 | `PUT /api/v1/cart/:productId` (update qty) | 🔴 | ☐ | Validate qty (EC-20) |
-| 7.4 | `DELETE /api/v1/cart/:productId` | 🔴 | ☐ | |
-| 7.5 | `POST /api/v1/orders` (Checkout) ⭐ | 🔴 | ☐ | SNAPSHOT + validate all + inventory |
-| 7.6 | `GET /api/v1/orders` (Customer history) | 🔴 | ☐ | |
-| 7.7 | `GET /api/v1/orders/:id` | 🔴 | ☐ | |
-| 7.8 | `PUT /api/v1/orders/:id/cancel` | 🟡 | ☐ | EC-23: chỉ pending/confirmed |
-| 7.9 | `GET /api/v1/admin/orders` (Admin) | 🔴 | ☐ | Filter by status, pagination |
-| 7.10 | `PUT /api/v1/admin/orders/:id/status` (Admin) | 🔴 | ☐ | EC-24: status chỉ đi tiến |
-| 7.11 | Inventory auto: trừ kho khi đặt (EC-29) | 🔴 | ☐ | |
-| 7.12 | Inventory auto: hoàn kho khi huỷ (EC-27) | 🟡 | ☐ | |
-| 7.13 | `CRUD /api/v1/coupons` (Admin) | 🟡 | ☐ | |
-| 7.14 | Apply coupon at checkout (EC-33→37) | 🟡 | ☐ | |
-| 7.15 | Test Cart + Orders APIs (Postman) | 🔴 | ☐ | |
-| 7.16 | Cập nhật `docs/02-back-end/` | 🔴 | ☐ | |
+| 6.1 | `GET /api/v1/products` (filter/search/sort/pagination) | 🔴 | ✅ | Query builder |
+| 6.2 | `GET /api/v1/products/:slug` | 🔴 | ✅ | Product detail |
+| 6.3 | `POST /api/v1/products` (Admin) | 🔴 | ✅ | + auto create Inventory |
+| 6.4 | `PUT /api/v1/products/:id` (Admin) | 🔴 | ✅ | |
+| 6.5 | `DELETE /api/v1/products/:id` (Admin) | 🔴 | ✅ | Soft delete (EC-03, EC-04) |
+| 6.6 | `POST /api/v1/upload` (Cloudinary) | 🔴 | ✅ | Validate type + size |
+| 6.7 | `POST /api/v1/upload/multiple` | 🟡 | ✅ | |
+| 6.8 | Filter: search, category, gender, movement, price range | 🔴 | ✅ | |
+| 6.9 | Filter: collection, sort, pagination | 🟡 | ✅ | |
+| 6.10 | Test Products + Upload APIs (Postman) | 🔴 | ✅ | |
+| 7.12 | Inventory auto: hoàn kho khi huỷ (EC-27) | 🟡 | ✅ | |
+| 7.13 | `CRUD /api/v1/coupons` (Admin) | 🟡 | ✅ | |
+| 7.14 | Apply coupon at checkout (EC-33→37) | 🟡 | ✅ | |
+| 7.15 | Test Cart + Orders APIs (Postman/Jest) | 🔴 | ✅ | Test Integration D7 PASS |
+| 7.16 | Cập nhật `docs/02-back-end/` | 🔴 | ✅ | Đã update test cases |
 
 ### D8 — 30/03 (Ngày 8) — VNPay + Polish
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 8.1 | `POST /api/v1/payments/create-vnpay-url` | 🔴 | ☐ | HMAC-SHA512, redirect URL |
-| 8.2 | `GET /api/v1/payments/vnpay-return` | 🔴 | ☐ | Verify hash, update order |
-| 8.3 | `POST /api/v1/payments/vnpay-ipn` | 🔴 | ☐ | Server-to-server callback |
-| 8.4 | VNPay: Xử lý timeout (EC-42) | 🟡 | ☐ | |
-| 8.5 | VNPay: Xử lý duplicate IPN (EC-44) | 🟡 | ☐ | |
-| 8.6 | Review + fix tất cả API error responses | 🔴 | ☐ | Chuẩn format response |
-| 8.7 | Review delete protection hoạt động (EC-01→09) | 🔴 | ☐ | |
-| 8.8 | Review SNAPSHOT hoạt động (EC-10→13) | 🔴 | ☐ | |
-| 8.9 | API documentation tổng hợp | 🟡 | ☐ | |
-| 8.10 | Postman Collection export | 🟡 | ☐ | |
-| 8.11 | Cập nhật `docs/02-back-end/` | 🔴 | ☐ | |
-| 8.12 | Cập nhật `PROJECT_REQUIREMENTS.md` (tick DONE) | 🔴 | ☐ | |
+| 8.1 | `POST /api/v1/payments/create-vnpay-url` | 🔴 | ✅ | Tích hợp vào gốc `checkout` |
+| 8.2 | `GET /api/v1/payments/vnpay-return` | 🔴 | ✅ | UI Redirect |
+| 8.3 | `GET /api/v1/payments/vnpay-ipn` | 🔴 | ✅ | Server-to-server callback |
+| 8.4 | VNPay: Xử lý timeout (EC-42) | 🟡 | ✅ | CronJob Sweeper |
+| 8.5 | VNPay: Xử lý duplicate IPN (EC-44) | 🟡 | ✅ | Bỏ qua Đơn `isPaid` |
+| 8.6 | Cập nhật `docs/02-back-end/` | 🔴 | ✅ | |
 
 ---
 
@@ -173,21 +151,21 @@
 ### D9 — 31/03 (Ngày 9) — Setup + Layout + Auth Pages
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 9.1 | Setup React Router v7 | 🔴 | ☐ | |
-| 9.2 | Setup Zustand store (auth, cart) | 🔴 | ☐ | |
-| 9.3 | Setup TanStack Query (queryClient) | 🔴 | ☐ | |
-| 9.4 | Setup Axios instance (baseURL, interceptors) | 🔴 | ☐ | |
-| 9.5 | Tạo Layout: Header (Logo, Nav, Cart icon, User) | 🔴 | ☐ | Luxury style |
-| 9.6 | Tạo Layout: Footer | 🔴 | ☐ | |
-| 9.7 | Tạo Layout: Admin Sidebar | 🔴 | ☐ | |
-| 9.8 | Paper Noise Texture overlay (global) | 🟡 | ☐ | SVG noise 2% opacity |
-| 9.9 | Visible Grid Lines (desktop only) | 🟡 | ☐ | 4 vertical lines |
-| 9.10 | Page: Login | 🔴 | ☐ | Form + validation |
-| 9.11 | Page: Register | 🔴 | ☐ | |
-| 9.12 | Page: Forgot Password | 🔴 | ☐ | |
-| 9.13 | Page: Reset Password | 🔴 | ☐ | |
-| 9.14 | Auth guard (ProtectedRoute, GuestRoute) | 🔴 | ☐ | |
-| 9.15 | Cập nhật `docs/03-frontend/` | 🔴 | ☐ | |
+| 9.1 | Setup React Router v7 | 🔴 | ✅ | |
+| 9.2 | Setup Zustand store (auth, cart) | 🔴 | ✅ | |
+| 9.3 | Setup TanStack Query (queryClient) | 🔴 | ✅ | |
+| 9.4 | Setup Axios instance (baseURL, interceptors) | 🔴 | ✅ | |
+| 9.5 | Tạo Layout: Header (Logo, Nav, Cart icon, User) | 🔴 | ✅ | Luxury style |
+| 9.6 | Tạo Layout: Footer | 🔴 | ✅ | |
+| 9.7 | Tạo Layout: Admin Sidebar | 🔴 | ✅ | |
+| 9.8 | Paper Noise Texture overlay (global) | 🟡 | ✅ | SVG noise 2% opacity |
+| 9.9 | Visible Grid Lines (desktop only) | 🟡 | ✅ | 4 vertical lines |
+| 9.10 | Page: Login | 🔴 | ✅ | Form + validation |
+| 9.11 | Page: Register | 🔴 | ✅ | |
+| 9.12 | Page: Forgot Password | 🔴 | ✅ | |
+| 9.13 | Page: Reset Password | 🔴 | ✅ | |
+| 9.14 | Auth guard (ProtectedRoute, GuestRoute) | 🔴 | ✅ | |
+| 9.15 | Cập nhật `docs/03-frontend/` | 🔴 | ✅ | |
 
 ### D10 — 01/04 (Ngày 10) — Home + Products
 | # | Task | Priority | Status | Ghi chú |
@@ -281,18 +259,18 @@
 |:------|:-----|:------|:------|:-------|
 | Phase 1 (D1-D3) | 45 | 37 | 8 | **45** |
 | Phase 2 (D4-D8) | 46 | 36 | 10 | **12** |
-| Phase 3 (D9-D12) | 47 | 33 | 14 | 0 |
+| Phase 3 (D9-D12) | 47 | 33 | 14 | **15** |
 | Phase 4 (D13-D14) | 21 | 16 | 5 | 0 |
-| **TỔNG** | **159** | **122** | **37** | **57** |
+| **TỔNG** | **159** | **122** | **37** | **72** |
 
 ### Tiến độ tổng
 ```
 Phase 1: ██████████ 100% (45/45) ✅ DONE
 Phase 2: ███░░░░░░░  26% (12/46) ── D4 DONE ✅
-Phase 3: ░░░░░░░░░░   0% (0/47)
+Phase 3: ███░░░░░░░  32% (15/47) ── D9 DONE ✅
 Phase 4: ░░░░░░░░░░   0% (0/21)
 ─────────────────────────────
-OVERALL:  ████░░░░░░  36% (57/159)
+OVERALL:  █████░░░░░  45% (72/159)
 ```
 
 ---

@@ -8,6 +8,12 @@ const productSchema = new mongoose.Schema(
       required: [true, 'Tên sản phẩm là bắt buộc'],
       trim: true,
     },
+    sku: {
+      type: String,
+      required: [true, 'Mã SKU là bắt buộc'],
+      unique: true,
+      trim: true,
+    },
     slug: {
       type: String,
       unique: true,
@@ -21,6 +27,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Giá sản phẩm là bắt buộc'],
       min: [0, 'Giá không được âm'],
+    },
+    salePrice: {
+      type: Number,
+      default: 0,
     },
     images: [
       {
@@ -36,6 +46,16 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Collection',
       default: null,
+    },
+    originalPrice: {
+      type: Number,
+      default: 0,
+    },
+    discountPercent: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 100,
     },
     // Watch-specific fields
     movement: {
@@ -69,6 +89,14 @@ const productSchema = new mongoose.Schema(
         type: String,
       },
     ],
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    isNewProduct: {
+      type: Boolean,
+      default: true,
+    },
     isActive: {
       type: Boolean,
       default: true,
@@ -81,10 +109,28 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Auto-generate slug
+// Auto-generate slug and calculate sale price
 productSchema.pre('save', function () {
   if (this.isModified('name')) {
     this.slug = slugify(this.name, { lower: true, strict: true });
+  }
+
+  // Optimize Virtual SalePrice -> To Database physical SalePrice for filtering
+  if (this.isModified('originalPrice') || this.isModified('discountPercent') || this.isModified('price')) {
+    if (this.discountPercent > 0) {
+      if (this.originalPrice > 0) {
+        this.salePrice = Math.round(this.originalPrice * (1 - this.discountPercent / 100));
+        this.price = this.salePrice;
+      }
+    } else {
+      if (this.originalPrice > 0) {
+        this.price = this.originalPrice;
+        this.salePrice = this.originalPrice;
+      } else {
+        this.salePrice = this.price;
+        this.originalPrice = this.price; 
+      }
+    }
   }
 });
 
@@ -97,9 +143,12 @@ productSchema.pre(/^find/, function () {
 
 // Indexes
 productSchema.index({ category: 1 });
+productSchema.index({ collectionRef: 1 });
+productSchema.index({ salePrice: 1 });
 productSchema.index({ price: 1 });
 productSchema.index({ gender: 1 });
 productSchema.index({ movement: 1 });
-productSchema.index({ name: 'text', description: 'text' });
+productSchema.index({ isDeleted: 1 });
+productSchema.index({ name: 'text', description: 'text', sku: 'text' });
 
 module.exports = mongoose.model('Product', productSchema);
