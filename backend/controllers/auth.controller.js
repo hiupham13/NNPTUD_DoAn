@@ -9,10 +9,10 @@ const sendEmail = require('../utils/sendEmail');
 // ============ VALIDATION RULES ============
 
 exports.registerValidation = [
-  body('username')
+  body('name')
     .trim()
-    .notEmpty().withMessage('Username là bắt buộc')
-    .isLength({ min: 3, max: 30 }).withMessage('Username từ 3-30 ký tự'),
+    .notEmpty().withMessage('Họ và tên là bắt buộc')
+    .isLength({ min: 2, max: 50 }).withMessage('Họ và tên từ 2-50 ký tự'),
   body('email')
     .trim()
     .notEmpty().withMessage('Email là bắt buộc')
@@ -21,9 +21,6 @@ exports.registerValidation = [
   body('password')
     .notEmpty().withMessage('Mật khẩu là bắt buộc')
     .isLength({ min: 6 }).withMessage('Mật khẩu tối thiểu 6 ký tự'),
-  body('fullName')
-    .optional()
-    .trim(),
 ];
 
 exports.loginValidation = [
@@ -58,18 +55,20 @@ exports.resetPasswordValidation = [
  */
 exports.register = async (req, res, next) => {
   try {
-    const { username, email, password, fullName } = req.body;
-
-    // Check duplicate username
-    const existingUsername = await User.findOne({ username });
-    if (existingUsername) {
-      return next(new AppError('Username đã tồn tại', 409));
-    }
+    const { name, email, password } = req.body;
 
     // Check duplicate email
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
       return next(new AppError('Email đã tồn tại', 409));
+    }
+
+    // Auto-generate username from email (phần trước @)
+    let username = email.split('@')[0].toLowerCase();
+    // Nếu username trùng → thêm random suffix
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      username = `${username}_${Date.now().toString(36)}`;
     }
 
     // Find customer role
@@ -83,21 +82,28 @@ exports.register = async (req, res, next) => {
       username,
       email,
       password,
-      fullName: fullName || '',
+      fullName: name,
       role: customerRole._id,
     });
 
-    // Response (exclude password)
+    // Generate JWT for auto-login after register
+    const token = generateToken({
+      userId: user._id.toString(),
+      role: 'customer',
+    });
+
+    // Response format khớp FE authStore
     res.status(201).json({
       success: true,
       message: 'Đăng ký thành công',
       data: {
+        token,
         user: {
-          _id: user._id,
-          username: user.username,
+          id: user._id,
+          name: user.fullName,
           email: user.email,
-          fullName: user.fullName,
           role: 'customer',
+          isActive: user.isActive,
         },
       },
     });
@@ -146,12 +152,11 @@ exports.login = async (req, res, next) => {
       data: {
         token,
         user: {
-          _id: user._id,
-          username: user.username,
+          id: user._id,
+          name: user.fullName || user.username,
           email: user.email,
-          fullName: user.fullName,
-          avatar: user.avatar,
           role: user.role.name,
+          isActive: user.isActive,
         },
       },
     });

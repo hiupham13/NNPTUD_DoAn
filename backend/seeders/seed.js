@@ -85,6 +85,7 @@ const seedDatabase = async () => {
     const productsData = [
       {
         name: 'Rolex Submariner Date 41mm',
+        sku: 'RLX-SUB-41',
         description: 'Đồng hồ lặn huyền thoại với bộ máy Calibre 3235 tự động, chống nước 300m. Vỏ Oystersteel 41mm, mặt số đen, bezel xoay một chiều Cerachrom.',
         price: 250000000, category: catMap['Rolex'], collectionRef: colMap["Diver's Edition"],
         movement: 'automatic', gender: 'male', caseMaterial: 'Oystersteel', caseSize: '41mm',
@@ -94,6 +95,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Rolex Datejust 36mm',
+        sku: 'RLX-DJ-36',
         description: 'Biểu tượng của sự thanh lịch với Calibre 3235, mặt số champagne, dây đeo Jubilee. Hoàn hảo cho mọi dịp.',
         price: 180000000, category: catMap['Rolex'], collectionRef: colMap['Classic Gold'],
         movement: 'automatic', gender: 'unisex', caseMaterial: 'Oystersteel & Yellow Gold', caseSize: '36mm',
@@ -103,6 +105,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Omega Seamaster Planet Ocean 600M',
+        sku: 'OMG-PO-600',
         description: 'Đồng hồ lặn chuyên nghiệp với Master Chronometer Co-Axial 8900, chống nước 600m, bezel ceramic cam-đen.',
         price: 120000000, category: catMap['Omega'], collectionRef: colMap['Sport Series'],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '43.5mm',
@@ -112,6 +115,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Omega Speedmaster Moonwatch Professional',
+        sku: 'OMG-SPD-42',
         description: 'Đồng hồ đầu tiên lên Mặt Trăng. Calibre 3861 lên dây cót thủ công, mặt đen Hesalite, chronograph huyền thoại.',
         price: 150000000, category: catMap['Omega'], collectionRef: colMap['Classic Gold'],
         movement: 'mechanical', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '42mm',
@@ -121,6 +125,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Casio G-Shock GA-2100-1A',
+        sku: 'CAS-GA2100-1A',
         description: 'CasiOak — thiết kế bát giác iconic, siêu bền, chống va đập. World time, stopwatch, LED backlight.',
         price: 5500000, category: catMap['Casio'], collectionRef: colMap['Sport Series'],
         movement: 'quartz', gender: 'male', caseMaterial: 'Carbon Core Guard', caseSize: '45.4mm',
@@ -130,6 +135,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Casio Edifice EFR-S108D',
+        sku: 'CAS-EFR-S108',
         description: 'Đồng hồ lịch lãm mỏng nhẹ với mặt sapphire, nhẹ và bền, phù hợp kinh doanh và hàng ngày.',
         price: 8200000, category: catMap['Casio'], collectionRef: colMap['Dress Collection'],
         movement: 'quartz', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '41mm',
@@ -139,6 +145,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Seiko Presage SRPD37',
+        sku: 'SEI-SRPD37',
         description: 'Cocktail Time series — mặt số gradient xanh đá quý, bộ máy 4R35 automatic Nhật Bản.',
         price: 12000000, category: catMap['Seiko'], collectionRef: colMap['Dress Collection'],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '40.5mm',
@@ -148,6 +155,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Seiko Prospex SPB143',
+        sku: 'SEI-SPB143',
         description: 'Đồng hồ lặn 200m với bộ máy 6R35 automatic, bezel xoay một chiều, thiết kế Captain Willard 1970.',
         price: 25000000, category: catMap['Seiko'], collectionRef: colMap["Diver's Edition"],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '42.7mm',
@@ -157,6 +165,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Citizen Eco-Drive BN0150-28E',
+        sku: 'CTZ-BN0150',
         description: 'Promaster Diver Eco-Drive — chạy bằng năng lượng ánh sáng, không cần pin, chống nước 200m.',
         price: 7500000, category: catMap['Citizen'], collectionRef: colMap["Diver's Edition"],
         movement: 'eco-drive', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '44mm',
@@ -166,6 +175,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Tissot PRX Powermatic 80',
+        sku: 'TIS-PRX-80',
         description: 'Phục hồi thiết kế 1970s với Powermatic 80 automatic, lưu trữ năng lượng 80 giờ, mặt xanh waffle.',
         price: 18000000, category: catMap['Tissot'], collectionRef: colMap['Classic Gold'],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '40mm',
@@ -175,6 +185,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Tissot Le Locle Powermatic 80',
+        sku: 'TIS-LOC-80',
         description: 'Đồng hồ cổ điển thanh lịch với Powermatic 80, mặt trắng Roman, dây da nâu Italy.',
         price: 15000000, category: catMap['Tissot'], collectionRef: colMap['Dress Collection'],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '39.3mm',
@@ -184,6 +195,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Longines HydroConquest 41mm',
+        sku: 'LNG-HC-41',
         description: 'Đồng hồ lặn sporty với bộ máy L888 automatic, ceramic bezel xanh, chống nước 300m.',
         price: 28000000, category: catMap['Longines'], collectionRef: colMap['Sport Series'],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '41mm',
@@ -193,6 +205,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'TAG Heuer Carrera Chronograph',
+        sku: 'TAG-CAR-44',
         description: 'Biểu tượng đua xe với Calibre Heuer 02 automatic chronograph, 80 giờ power reserve.',
         price: 85000000, category: catMap['TAG Heuer'], collectionRef: colMap['Sport Series'],
         movement: 'automatic', gender: 'male', caseMaterial: 'Stainless Steel', caseSize: '44mm',
@@ -202,6 +215,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Omega Constellation 29mm',
+        sku: 'OMG-CON-29',
         description: 'Đồng hồ nữ sang trọng với Calibre 8700 Master Chronometer, bezel gắn móng vuốt, mặt xà cừ.',
         price: 95000000, category: catMap['Omega'], collectionRef: colMap['Classic Gold'],
         movement: 'quartz', gender: 'female', caseMaterial: 'Stainless Steel & Sedna Gold', caseSize: '29mm',
@@ -211,6 +225,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Casio Baby-G BGD-565',
+        sku: 'CAS-BGD-565',
         description: 'Đồng hồ nữ nhỏ gọn, chống va đập, chống nước 200m. Màu pastel thời trang.',
         price: 3200000, category: catMap['Casio'], collectionRef: colMap['Sport Series'],
         movement: 'quartz', gender: 'female', caseMaterial: 'Resin', caseSize: '37mm',
@@ -240,7 +255,7 @@ const seedDatabase = async () => {
     const coupons = await Coupon.create([
       {
         code: 'WELCOME10',
-        discountType: 'percentage',
+        discountType: 'percent',
         discountValue: 10,
         maxDiscount: 500000,
         minOrderAmount: 1000000,
@@ -257,7 +272,7 @@ const seedDatabase = async () => {
       },
       {
         code: 'VIP20',
-        discountType: 'percentage',
+        discountType: 'percent',
         discountValue: 20,
         maxDiscount: 2000000,
         minOrderAmount: 5000000,

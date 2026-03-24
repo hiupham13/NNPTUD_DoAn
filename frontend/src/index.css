@@ -48,12 +48,27 @@
   --animate-slide-in-right: slide-in-right 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 
   @keyframes slide-in-left {
-    from { opacity: 0; transform: translateX(-40%); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(-40%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
+
   @keyframes slide-in-right {
-    from { opacity: 0; transform: translateX(40%); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(40%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
@@ -70,16 +85,18 @@
     filter: grayscale(100%);
     transition: filter 2000ms ease-in-out, transform 2000ms ease-in-out;
   }
+
   .grayscale-hover:hover {
     filter: grayscale(0%);
-    transform: scale(1.05); /* very subtle cinematic zoom */
+    transform: scale(1.05);
+    /* very subtle cinematic zoom */
   }
-  
+
   .vertical-rl {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
   }
-  
+
   .whisper-shadow {
     box-shadow: 0 20px 40px rgba(26, 28, 27, 0.04);
   }
@@ -89,6 +106,7 @@
     overflow: hidden;
     transition: color 500ms ease-in-out;
   }
+
   .cta-button::before {
     content: '';
     position: absolute;
@@ -100,14 +118,16 @@
     transition: left 500ms ease-in-out;
     z-index: -1;
   }
+
   .cta-button:hover::before {
     left: 0;
   }
+
   .cta-button:hover {
     color: #ffffff;
     border-color: var(--color-primary);
   }
-  
+
   .drop-cap::first-letter {
     font-family: var(--font-display);
     font-size: 5rem;
