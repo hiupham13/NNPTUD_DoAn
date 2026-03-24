@@ -1,0 +1,133 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Plus, Search, Edit, Trash2 } from 'lucide-react';
+import AdminTable, { type Column } from '../../components/admin/AdminTable';
+import { useAdminProducts, useDeleteProduct, useUpdateProduct } from '../../hooks/useProductAdmin';
+import toast from 'react-hot-toast';
+import '../../components/admin/AdminToggle.css';
+import './ProductListPage.css';
+
+export default function ProductListPage() {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useAdminProducts({ search, page, limit: 15 });
+  const deleteMutation = useDeleteProduct();
+  const updateMutation = useUpdateProduct();
+
+  const products = data?.data || [];
+  const pagination = data?.pagination;
+
+  const handleDelete = (id: string, name: string) => {
+    if (!confirm(`Bạn có chắc muốn xóa "${name}"?`)) return;
+    deleteMutation.mutate(id, {
+      onSuccess: () => toast.success('Đã xóa sản phẩm'),
+      onError: () => toast.error('Xóa thất bại'),
+    });
+  };
+
+  const formatVND = (v: number) =>
+    new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(v);
+
+  const columns: Column<any>[] = [
+    {
+      key: 'image',
+      title: 'Ảnh',
+      width: '60px',
+      render: (p) => (
+        <img
+          src={p.images?.[0] || '/placeholder.png'}
+          alt={p.name}
+          className="product-list__thumb"
+        />
+      ),
+    },
+    { key: 'name', title: 'Tên sản phẩm' },
+    { key: 'sku', title: 'SKU', width: '120px' },
+    {
+      key: 'category',
+      title: 'Thương hiệu',
+      render: (p) => p.category?.name || '—',
+    },
+    {
+      key: 'price',
+      title: 'Giá bán',
+      width: '140px',
+      render: (p) => formatVND(p.salePrice || p.price),
+    },
+    {
+      key: 'isActive',
+      title: 'Hiển thị',
+      width: '70px',
+      render: (p) => (
+        <label className="admin-toggle" onClick={e => e.stopPropagation()}>
+          <input type="checkbox" checked={p.isActive}
+            onChange={() => updateMutation.mutate({ id: p._id, payload: { isActive: !p.isActive } },
+              { onSuccess: () => toast.success(p.isActive ? 'Đã ẩn sản phẩm' : 'Đã hiển thị sản phẩm') })} />
+          <span className="admin-toggle__slider" />
+        </label>
+      ),
+    },
+    {
+      key: 'actions',
+      title: '',
+      width: '100px',
+      render: (p) => (
+        <div className="product-list__actions">
+          <button className="product-list__btn--edit" onClick={(e) => { e.stopPropagation(); navigate(`/admin/products/${p._id}/edit`); }}>
+            <Edit size={14} />
+          </button>
+          <button className="product-list__btn--delete" onClick={(e) => { e.stopPropagation(); handleDelete(p._id, p.name); }}>
+            <Trash2 size={14} />
+          </button>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div className="product-list">
+      <div className="product-list__header">
+        <h1 className="product-list__title">Quản lý sản phẩm</h1>
+        <Link to="/admin/products/new" className="product-list__add">
+          <Plus size={16} />
+          <span>Thêm sản phẩm</span>
+        </Link>
+      </div>
+
+      <div className="product-list__toolbar">
+        <div className="product-list__search">
+          <Search size={16} />
+          <input
+            type="text"
+            placeholder="Tìm theo tên hoặc SKU..."
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          />
+        </div>
+      </div>
+
+      <AdminTable
+        columns={columns}
+        data={products}
+        loading={isLoading}
+        rowKey={(p: any) => p._id}
+        emptyText="Chưa có sản phẩm nào"
+      />
+
+      {pagination && pagination.totalPages > 1 && (
+        <div className="product-list__pagination">
+          {Array.from({ length: pagination.totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`product-list__page ${page === i + 1 ? 'product-list__page--active' : ''}`}
+              onClick={() => setPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

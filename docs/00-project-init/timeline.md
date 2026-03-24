@@ -1,7 +1,7 @@
 # 📅 Timeline — 14 Ngày
 
 > Xem chi tiết tại [`ke-hoach.md`](../../ke-hoach.md) và [`task.md`](../../task.md)
-> Cập nhật lần cuối: **24/03/2026 — 13:00**
+> Cập nhật lần cuối: **24/03/2026 — 22:00**
 
 ---
 
@@ -12,8 +12,8 @@
   │  Phase 1  │    Phase 2    │     Phase 3      │  Phase 4  │ Submit │
   │  3 ngày   │    5 ngày     │     4 ngày       │  2 ngày   │        │
   │ Foundation│  Backend API  │  Frontend React  │  Polish   │  📦    │
-  ▲ ✅ DONE   ▲ ✅ DONE   ──────→
-  (D1-D4)
+  ▲ ✅ DONE   ▲ ✅ DONE       ▲ ✅ DONE   ──────→
+  (D1-D3)     (D4-D8)        (D9-D12)
 ```
 
 ## Phase 1: Foundation (23/03) ✅ DONE
@@ -25,7 +25,7 @@
 
 > 📝 Phase 1 hoàn thành trong 1 ngày thay vì 3 ngày dự kiến!
 
-## Phase 2: Backend API (23/03 → 30/03) — Đang thực hiện
+## Phase 2: Backend API (23/03 → 24/03) ✅ DONE
 | Ngày | Task | Status |
 |:-----|:-----|:-------|
 | D4 (23/03) | Auth: Register, Login, Forgot/Reset PW + Mailtrap email + JWT | ✅ 12/12 |
@@ -34,32 +34,37 @@
 | D7 (24/03) | Cart + Orders (SNAPSHOT) + Inventory + Coupons | ✅ 6/6 |
 | D8 (24/03) | VNPay Sandbox + Error handling + API polish | ✅ 6/6 |
 
-## Phase 3: Frontend React (28/03 → 31/03)
-| Ngày | Task | Status |
-|:-----|:-----|:-------|
-| D9 (28/03) | Setup + Layout + Design System + Auth pages | ✅ 15/15 |
-| D10 (29/03) | Home + Product List + Product Detail | ✅ 25/25 |
-| D11 (30/03) | Cart + Checkout + Orders + Profile | ☐ |
-| D12 (31/03) | Admin: Dashboard + Products + Orders + Users + Categories | ☐ |
+> 📝 Phase 2 hoàn thành trong 2 ngày thay vì 5 ngày dự kiến!
 
-## Phase 4: Polish (01/04 → 02/04)
+## Phase 3: Frontend React (24/03) ✅ DONE
 | Ngày | Task | Status |
 |:-----|:-----|:-------|
-| D13 (01/04) | Testing, bug fix, UI polish | ☐ |
-| D14 (02/04) | Seed data final, README, docs, submit prep | ☐ |
+| D9 (24/03) | Setup + Layout + Design System + Auth pages | ✅ 15/15 |
+| D10 (24/03) | Home + Product List + Product Detail | ✅ 15/15 |
+| D11 (24/03) | Cart + Checkout + VNPay + Orders + Profile | ✅ 12/12 |
+| D12 (24/03) | Admin: Dashboard, Products, Orders, Users, Settings, Inventory | ✅ 12/12 |
+
+> 📝 Phase 3 hoàn thành trong 1 ngày thay vì 4 ngày dự kiến!
+
+## Phase 4: Polish & Submit — TIẾP THEO
+| Ngày | Task | Status |
+|:-----|:-----|:-------|
+| D13 | Testing E2E, bug fix, responsive, UI polish | ☐ |
+| D14 | Seed data final, README, docs, Docker test, submit prep | ☐ |
 
 ---
 
 ## 📊 Tiến độ
 
 ```
-Phase 1: ██████████ 100% ✅
-Phase 2: ██████████ 100% ✅ ← XONG BACKEND
-Phase 3: █████░░░░░  50%
-Phase 4: ░░░░░░░░░░   0%
+Phase 1: ██████████ 100% ✅ DONE (45/45)
+Phase 2: ██████████ 100% ✅ DONE (46/46)
+Phase 3: ██████████ 100% ✅ DONE (48/48)
+Phase 4: ░░░░░░░░░░   0%       (0/21)
 ─────────────────────────
-OVERALL:  ████████░░  80% (127/159 tasks)
+OVERALL:  █████████░  87% (139/160 tasks)
 ```
 
-> 🎯 Vượt tiến độ ~3 ngày so với kế hoạch ban đầu!
-> Deadline gốc: 06/04 — Có thể xong sớm ~02/04
+> 🎯 Vượt tiến độ **~10 ngày** so với kế hoạch ban đầu!
+> Kế hoạch gốc: Phase 3 xong 03/04 — Thực tế: **24/03** ✅
+> Deadline: 06/04 — Còn dư **12 ngày** cho Phase 4 (testing + polish)

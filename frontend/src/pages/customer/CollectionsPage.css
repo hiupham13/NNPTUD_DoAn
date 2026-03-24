@@ -1,0 +1,322 @@
+/* ============================================
+   CollectionsPage — Editorial Asymmetric Gallery
+   Layout inspired by "The Archive" template
+   Design System: Project ROOT (Cormorant/Playfair/Inter)
+   ============================================ */
+
+.collections {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ════════ HERO ════════ */
+.collections__hero {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
+  align-items: center;
+  padding: 120px 0 80px;
+}
+
+.collections__hero-content {
+  grid-column: 2 / 7;
+}
+
+.collections__hero-image {
+  grid-column: 8 / 13;
+}
+
+.collections__hero-image img {
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  max-height: 400px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 1.5s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+.collections__hero-image:hover img {
+  filter: grayscale(0%);
+}
+
+.collections__title {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(3.5rem, 7vw, 8rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #2c2c2c;
+  margin: 0 0 48px;
+}
+
+.collections__title em {
+  font-style: italic;
+  color: #D4AF37;
+}
+
+.collections__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 640px;
+}
+
+.collections__intro-cap {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  line-height: 0.75;
+  color: #D4AF37;
+  flex-shrink: 0;
+}
+
+.collections__intro-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.9;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #2c2c2c;
+  opacity: 0.65;
+}
+
+/* ════════ ASYMMETRIC GRID ════════ */
+.collections__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  row-gap: 40px;
+  padding-bottom: 80px;
+}
+
+/* Row 1: card 1 (left-small) + card 2 (right-large, shifted down) */
+.collections__card:nth-child(4n+1) {
+  grid-column: 1 / 5;
+  padding-top: 0;
+}
+
+.collections__card:nth-child(4n+2) {
+  grid-column: 6 / 11;
+  padding-top: 80px;
+}
+
+/* Row 2: card 3 (left-wide) + card 4 (right-small, shifted up via less padding) */
+.collections__card:nth-child(4n+3) {
+  grid-column: 1 / 6;
+  padding-top: 48px;
+}
+
+.collections__card:nth-child(4n+4) {
+  grid-column: 7 / 12;
+  padding-top: 0;
+}
+
+/* Constrained image heights — keeps layout compact */
+.collections__card:nth-child(4n+1) .collections__card-image {
+  max-height: 300px;
+}
+
+.collections__card:nth-child(4n+2) .collections__card-image {
+  max-height: 340px;
+}
+
+.collections__card:nth-child(4n+3) .collections__card-image {
+  max-height: 320px;
+}
+
+.collections__card:nth-child(4n+4) .collections__card-image {
+  max-height: 260px;
+}
+
+/* ════════ CARD ════════ */
+.collections__card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+  transition: all 1s ease;
+}
+
+.collections__card-image {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: #f4f3f1;
+}
+
+.collections__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 2s cubic-bezier(0.25, 0, 0.25, 1),
+    transform 2s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+.collections__card:hover .collections__card-image img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+.collections__card:hover .collections__card-shadow {
+  box-shadow: 0 20px 40px rgba(26, 28, 27, 0.06);
+}
+
+/* Vertical label */
+.collections__card-vlabel {
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  writing-mode: vertical-rl;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2c2c2c;
+  opacity: 0.3;
+}
+
+/* Card info */
+.collections__card-info {
+  padding-top: 20px;
+  border-top: 1px solid rgba(44, 44, 44, 0.12);
+}
+
+.collections__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.collections__card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #2c2c2c;
+}
+
+.collections__card-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #D4AF37;
+}
+
+.collections__card-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #2c2c2c;
+  opacity: 0.45;
+}
+
+/* ════════ CTA ════════ */
+.collections__cta {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 100px;
+}
+
+.collections__cta-btn {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2c2c2c;
+  border: 1px solid #2c2c2c;
+  padding: 18px 56px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.5s ease;
+}
+
+.collections__cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #c9a96e, #d4b97e);
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+.collections__cta-btn:hover {
+  color: #ffffff;
+}
+
+.collections__cta-btn:hover::before {
+  left: 0;
+}
+
+/* ════════ EMPTY STATE ════════ */
+.collections__empty {
+  text-align: center;
+  padding: 120px 0;
+}
+
+.collections__empty-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #2c2c2c;
+  opacity: 0.4;
+}
+
+/* ════════ RESPONSIVE ════════ */
+@media (max-width: 1024px) {
+  .collections {
+    padding: 0 24px;
+  }
+
+  .collections__hero {
+    padding: 80px 0 48px;
+  }
+
+  .collections__hero-content {
+    grid-column: 1 / -1;
+  }
+
+  .collections__hero-image {
+    grid-column: 1 / -1;
+  }
+
+  .collections__grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 48px;
+  }
+
+  .collections__card:nth-child(4n+1),
+  .collections__card:nth-child(4n+2),
+  .collections__card:nth-child(4n+3),
+  .collections__card:nth-child(4n+4) {
+    grid-column: auto;
+    margin-top: 0;
+  }
+
+  .collections__card:nth-child(even) {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .collections__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collections__card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .collections__card-vlabel {
+    display: none;
+  }
+}

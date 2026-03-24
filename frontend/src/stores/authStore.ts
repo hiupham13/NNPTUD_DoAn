@@ -3,6 +3,7 @@ import { create } from 'zustand';
 interface User {
   id: string;
   name: string;
+  fullName?: string;
   email: string;
   role: 'customer' | 'admin';
   isActive: boolean;
@@ -14,9 +15,10 @@ interface AuthState {
   isAuthenticated: boolean;
   login: (user: User, token: string) => void;
   logout: () => void;
+  setUser: (updates: Partial<User>) => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null,
   token: localStorage.getItem('token'),
   isAuthenticated: !!localStorage.getItem('token'),
@@ -32,4 +34,14 @@ export const useAuthStore = create<AuthState>((set) => ({
     localStorage.removeItem('token');
     set({ user: null, token: null, isAuthenticated: false });
   },
+
+  setUser: (updates) => {
+    const current = get().user;
+    if (current) {
+      const updated = { ...current, ...updates };
+      localStorage.setItem('user', JSON.stringify(updated));
+      set({ user: updated });
+    }
+  },
 }));
+

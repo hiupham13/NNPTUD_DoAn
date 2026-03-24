@@ -1,15 +1,21 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProductBySlug, useProducts } from '../../hooks/useProducts';
+import { useAddToCart } from '../../hooks/useCart';
+import { useAuthStore } from '../../stores/authStore';
 import ProductCard from '../../components/product/ProductCard';
 import { formatPrice, formatMovement, formatGender } from '../../utils/format';
+import toast from 'react-hot-toast';
 import './ProductDetailPage.css';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const { data, isLoading } = useProductBySlug(slug || '');
   const product = data?.data;
+  const addToCartMutation = useAddToCart();
+  const isAuthenticated = useAuthStore((s) => !!s.token);
 
   // Related products (same category)
   const { data: relatedData } = useProducts({
@@ -22,6 +28,42 @@ export default function ProductDetailPage() {
 
   // Gallery
   const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+
+  const handlePrevImage = () => {
+    if (product?.images && product.images.length > 1) {
+      setSelectedImage((prev) => (prev === 0 ? product.images.length - 1 : prev - 1));
+    }
+  };
+
+  const handleNextImage = () => {
+    if (product?.images && product.images.length > 1) {
+      setSelectedImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1));
+    }
+  };
+
+  const decreaseQty = () => setQuantity((q) => Math.max(1, q - 1));
+  const increaseQty = () => setQuantity((q) => Math.min(99, q + 1));
+
+  const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng');
+      navigate('/login');
+      return;
+    }
+    if (!product) return;
+    addToCartMutation.mutate(
+      { productId: product._id, quantity },
+      {
+        onSuccess: () => {
+          setQuantity(1);
+        },
+        onError: (error: any) => {
+          toast.error(error.response?.data?.message || 'Không thể thêm vào giỏ');
+        },
+      }
+    );
+  };
 
   if (isLoading) {
     return (
@@ -73,6 +115,29 @@ export default function ProductDetailPage() {
               src={product.images?.[selectedImage] || product.images?.[0] || '/placeholder-watch.jpg'}
               alt={product.name}
             />
+            {/* Navigation Arrows */}
+            {product.images && product.images.length > 1 && (
+              <>
+                <button
+                  className="product-detail__arrow product-detail__arrow--prev"
+                  onClick={handlePrevImage}
+                  aria-label="Ảnh trước"
+                >
+                  <ChevronLeft size={20} strokeWidth={1.5} />
+                </button>
+                <button
+                  className="product-detail__arrow product-detail__arrow--next"
+                  onClick={handleNextImage}
+                  aria-label="Ảnh tiếp theo"
+                >
+                  <ChevronRight size={20} strokeWidth={1.5} />
+                </button>
+                {/* Image Counter */}
+                <div className="product-detail__image-counter">
+                  {selectedImage + 1} / {product.images.length}
+                </div>
+              </>
+            )}
           </div>
           {product.images && product.images.length > 1 && (
             <div className="product-detail__thumbnails">
@@ -133,10 +198,33 @@ export default function ProductDetailPage() {
             </div>
           )}
 
-          {/* Add to Cart (placeholder — D11) */}
+          {/* Quantity + Add to Cart */}
           <div className="product-detail__actions">
-            <button className="product-detail__add-btn">
-              Thêm Vào Giỏ Hàng
+            <div className="product-detail__qty">
+              <button
+                className="product-detail__qty-btn"
+                onClick={decreaseQty}
+                disabled={quantity <= 1}
+                aria-label="Giảm số lượng"
+              >
+                −
+              </button>
+              <span className="product-detail__qty-value">{quantity}</span>
+              <button
+                className="product-detail__qty-btn"
+                onClick={increaseQty}
+                disabled={quantity >= 99}
+                aria-label="Tăng số lượng"
+              >
+                +
+              </button>
+            </div>
+            <button
+              className="product-detail__add-btn"
+              onClick={handleAddToCart}
+              disabled={addToCartMutation.isPending}
+            >
+              {addToCartMutation.isPending ? 'Đang thêm...' : 'Thêm Vào Giỏ Hàng'}
             </button>
           </div>
 

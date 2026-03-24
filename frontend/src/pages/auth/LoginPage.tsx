@@ -30,7 +30,8 @@ export default function LoginPage() {
       const { user, token } = res.data.data;
       loginAction(user, token);
       toast.success('Xác thực thành công');
-      navigate('/');
+      // Admin → Dashboard, Customer → Trang chủ
+      navigate(user.role === 'admin' ? '/admin' : '/');
     } catch (e: any) {
       toast.error(e.response?.data?.message || 'Xác thực thất bại');
     }

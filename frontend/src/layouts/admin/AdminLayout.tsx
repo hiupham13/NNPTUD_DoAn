@@ -1,20 +1,45 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
+import {
+  LayoutDashboard, Package, ShoppingCart, Users,
+  FolderTree, Layers, Ticket, Warehouse, Settings, LogOut, Watch
+} from 'lucide-react';
+import './AdminLayout.css';
+
+const MENU_ITEMS = [
+  { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/admin/products', label: 'Sản phẩm', icon: Package },
+  { path: '/admin/orders', label: 'Đơn hàng', icon: ShoppingCart },
+  { path: '/admin/users', label: 'Người dùng', icon: Users },
+  { path: '/admin/inventory', label: 'Tồn kho', icon: Warehouse },
+  { path: '/admin/settings', label: 'Cài đặt', icon: Settings },
+];
 
 function AdminSidebar() {
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    if (path === '/admin') return location.pathname === '/admin';
+    return location.pathname.startsWith(path);
+  };
+
   return (
-    <aside className="w-64 bg-gray-900 text-white min-h-screen fixed left-0 top-0 flex flex-col">
-      <div className="h-16 flex items-center justify-center border-b border-gray-800">
-        <h1 className="font-display italic text-xl text-primary-container">The Curator</h1>
+    <aside className="admin-sidebar">
+      <div className="admin-sidebar__logo">
+        <Watch size={20} strokeWidth={1.5} />
+        <span>The Curator</span>
       </div>
-      <nav className="flex-1 py-6 flex flex-col gap-2 px-4 font-body text-sm">
-        <Link to="/admin" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest text-[#d4af37]">Dashboard</Link>
-        <Link to="/admin/products" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest">Products</Link>
-        <Link to="/admin/orders" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest">Orders</Link>
-        <Link to="/admin/users" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest">Users</Link>
-        <Link to="/admin/categories" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest">Categories</Link>
-        <Link to="/admin/collections" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest">Collections</Link>
-        <Link to="/admin/coupons" className="p-3 hover:bg-gray-800 rounded transition-colors uppercase tracking-widest">Coupons</Link>
+      <nav className="admin-sidebar__nav">
+        {MENU_ITEMS.map(({ path, label, icon: Icon }) => (
+          <Link
+            key={path}
+            to={path}
+            className={`admin-sidebar__link ${isActive(path) ? 'admin-sidebar__link--active' : ''}`}
+          >
+            <Icon size={18} strokeWidth={1.5} />
+            <span>{label}</span>
+          </Link>
+        ))}
       </nav>
     </aside>
   );
@@ -22,13 +47,22 @@ function AdminSidebar() {
 
 function AdminHeader() {
   const { user, logout } = useAuthStore();
-  
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-50">
-      <div className="font-body font-medium text-gray-700">Admin Dashboard</div>
-      <div className="flex items-center gap-4">
-        <span className="text-sm font-body text-gray-600">{user?.name}</span>
-        <button onClick={logout} className="text-sm text-red-600 font-body hover:underline">Logout</button>
+    <header className="admin-header">
+      <div className="admin-header__title">Trang quản trị</div>
+      <div className="admin-header__user">
+        <span className="admin-header__name">{user?.name}</span>
+        <button className="admin-header__logout" onClick={handleLogout}>
+          <LogOut size={16} strokeWidth={1.5} />
+          <span>Đăng xuất</span>
+        </button>
       </div>
     </header>
   );
@@ -36,12 +70,14 @@ function AdminHeader() {
 
 export default function AdminLayout() {
   return (
-    <div className="flex min-h-screen bg-gray-50 flex-col pl-64">
+    <div className="admin-layout">
       <AdminSidebar />
-      <AdminHeader />
-      <main className="flex-1 p-8">
-        <Outlet />
-      </main>
+      <div className="admin-layout__main">
+        <AdminHeader />
+        <main className="admin-layout__content">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

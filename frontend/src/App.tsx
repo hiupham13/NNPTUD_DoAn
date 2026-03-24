@@ -17,16 +17,31 @@ import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import HomePage from './pages/customer/HomePage';
 import ProductListPage from './pages/customer/ProductListPage';
 import ProductDetailPage from './pages/customer/ProductDetailPage';
+import CartPage from './pages/customer/CartPage';
+import CheckoutPage from './pages/customer/CheckoutPage';
+import OrderHistoryPage from './pages/customer/OrderHistoryPage';
+import OrderDetailPage from './pages/customer/OrderDetailPage';
+import ProfilePage from './pages/customer/ProfilePage';
+import VnpayReturnPage from './pages/customer/VnpayReturnPage';
+import CollectionsPage from './pages/customer/CollectionsPage';
+import BrandsPage from './pages/customer/BrandsPage';
 
 // Pages — Admin
 import DashboardPage from './pages/admin/DashboardPage';
+import AdminProductListPage from './pages/admin/ProductListPage';
+import AdminProductFormPage from './pages/admin/ProductFormPage';
+import AdminOrderListPage from './pages/admin/OrderListPage';
+import AdminUserListPage from './pages/admin/UserListPage';
+import AdminSettingsPage from './pages/admin/SettingsPage';
+import AdminInventoryPage from './pages/admin/InventoryPage';
 
 const queryClient = new QueryClient();
 
 // Guards
 const GuestRoute = () => {
-  const { isAuthenticated } = useAuthStore();
-  return isAuthenticated ? <Navigate to="/" /> : <Outlet />;
+  const { isAuthenticated, user } = useAuthStore();
+  if (!isAuthenticated) return <Outlet />;
+  return <Navigate to={user?.role === 'admin' ? '/admin' : '/'} />;
 };
 
 const ProtectedRoute = () => {
@@ -52,6 +67,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductListPage />} />
             <Route path="/products/:slug" element={<ProductDetailPage />} />
+            <Route path="/collections" element={<CollectionsPage />} />
+            <Route path="/brands" element={<BrandsPage />} />
             
             {/* Auth (Guest only) */}
             <Route element={<GuestRoute />}>
@@ -63,15 +80,28 @@ function App() {
             
             {/* Protected (Customer) */}
             <Route element={<ProtectedRoute />}>
-              {/* D11: Cart, Checkout, Orders, Profile */}
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/orders" element={<OrderHistoryPage />} />
+              <Route path="/orders/:id" element={<OrderDetailPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
+
+            {/* VNPay Return (public — redirect from VNPay) */}
+            <Route path="/checkout/vnpay-return" element={<VnpayReturnPage />} />
           </Route>
 
           {/* Admin Layout (Dashboard) */}
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/admin" element={<DashboardPage />} />
-              {/* D12: ProductManage, OrderManage, UserManage */}
+              <Route path="/admin/products" element={<AdminProductListPage />} />
+              <Route path="/admin/products/new" element={<AdminProductFormPage />} />
+              <Route path="/admin/products/:id/edit" element={<AdminProductFormPage />} />
+              <Route path="/admin/orders" element={<AdminOrderListPage />} />
+              <Route path="/admin/users" element={<AdminUserListPage />} />
+              <Route path="/admin/settings" element={<AdminSettingsPage />} />
+              <Route path="/admin/inventory" element={<AdminInventoryPage />} />
             </Route>
           </Route>
         </Routes>

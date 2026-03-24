@@ -10,8 +10,8 @@ const storage = new CloudinaryStorage({
     folder: 'luxury-watch-store',
     allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
     transformation: [
-      { width: 800, height: 800, crop: 'fill' }, // Vuông 800x800
-      { quality: 'auto', fetch_format: 'auto' } // Tự nén
+      { width: 1600, height: 1600, crop: 'limit' }, // Giữ tỷ lệ gốc, max 1600px
+      { quality: 'auto:best', fetch_format: 'auto' } // Chất lượng cao nhất
     ]
   }
 });

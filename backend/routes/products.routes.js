@@ -8,6 +8,7 @@ const validate = require('../middlewares/validate');
 
 // Public routes
 router.get('/', productController.getProducts);
+router.get('/id/:id', auth, authorize('admin'), productController.getProductById);
 router.get('/:slug', productController.getProductBySlug);
 
 // Admin routes

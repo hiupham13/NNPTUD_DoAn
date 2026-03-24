@@ -1,13 +1,16 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, LogOut, UserCircle } from 'lucide-react';
+import { ShoppingBag, User, LogOut, UserCircle, Package } from 'lucide-react';
 import { useAuthStore } from '../../stores/authStore';
+import { useCart } from '../../hooks/useCart';
 
 export default function CustomerHeader() {
   const { isAuthenticated, user, logout } = useAuthStore();
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { data: cart } = useCart();
+  const cartItemCount = cart?.items?.length || 0;
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -40,7 +43,7 @@ export default function CustomerHeader() {
           Bộ sưu tập
         </Link>
         <Link to="/about" className="font-headline uppercase tracking-[0.2em] text-[11px] font-light text-on-surface opacity-80 hover:text-primary-container hover:opacity-100 transition-all duration-500 ease-in-out">
-          Di sản
+          Giới thiệu
         </Link>
       </div>
       <div className="flex items-center gap-6">
@@ -59,11 +62,10 @@ export default function CustomerHeader() {
 
             {/* Dropdown — Luxury Style */}
             <div
-              className={`absolute right-0 top-full pt-3 transition-all duration-300 ${
-                dropdownOpen
+              className={`absolute right-0 top-full pt-3 transition-all duration-300 ${dropdownOpen
                   ? 'opacity-100 translate-y-0 pointer-events-auto'
                   : 'opacity-0 -translate-y-2 pointer-events-none'
-              }`}
+                }`}
             >
               <div className="min-w-[240px] bg-surface border-t-2 border-t-primary-container border border-outline-variant/10 shadow-[0_12px_40px_rgba(0,0,0,0.1)]">
                 {/* User info */}
@@ -80,6 +82,14 @@ export default function CustomerHeader() {
                 >
                   <User className="w-3.5 h-3.5" strokeWidth={1.5} />
                   Hồ sơ
+                </Link>
+                <Link
+                  to="/orders"
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex items-center gap-3 px-5 py-3 font-label text-[11px] tracking-[0.15em] uppercase text-on-surface/70 hover:text-primary-container hover:bg-surface-container-low transition-all duration-300"
+                >
+                  <Package className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  Đơn hàng
                 </Link>
                 <button
                   onClick={handleLogout}
@@ -104,6 +114,11 @@ export default function CustomerHeader() {
         )}
         <Link to="/cart" className="relative ml-4">
           <ShoppingBag className="w-5 h-5 opacity-80 cursor-pointer hover:text-primary-container transition-colors" />
+          {isAuthenticated && cartItemCount > 0 && (
+            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-primary-container text-on-primary text-[9px] font-bold flex items-center justify-center">
+              {cartItemCount}
+            </span>
+          )}
         </Link>
       </div>
     </nav>

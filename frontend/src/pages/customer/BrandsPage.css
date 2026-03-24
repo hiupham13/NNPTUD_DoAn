@@ -1,0 +1,528 @@
+/* ============================================
+   BrandsPage — Manifesto & Heritage
+   Layout inspired by Stitch "The Brand" template
+   Design System: Project ROOT
+   ============================================ */
+
+.brands {
+  overflow-x: hidden;
+}
+
+/* ════════ HERO ════════ */
+.brands__hero {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 80px 48px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+
+.brands__hero-content {
+  flex: 0 0 42%;
+}
+
+.brands__hero-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #7f7663;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.brands__hero-title {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(3rem, 6vw, 7rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: #2c2c2c;
+  margin: 0 0 40px;
+}
+
+.brands__hero-title em {
+  font-style: italic;
+  color: #D4AF37;
+}
+
+.brands__hero-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #5f5e5e;
+  max-width: 420px;
+}
+
+.brands__hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.brands__hero-image-wrap {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  position: relative;
+}
+
+.brands__hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 2s cubic-bezier(0.25, 0, 0.25, 1),
+    transform 2s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+.brands__hero-image-wrap:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.brands__hero-vlabel {
+  position: fixed;
+  bottom: 48px;
+  left: 48px;
+  writing-mode: vertical-rl;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #d0c5af;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ════════ PHILOSOPHY ════════ */
+.brands__philosophy {
+  background: #f4f3f1;
+  border-top: 1px solid rgba(208, 197, 175, 0.1);
+  border-bottom: 1px solid rgba(208, 197, 175, 0.1);
+  padding: 120px 48px;
+}
+
+.brands__philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4fr 7fr;
+  gap: 64px;
+}
+
+.brands__philosophy-heading {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  line-height: 1.25;
+  color: #2c2c2c;
+}
+
+.brands__philosophy-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #2c2c2c;
+  margin-bottom: 24px;
+}
+
+.brands__philosophy-body:first-of-type::first-letter {
+  font-family: 'Playfair Display', serif;
+  float: left;
+  font-size: 4.5rem;
+  line-height: 1;
+  padding-right: 12px;
+  color: #D4AF37;
+}
+
+.brands__philosophy-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #5f5e5e;
+}
+
+/* ════════ HERITAGE ════════ */
+.brands__heritage {
+  padding: 120px 48px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.brands__heritage-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.brands__heritage-left {
+  grid-column: 1 / 7;
+  position: relative;
+}
+
+.brands__heritage-vlabel {
+  position: absolute;
+  left: -24px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  writing-mode: vertical-rl;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #D4AF37;
+  font-weight: 600;
+}
+
+.brands__heritage-img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.brands__heritage-img img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 2s ease, transform 2s ease;
+}
+
+.brands__heritage-img:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.brands__heritage-caption {
+  margin-top: 32px;
+  padding-left: 64px;
+}
+
+.brands__heritage-caption h3 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #2c2c2c;
+}
+
+.brands__heritage-caption p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #5f5e5e;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.brands__heritage-right {
+  grid-column: 8 / 13;
+}
+
+.brands__heritage-right-img {
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.brands__heritage-right-img img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 2s ease, transform 2s ease;
+}
+
+.brands__heritage-right-img:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.brands__heritage-divider {
+  width: 48px;
+  height: 1px;
+  background: #D4AF37;
+  margin-bottom: 24px;
+}
+
+.brands__heritage-right h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #2c2c2c;
+}
+
+.brands__heritage-right p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #5f5e5e;
+  line-height: 1.6;
+}
+
+/* ════════ PROCESS (DARK) ════════ */
+.brands__process {
+  background: #1a1c1b;
+  color: #faf9f7;
+  padding: 120px 48px;
+}
+
+.brands__process-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brands__process-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  letter-spacing: -0.02em;
+  color: #faf9f7;
+}
+
+.brands__process-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #d0c5af;
+}
+
+.brands__process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(250, 249, 247, 0.1);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.brands__process-item {
+  padding: 48px 40px 80px 0;
+  border-right: 1px solid rgba(250, 249, 247, 0.1);
+  position: relative;
+}
+
+.brands__process-item:last-child {
+  border-right: none;
+  padding-left: 40px;
+}
+
+.brands__process-item:nth-child(2) {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.brands__process-num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: #D4AF37;
+  display: block;
+  margin-bottom: 32px;
+}
+
+.brands__process-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+  color: #faf9f7;
+}
+
+.brands__process-item p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(250, 249, 247, 0.6);
+  margin-bottom: 32px;
+}
+
+.brands__process-bar {
+  height: 3px;
+  width: 0;
+  background: #D4AF37;
+  transition: width 1s ease;
+}
+
+.brands__process-item:hover .brands__process-bar {
+  width: 100%;
+}
+
+/* ════════ CTA ════════ */
+.brands__cta {
+  padding: 160px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.brands__cta-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0.04;
+}
+
+.brands__cta-bg span {
+  font-family: 'Playfair Display', serif;
+  font-size: 18rem;
+  font-weight: 900;
+  user-select: none;
+  white-space: nowrap;
+  color: #2c2c2c;
+}
+
+.brands__cta-content {
+  position: relative;
+  z-index: 2;
+}
+
+.brands__cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+  color: #2c2c2c;
+}
+
+.brands__cta-title em {
+  font-style: italic;
+  color: #D4AF37;
+}
+
+.brands__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2c2c2c;
+  border: 1px solid #2c2c2c;
+  padding: 20px 48px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.5s ease;
+}
+
+.brands__cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #c9a96e, #d4b97e);
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+.brands__cta-btn:hover {
+  color: #ffffff;
+}
+
+.brands__cta-btn:hover::before {
+  left: 0;
+}
+
+/* ════════ RESPONSIVE ════════ */
+@media (max-width: 1024px) {
+  .brands__hero {
+    flex-direction: column;
+    padding: 60px 24px;
+    min-height: auto;
+  }
+
+  .brands__hero-content {
+    flex: 1;
+  }
+
+  .brands__hero-image-wrap {
+    max-width: 100%;
+  }
+
+  .brands__hero-vlabel {
+    display: none;
+  }
+
+  .brands__philosophy {
+    padding: 80px 24px;
+  }
+
+  .brands__philosophy-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .brands__heritage {
+    padding: 80px 24px;
+  }
+
+  .brands__heritage-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .brands__heritage-left {
+    grid-column: 1 / -1;
+  }
+
+  .brands__heritage-right {
+    grid-column: 1 / -1;
+  }
+
+  .brands__heritage-vlabel {
+    display: none;
+  }
+
+  .brands__heritage-caption {
+    padding-left: 0;
+  }
+
+  .brands__process {
+    padding: 80px 24px;
+  }
+
+  .brands__process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brands__process-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(250, 249, 247, 0.1);
+    padding: 32px 0;
+  }
+
+  .brands__process-item:nth-child(2),
+  .brands__process-item:last-child {
+    padding-left: 0;
+  }
+
+  .brands__cta {
+    padding: 80px 24px;
+  }
+
+  .brands__cta-bg span {
+    font-size: 6rem;
+  }
+}

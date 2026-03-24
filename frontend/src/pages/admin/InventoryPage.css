@@ -1,0 +1,21 @@
+/* InventoryPage CSS */
+.inventory-page__title { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600; color: #212529; margin-bottom: 20px; }
+.inventory-page__toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 16px; }
+.inventory-page__search { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fff; border: 1px solid #dee2e6; border-radius: 6px; max-width: 360px; flex: 1; }
+.inventory-page__search input { border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; flex: 1; background: transparent; }
+.inventory-page__search svg { color: #adb5bd; flex-shrink: 0; }
+.inventory-page__hint { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #adb5bd; white-space: nowrap; }
+
+.inv-thumb { width: 36px; height: 36px; border-radius: 4px; object-fit: cover; }
+.inv-sku { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6c757d; }
+
+.inv-stock { cursor: pointer; padding: 4px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; font-weight: 600; transition: background 0.2s; }
+.inv-stock:hover { background: #f0f0f0; }
+.inv-low { color: #ef4444; animation: pulse 1.5s ease infinite; }
+.inv-zero { color: #ef4444; font-weight: 700; }
+
+.inv-edit { display: flex; align-items: center; gap: 4px; }
+.inv-edit__input { width: 70px; padding: 4px 6px; border: 1px solid #d4af37; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: center; outline: none; }
+.inv-edit__save { width: 24px; height: 24px; border: none; background: #10b981; color: #fff; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }

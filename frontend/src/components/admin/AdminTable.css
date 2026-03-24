@@ -1,0 +1,9 @@
+.admin-table__wrapper { overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.85rem; }
+.admin-table thead { background: #f8f9fa; border-bottom: 2px solid #e9ecef; }
+.admin-table th { text-align: left; padding: 12px 16px; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #6c757d; white-space: nowrap; }
+.admin-table td { padding: 12px 16px; border-bottom: 1px solid #f1f3f5; color: #495057; vertical-align: middle; }
+.admin-table tbody tr:hover { background: #f8f9fa; }
+.admin-table__row--clickable { cursor: pointer; }
+.admin-table__empty { text-align: center; padding: 48px 16px !important; color: #adb5bd; font-style: italic; }
+.admin-table__loading { display: flex; align-items: center; justify-content: center; padding: 60px; color: #adb5bd; font-family: 'Inter', sans-serif; font-size: 0.85rem; }
