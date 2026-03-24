@@ -1,0 +1,35 @@
+/* ProductFormPage CSS */
+.product-form { max-width: 1100px; }
+.pf-loading { padding: 60px; text-align: center; color: #adb5bd; font-family: 'Inter', sans-serif; }
+
+.pf-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.pf-back { width: 36px; height: 36px; border: 1px solid #dee2e6; border-radius: 6px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.pf-back:hover { background: #f8f9fa; }
+.pf-title { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600; color: #212529; }
+
+.pf-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
+
+.pf-col { display: flex; flex-direction: column; gap: 16px; }
+
+.pf-section { background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; }
+.pf-section__title { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #212529; margin-bottom: 16px; }
+
+.pf-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.pf-field label { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; color: #6c757d; }
+.pf-field input, .pf-field select, .pf-field textarea { padding: 8px 12px; border: 1px solid #dee2e6; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; transition: border-color 0.2s; }
+.pf-field input:focus, .pf-field select:focus, .pf-field textarea:focus { outline: none; border-color: #d4af37; }
+.pf-field textarea { resize: vertical; }
+
+.pf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.pf-checkbox { display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #495057; cursor: pointer; padding: 6px 0; }
+.pf-checkbox input[type="checkbox"] { width: 16px; height: 16px; accent-color: #d4af37; }
+
+.pf-submit { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: #1a1a2e; color: #fff; border: none; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+.pf-submit:hover { background: #2d2d4e; }
+.pf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+@media (max-width: 900px) {
+  .pf-grid { grid-template-columns: 1fr; }
+  .pf-row { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,35 @@
+/* OrderListPage CSS */
+.order-list__title { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600; color: #212529; margin-bottom: 20px; }
+
+.order-list__toolbar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.order-list__search { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fff; border: 1px solid #dee2e6; border-radius: 6px; max-width: 320px; }
+.order-list__search input { border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; flex: 1; background: transparent; }
+.order-list__search svg { color: #adb5bd; flex-shrink: 0; }
+
+.order-list__filters { display: flex; gap: 4px; flex-wrap: wrap; }
+.order-list__filter-btn { padding: 5px 12px; border: 1px solid #dee2e6; border-radius: 4px; background: #fff; font-family: 'Inter', sans-serif; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; color: #495057; }
+.order-list__filter-btn:hover { background: #f8f9fa; }
+.order-list__filter-btn--active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+
+.order-code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #3b82f6; font-weight: 500; }
+
+.order-payment { font-size: 0.7rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.03em; }
+.order-paid { font-weight: 700; font-size: 0.85rem; }
+.order-paid--yes { color: #10b981; }
+.order-paid--no { color: #ef4444; }
+
+/* Status select */
+.order-status-select { padding: 4px 8px; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; cursor: pointer; border: 1px solid #dee2e6; background: #fff; transition: all 0.2s; }
+.order-status-select:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.order-badge--pending { color: #d97706; }
+.order-badge--confirmed { color: #2563eb; }
+.order-badge--processing { color: #7c3aed; }
+.order-badge--shipping { color: #0891b2; }
+.order-badge--delivered { color: #059669; }
+.order-badge--completed { color: #10b981; }
+.order-badge--cancelled { color: #ef4444; }
+
+.order-list__pagination { display: flex; gap: 4px; justify-content: center; margin-top: 20px; }
+.order-list__page { width: 32px; height: 32px; border: 1px solid #dee2e6; border-radius: 4px; background: #fff; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.order-list__page--active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }

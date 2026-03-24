@@ -1,0 +1,22 @@
+/* AdminLayout CSS */
+.admin-layout { display: flex; min-height: 100vh; background: #f8f9fa; }
+
+/* Sidebar */
+.admin-sidebar { width: 240px; background: #1a1a2e; color: #fff; position: fixed; left: 0; top: 0; bottom: 0; display: flex; flex-direction: column; z-index: 50; }
+.admin-sidebar__logo { height: 64px; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: #d4af37; }
+.admin-sidebar__nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 2px; }
+.admin-sidebar__link { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 400; color: rgba(255,255,255,0.55); text-decoration: none; transition: all 0.2s; }
+.admin-sidebar__link:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+.admin-sidebar__link--active { background: rgba(212,175,55,0.15); color: #d4af37; font-weight: 500; }
+
+/* Header */
+.admin-header { height: 64px; background: #fff; border-bottom: 1px solid #e9ecef; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 40; }
+.admin-header__title { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; color: #495057; }
+.admin-header__user { display: flex; align-items: center; gap: 16px; }
+.admin-header__name { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #6c757d; }
+.admin-header__logout { display: flex; align-items: center; gap: 6px; background: none; border: 1px solid #dee2e6; padding: 6px 12px; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #dc3545; cursor: pointer; transition: all 0.2s; }
+.admin-header__logout:hover { background: #dc3545; color: #fff; border-color: #dc3545; }
+
+/* Main content */
+.admin-layout__main { flex: 1; margin-left: 240px; display: flex; flex-direction: column; }
+.admin-layout__content { flex: 1; padding: 24px; }

@@ -83,6 +83,44 @@ Tuỳ vào yêu cầu, đọc SKILL.md tương ứng:
 
 ---
 
+## BƯỚC 4.5: KHẢO SÁT LAYOUT + SHARED CSS (BẮT BUỘC TRƯỚC KHI THIẾT KẾ)
+
+> ⚠️ **BẮT BUỘC** đọc theo đúng thứ tự dưới đây TRƯỚC khi tạo bất kỳ page/component mới nào.
+> Mục đích: hiểu rõ ràng buộc layout (fixed header, footer height, z-index...) và tái sử dụng
+> style đã có — tránh lỗi content bị đè header, font/color không nhất quán, spacing sai.
+
+```
+1. Layout files (BẮT BUỘC xem TRƯỚC):
+   → frontend/src/layouts/customer/CustomerLayout.tsx
+   → frontend/src/layouts/customer/CustomerHeader.tsx
+   → frontend/src/layouts/customer/CustomerFooter.tsx
+   → frontend/src/layouts/admin/AdminLayout.tsx (nếu liên quan admin)
+   → Nắm:
+     • Header position (fixed/sticky), height, z-index
+     • Footer structure, spacing
+     • Layout wrapper padding/margin
+     • Cần padding-top bao nhiêu cho content page (VD: header fixed → padding-top: 100px)
+
+2. Shared UI Components (xem thứ hai):
+   → frontend/src/components/ui/ (Button, Input, Modal, Card...)
+   → frontend/src/components/common/ (nếu có)
+   → Nắm: props interface, variants, đã có sẵn hay cần tạo mới
+
+3. Global CSS (xem thứ ba):
+   → frontend/src/index.css (hoặc App.css, globals.css)
+   → Nắm: CSS reset, font imports, CSS variables, base styles
+   → Đặc biệt: font-family defaults, color tokens, border-radius conventions
+
+4. Tham chiếu page đã hoạt động đúng:
+   → Xem CSS của 1 page ĐANG CHẠY TỐT (VD: ProductDetailPage.css)
+   → Nắm: padding-top (để tránh bị header đè), max-width, responsive breakpoints
+   → Copy pattern padding/spacing từ page đó làm baseline
+
+→ SAU KHI ĐÃ NẮM RÕ layout constraints + shared styles → mới bắt đầu thiết kế page mới.
+```
+
+---
+
 ## BƯỚC 5: ĐỌC BE — NGHIỆP VỤ LIÊN QUAN
 
 ```

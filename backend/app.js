@@ -43,6 +43,8 @@ app.use('/api/v1/orders', require('./routes/orders.routes'));
 app.use('/api/v1/coupons', require('./routes/coupons.routes'));
 app.use('/api/v1/payments', require('./routes/payments.routes'));
 app.use('/api/v1/dashboard', require('./routes/dashboard.routes'));
+app.use('/api/v1/admin', require('./routes/admin.routes'));
+app.use('/api/v1/inventory', require('./routes/inventory.routes'));
 
 // 404 handler
 app.use((req, res, next) => {

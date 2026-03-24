@@ -96,21 +96,58 @@ exports.vnpayIPN = async (req, res, next) => {
   }
 };
 
-// @desc    Trả kết quả về Trang Web cho Khách hàng thấy (UI Redirect)
+// @desc    Trả kết quả về cho Frontend (UI Redirect) + Update DB cho localhost/dev
 // @route   GET /api/v1/payments/vnpay-return
 // @access  Public
-exports.vnpayReturn = (req, res, next) => {
-  // Thực tế Frontend gọi hoặc VNPay gọi trình duyệt nhảy url sang GET
-  // Ko update DB ở đây (chỉ làm giao diện UI) 
+exports.vnpayReturn = async (req, res, next) => {
   try {
-    const isChecksumValid = verifyVNPaySignature(req.query);
+    const vnp_Params = { ...req.query };
+    const isChecksumValid = verifyVNPaySignature(vnp_Params);
     
     if (isChecksumValid) {
-       // Thường Redirect thẳng về web `returnUrl?status=success...` thay vì res.json
-       if (req.query.vnp_ResponseCode === '00') {
+       const orderCode = req.query.vnp_TxnRef;
+       const rspCode = req.query.vnp_ResponseCode;
+
+       // Dev/Localhost: IPN không gọi được → update DB tại đây
+       const order = await Order.findOne({ orderCode });
+       if (order && !order.isPaid && order.status === 'pending') {
+         if (rspCode === '00') {
+           order.isPaid = true;
+           order.paidAt = new Date();
+           order.status = 'processing';
+           await order.save();
+
+           await Payment.create({
+             order: order._id,
+             method: 'vnpay',
+             amount: order.finalAmount,
+             status: 'success',
+             vnpayTransactionId: req.query.vnp_TransactionNo,
+             vnpayResponseCode: rspCode,
+             vnpayBankCode: req.query.vnp_BankCode,
+             paidAt: new Date()
+           });
+         } else {
+           order.status = 'cancelled';
+           order.cancelReason = `VNPay Error Code: ${rspCode}`;
+           order.cancelledAt = new Date();
+           await order.save();
+
+           for (const item of order.items) {
+             if (item.product) {
+               await Inventory.updateOne(
+                 { product: item.product },
+                 { $inc: { reserved: -item.quantity } }
+               );
+             }
+           }
+         }
+       }
+
+       if (rspCode === '00') {
          res.status(200).json({ success: true, message: 'Giao dịch thành công', data: req.query });
        } else {
-         res.status(400).json({ success: false, message: 'Giao dịch thất bại', code: req.query.vnp_ResponseCode });
+         res.status(400).json({ success: false, message: 'Giao dịch thất bại', code: rspCode });
        }
     } else {
        res.status(400).json({ success: false, message: 'Sai Checksum, nghi ngờ giả mạo!' });

@@ -6,14 +6,16 @@ const authorize = require('../middlewares/role');
 
 router.use(auth);
 
+// Admin routes (đặt TRƯỚC /:id để tránh bị match nhầm)
+router.get('/admin', authorize('admin'), orderController.getAllOrders);
+
 // Customer routes
 router.post('/', orderController.createOrder);
 router.get('/', orderController.getMyOrders);
-router.put('/:id/cancel', orderController.updateOrderStatus); 
+router.get('/:id', orderController.getOrderById);
+router.put('/:id/cancel', orderController.updateOrderStatus);
 
-// Admin routes
-router.use(authorize('admin'));
-router.get('/admin', orderController.getAllOrders);
-router.put('/:id/status', orderController.updateOrderStatus);
+// Admin status update
+router.put('/:id/status', authorize('admin'), orderController.updateOrderStatus);
 
 module.exports = router;

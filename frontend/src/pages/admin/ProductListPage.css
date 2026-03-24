@@ -1,0 +1,26 @@
+/* ProductListPage CSS */
+.product-list__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.product-list__title { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600; color: #212529; }
+.product-list__add { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: #1a1a2e; color: #fff; border: none; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.product-list__add:hover { background: #2d2d4e; }
+
+.product-list__toolbar { margin-bottom: 16px; }
+.product-list__search { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fff; border: 1px solid #dee2e6; border-radius: 6px; max-width: 360px; }
+.product-list__search input { border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; flex: 1; background: transparent; }
+.product-list__search svg { color: #adb5bd; flex-shrink: 0; }
+
+.product-list__thumb { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; }
+
+.product-list__badge { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 500; }
+.product-list__badge--active { background: #d1fae5; color: #065f46; }
+.product-list__badge--inactive { background: #fee2e2; color: #991b1b; }
+
+.product-list__actions { display: flex; gap: 4px; }
+.product-list__btn--edit, .product-list__btn--delete { width: 28px; height: 28px; border: 1px solid #dee2e6; border-radius: 4px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.product-list__btn--edit:hover { border-color: #3b82f6; color: #3b82f6; }
+.product-list__btn--delete:hover { border-color: #dc3545; color: #dc3545; }
+
+.product-list__pagination { display: flex; gap: 4px; justify-content: center; margin-top: 20px; }
+.product-list__page { width: 32px; height: 32px; border: 1px solid #dee2e6; border-radius: 4px; background: #fff; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.product-list__page--active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+.product-list__page:hover:not(.product-list__page--active) { background: #f8f9fa; }

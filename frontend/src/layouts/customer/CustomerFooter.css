@@ -1,0 +1,144 @@
+/* ============================================
+   CustomerFooter — Luxury Dark Footer
+   ============================================ */
+
+.luxury-footer {
+  background: #1a1a1a;
+  color: #f9f8f6;
+  position: relative;
+  z-index: 20;
+}
+
+.luxury-footer__inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* Decorative top line */
+.luxury-footer__divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+/* Grid */
+.luxury-footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 56px 0 40px;
+}
+
+/* Brand */
+.luxury-footer__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #f9f8f6;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.luxury-footer__tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: rgba(249, 248, 246, 0.45);
+  max-width: 260px;
+  letter-spacing: 0.03em;
+}
+
+/* Columns */
+.luxury-footer__col-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+
+.luxury-footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.luxury-footer__nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(249, 248, 246, 0.55);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.4s ease;
+}
+
+.luxury-footer__nav a:hover {
+  color: #d4af37;
+}
+
+/* Contact */
+.luxury-footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.luxury-footer__contact p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(249, 248, 246, 0.55);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* Bottom bar */
+.luxury-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid rgba(249, 248, 246, 0.08);
+}
+
+.luxury-footer__copyright,
+.luxury-footer__credit {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(249, 248, 246, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .luxury-footer__inner {
+    padding: 0 24px;
+  }
+
+  .luxury-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 40px 0 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .luxury-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 32px 0 24px;
+  }
+
+  .luxury-footer__bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}

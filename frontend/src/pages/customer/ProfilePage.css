@@ -1,0 +1,36 @@
+/* ProfilePage — Luxury Style */
+.profile-page { max-width: 640px; margin: 0 auto; padding: 100px 48px 100px; min-height: calc(100vh - 80px); }
+.profile-page__loading { display: flex; align-items: center; justify-content: center; min-height: 400px; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: rgba(44,44,44,0.5); }
+
+.profile-page__title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; color: #2c2c2c; margin-bottom: 48px; }
+
+/* Section */
+.profile-section { margin-bottom: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(44,44,44,0.08); }
+.profile-section:last-child { border-bottom: none; }
+.profile-section__title { font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #2c2c2c; margin-bottom: 28px; }
+
+/* Fields */
+.profile-field { margin-bottom: 20px; }
+.profile-field__label { display: block; font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(44,44,44,0.45); margin-bottom: 8px; }
+.profile-field__input { width: 100%; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #2c2c2c; padding: 10px 0; border: none; border-bottom: 1px solid rgba(44,44,44,0.15); background: transparent; outline: none; transition: border-color 0.3s; }
+.profile-field__input:focus { border-bottom-color: #d4af37; }
+.profile-field__readonly { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: rgba(44,44,44,0.45); padding: 10px 0; }
+
+.profile-field__row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* Buttons */
+.profile-section__btn {
+  margin-top: 8px; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase; padding: 12px 32px;
+  background: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; cursor: pointer;
+  transition: all 0.3s;
+}
+.profile-section__btn:hover:not(:disabled) { background: #2c2c2c; color: #fff; }
+.profile-section__btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.profile-section__btn--primary { background: #2c2c2c; color: #fff; }
+.profile-section__btn--primary:hover:not(:disabled) { background: #d4af37; border-color: #d4af37; }
+
+@media (max-width: 640px) {
+  .profile-page { padding: 24px 16px 60px; }
+  .profile-field__row { grid-template-columns: 1fr; }
+}

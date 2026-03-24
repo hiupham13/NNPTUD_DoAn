@@ -162,15 +162,69 @@ exports.getMyOrders = async (req, res, next) => {
   }
 };
 
-// @desc    Admin lấy full list đơn
+// @desc    Lấy chi tiết 1 đơn hàng (Customer xem đơn của mình)
+// @route   GET /api/v1/orders/:id
+// @access  Private/Customer
+exports.getOrderById = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order || order.isDeleted) {
+      return next(new AppError('Đơn hàng không tồn tại', 404));
+    }
+
+    // Chỉ cho phép xem đơn của chính mình (trừ admin)
+    if (req.user.role !== 'admin' && order.user.toString() !== req.user.userId.toString()) {
+      return next(new AppError('Bạn không có quyền xem đơn hàng này', 403));
+    }
+
+    res.status(200).json({ success: true, data: order });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Admin lấy full list đơn + filter/search/pagination
 // @route   GET /api/v1/orders/admin
 // @access  Private/Admin
 exports.getAllOrders = async (req, res, next) => {
   try {
-    const orders = await Order.find({ isDeleted: false })
-      .populate('user', 'username email')
-      .sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: orders });
+    const { status, search, page, limit } = req.query;
+    let query = { isDeleted: false };
+
+    // Filter by status
+    if (status && status !== 'all') {
+      query.status = status;
+    }
+
+    // Search by orderCode
+    if (search) {
+      query.orderCode = { $regex: search, $options: 'i' };
+    }
+
+    // Pagination
+    const pageNum = parseInt(page, 10) || 1;
+    const limitNum = parseInt(limit, 10) || 20;
+    const skip = (pageNum - 1) * limitNum;
+
+    const [orders, total] = await Promise.all([
+      Order.find(query)
+        .populate('user', 'username email fullName')
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limitNum),
+      Order.countDocuments(query)
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: orders,
+      pagination: {
+        page: pageNum,
+        limit: limitNum,
+        total,
+        totalPages: Math.ceil(total / limitNum)
+      }
+    });
   } catch (error) {
     next(error);
   }

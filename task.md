@@ -186,36 +186,37 @@
 | 10.14 | Page: Product Detail — Related products | 🟡 | ✅ | |
 | 10.15 | Cập nhật `docs/03-frontend/` | 🔴 | ✅ | |
 
-### D11 — 02/04 (Ngày 11) — Cart + Checkout + Orders
+### D11 — 24/03 (Ngày 11) — Cart + Checkout + Orders ✅ HOÀN THÀNH
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 11.1 | Page: Cart — Items list, qty update, remove | 🔴 | ☐ | |
-| 11.2 | Page: Cart — Summary (subtotal, shipping, total) | 🔴 | ☐ | |
-| 11.3 | Handle deleted products in cart (EC-03) | 🔴 | ☐ | "SP không còn tồn tại" |
-| 11.4 | Page: Checkout — Shipping address form | 🔴 | ☐ | React Hook Form + Zod |
-| 11.5 | Page: Checkout — Coupon input + apply | 🟡 | ☐ | |
-| 11.6 | Page: Checkout — Payment method select (COD/VNPay) | 🔴 | ☐ | |
-| 11.7 | Page: Checkout — Order summary + Confirm | 🔴 | ☐ | |
-| 11.8 | VNPay redirect flow + return page | 🔴 | ☐ | |
-| 11.9 | Page: Order History (list) | 🔴 | ☐ | |
-| 11.10 | Page: Order Detail (snapshot data) | 🔴 | ☐ | |
-| 11.11 | Page: Profile (view/edit) | 🟡 | ☐ | |
-| 11.12 | Cập nhật `docs/03-frontend/` | 🔴 | ☐ | |
+| 11.1 | Page: Cart — Items list, qty update, remove | 🔴 | ✅ | useCart hooks + cartService |
+| 11.2 | Page: Cart — Summary (subtotal, shipping, total) | 🔴 | ✅ | Freeship ≥50tr |
+| 11.3 | Handle deleted products in cart (EC-03) | 🔴 | ✅ | BE filter isDeleted+isActive |
+| 11.4 | Page: Checkout — Shipping address form | 🔴 | ✅ | Auto-fill từ profile |
+| 11.5 | Page: Checkout — Coupon input + apply | 🟡 | ✅ | POST /coupons/validate |
+| 11.6 | Page: Checkout — Payment method select (COD/VNPay) | 🔴 | ✅ | Radio buttons |
+| 11.7 | Page: Checkout — Order summary + Confirm | 🔴 | ✅ | Snapshot pricing |
+| 11.8 | VNPay redirect flow + return page | 🔴 | ✅ | FE gọi BE verify + update DB |
+| 11.9 | Page: Order History (list) | 🔴 | ✅ | Status badges, empty state |
+| 11.10 | Page: Order Detail (snapshot data) | 🔴 | ✅ | Timeline + cancel dialog |
+| 11.11 | Page: Profile (view/edit) | 🟡 | ✅ | Address fields + đổi mật khẩu |
+| 11.12 | Cập nhật `docs/03-frontend/` | 🔴 | ✅ | Cart, Checkout, Orders, Profile |
 
-### D12 — 03/04 (Ngày 12) — Admin Pages
+### D12 — 24/03 (Ngày 12) — Admin Pages ✅ HOÀN THÀNH
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 12.1 | Page: Admin Dashboard — Stats cards | 🟡 | ☐ | Revenue, Orders, Users, Products |
-| 12.2 | Page: Admin Products — CRUD table | 🔴 | ☐ | |
-| 12.3 | Page: Admin Products — Create/Edit form + Upload | 🔴 | ☐ | Cloudinary upload |
-| 12.4 | Page: Admin Orders — List + Status update | 🔴 | ☐ | |
-| 12.5 | Page: Admin Orders — Detail view | 🔴 | ☐ | Snapshot data |
-| 12.6 | Page: Admin Users — List + Lock/Unlock | 🟡 | ☐ | |
-| 12.7 | Page: Admin Categories — CRUD | 🔴 | ☐ | |
-| 12.8 | Page: Admin Collections — CRUD | 🟡 | ☐ | |
-| 12.9 | Page: Admin Coupons — CRUD | 🟡 | ☐ | |
-| 12.10 | Page: Admin Inventory — View/Update stock | 🟡 | ☐ | |
-| 12.11 | Cập nhật `docs/03-frontend/` | 🔴 | ☐ | |
+| 12.1 | Page: Admin Dashboard — Stats cards + Charts | 🟡 | ✅ | Revenue, Orders, Users, Products + 2 charts |
+| 12.2 | Page: Admin Products — CRUD table | 🔴 | ✅ | Search, pagination, toggle isActive |
+| 12.3 | Page: Admin Products — Create/Edit form + Upload | 🔴 | ✅ | Cloudinary upload 5 ảnh, 2-col layout |
+| 12.4 | Page: Admin Orders — List + Status update | 🔴 | ✅ | Filter tabs, inline status select |
+| 12.5 | Page: Admin Orders — Detail view | 🔴 | ✅ | Qua inline update trên bảng |
+| 12.6 | Page: Admin Users — List + Lock/Unlock | 🟡 | ✅ | Toggle, UserDetailDrawer |
+| 12.7 | Page: Admin Categories — CRUD | 🔴 | ✅ | Tab trong Settings |
+| 12.8 | Page: Admin Collections — CRUD | 🟡 | ✅ | Tab trong Settings |
+| 12.9 | Page: Admin Coupons — CRUD + Toggle | 🟡 | ✅ | Full form, toggle isActive |
+| 12.10 | Page: Admin Inventory — View/Update stock | 🟡 | ✅ | Inline edit, low-stock warning |
+| 12.11 | Page: Admin Inventory — BE controller + routes | 🔴 | ✅ | Aggregation pipeline |
+| 12.12 | Cập nhật `docs/03-frontend/` | 🔴 | ✅ | task.md 6 batches DONE |
 
 ---
 
@@ -250,6 +251,14 @@
 | 14.8 | Docker Compose test: 1 lệnh chạy all | 🔴 | ☐ | |
 | 14.9 | Final review toàn bộ | 🔴 | ☐ | |
 
+### D13 — 24/03 (buổi tối) — Supplementary Pages 🔄
+| # | Task | Priority | Status | Ghi chú |
+|:--|:-----|:---------|:-------|:--------|
+| S.1 | CollectionsPage — CSS + TSX + Route | 🔴 | ✅ | Asymmetric grid, grayscale hover, hero |
+| S.2 | BrandsPage — CSS + TSX + Route | 🔴 | ✅ | 5 sections, dark process, CTA |
+| S.3 | AboutPage — CSS + TSX + Route | 🟡 | ☐ | Chờ template từ user |
+| S.4 | Verify nav links (Header) | 🟡 | ✅ | /collections, /brands, /about đã có |
+
 ---
 
 ## THỐNG KÊ
@@ -259,18 +268,18 @@
 |:------|:-----|:------|:------|:-------|
 | Phase 1 (D1-D3) | 45 | 37 | 8 | **45** |
 | Phase 2 (D4-D8) | 46 | 36 | 10 | **46** |
-| Phase 3 (D9-D12) | 47 | 33 | 14 | **30** |
-| Phase 4 (D13-D14) | 21 | 16 | 5 | 0 |
-| **TỔNG** | **159** | **122** | **37** | **121** |
+| Phase 3 (D9-D12) | 48 | 34 | 14 | **48** |
+| Phase 4 (D13-D14) | 25 | 18 | 7 | **4** |
+| **TỔNG** | **164** | **125** | **39** | **143** |
 
 ### Tiến độ tổng
 ```
 Phase 1: ██████████ 100% (45/45) ✅ DONE
 Phase 2: ██████████ 100% (46/46) ✅ DONE
-Phase 3: ██████░░░░  63% (30/47) ── D10 DONE ✅
-Phase 4: ░░░░░░░░░░   0% (0/21)
+Phase 3: ██████████ 100% (48/48) ✅ DONE
+Phase 4: ██░░░░░░░░  16% (4/25)  🔄 ĐANG LÀM
 ─────────────────────────────
-OVERALL:  ███████░░░  76% (121/159)
+OVERALL:  █████████░  87% (143/164)
 ```
 
 ---

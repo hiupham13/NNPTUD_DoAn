@@ -1,0 +1,13 @@
+/* VnpayReturnPage */
+.vnpay-return { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 80px); padding: 48px; }
+.vnpay-return__card { text-align: center; max-width: 480px; padding: 60px 40px; border: 1px solid rgba(44,44,44,0.08); }
+.vnpay-return__icon { margin-bottom: 24px; }
+.vnpay-return__icon--success { color: #d4af37; }
+.vnpay-return__icon--fail { color: #c0392b; }
+.vnpay-return__title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: #2c2c2c; margin-bottom: 16px; }
+.vnpay-return__desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: rgba(44,44,44,0.6); line-height: 1.7; margin-bottom: 8px; }
+.vnpay-return__amount { font-family: 'Inter', sans-serif; font-size: 1.2rem; font-weight: 600; color: #2c2c2c; margin-bottom: 24px; }
+.vnpay-return__actions { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+.vnpay-return__btn { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 12px 28px; border: 1px solid #2c2c2c; color: #2c2c2c; text-decoration: none; transition: all 0.3s; }
+.vnpay-return__btn--primary { background: #2c2c2c; color: #fff; }
+.vnpay-return__btn:hover { background: #d4af37; border-color: #d4af37; color: #fff; }

@@ -1,0 +1,44 @@
+/* SettingsPage CSS */
+.settings-page__title { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 600; color: #212529; margin-bottom: 20px; }
+
+.settings-page__tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid #e9ecef; padding-bottom: 0; }
+.settings-tab { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border: none; background: none; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; color: #6c757d; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+.settings-tab:hover { color: #212529; }
+.settings-tab--active { color: #d4af37; border-bottom-color: #d4af37; }
+
+.stg-tab-header { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+.stg-add { display: flex; align-items: center; gap: 6px; padding: 7px 14px; background: #1a1a2e; color: #fff; border: none; border-radius: 5px; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+.stg-add:hover { background: #2d2d4e; }
+
+.stg-actions { display: flex; gap: 4px; }
+.stg-actions button { width: 26px; height: 26px; border: 1px solid #dee2e6; border-radius: 4px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #495057; transition: all 0.2s; }
+.stg-actions button:hover { border-color: #3b82f6; color: #3b82f6; }
+.stg-actions--del:hover { border-color: #dc3545 !important; color: #dc3545 !important; }
+
+.stg-badge { font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 3px; }
+.stg-badge--on { background: #d1fae5; color: #065f46; }
+.stg-badge--off { background: #fee2e2; color: #991b1b; }
+
+.coupon-code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; color: #7c3aed; }
+
+/* Modal */
+.stg-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 100; display: flex; align-items: center; justify-content: center; }
+.stg-modal { background: #fff; border-radius: 8px; width: 480px; max-width: 90vw; box-shadow: 0 20px 60px rgba(0,0,0,0.15); animation: stg-in 0.2s ease; }
+.stg-modal__header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #e9ecef; }
+.stg-modal__header h3 { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: #212529; }
+.stg-modal__header button { background: none; border: none; cursor: pointer; color: #adb5bd; }
+.stg-modal__body { padding: 20px; }
+.stg-modal__footer { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 20px; border-top: 1px solid #e9ecef; }
+.stg-modal__cancel { padding: 7px 16px; border: 1px solid #dee2e6; border-radius: 5px; background: #fff; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; }
+.stg-modal__save { display: flex; align-items: center; gap: 6px; padding: 7px 16px; background: #1a1a2e; color: #fff; border: none; border-radius: 5px; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; }
+.stg-modal__save:disabled { opacity: 0.5; }
+
+.stg-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.stg-field label { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; color: #6c757d; }
+.stg-field input, .stg-field select { padding: 8px 10px; border: 1px solid #dee2e6; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; }
+.stg-field input:focus, .stg-field select:focus { outline: none; border-color: #d4af37; }
+.stg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.stg-checkbox { display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 0.85rem; cursor: pointer; padding: 4px 0; }
+.stg-checkbox input { accent-color: #d4af37; }
+
+@keyframes stg-in { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }

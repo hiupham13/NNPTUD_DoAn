@@ -98,6 +98,29 @@ exports.getProductBySlug = async (req, res, next) => {
   }
 };
 
+// @desc    Get single product by ID (Admin)
+// @route   GET /api/v1/products/id/:id
+// @access  Private/Admin
+exports.getProductById = async (req, res, next) => {
+  try {
+    const product = await Product.findOne({ _id: req.params.id, isDeleted: false })
+      .populate('category', 'name slug')
+      .populate('collectionRef', 'name slug')
+      .select('-__v');
+
+    if (!product) {
+      return next(new AppError('Không tìm thấy sản phẩm', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      data: product
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Create new product
 // @route   POST /api/v1/products
 // @access  Private/Admin

@@ -84,7 +84,7 @@ exports.addToCart = async (req, res, next) => {
 exports.updateCartItem = async (req, res, next) => {
   try {
     const { quantity } = req.body;
-    let cart = await Cart.findOne({ user: req.user.id });
+    let cart = await Cart.findOne({ user: req.user.userId });
 
     if (!cart) return next(new AppError('Giỏ hàng trống', 404));
     
@@ -111,7 +111,7 @@ exports.updateCartItem = async (req, res, next) => {
 // @access  Private/Customer
 exports.removeCartItem = async (req, res, next) => {
   try {
-    let cart = await Cart.findOne({ user: req.user.id });
+    let cart = await Cart.findOne({ user: req.user.userId });
     if (!cart) return next(new AppError('Giỏ hàng trống', 404));
 
     cart.items = cart.items.filter(p => p.product.toString() !== req.params.productId);

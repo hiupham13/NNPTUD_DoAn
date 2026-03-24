@@ -84,17 +84,19 @@ Hoàn thiện toàn bộ REST API backend: Auth, CRUD, Business Logic, VNPay.
 | **D7** (29/03) | Cart + Orders + Inventory + Coupons | `CRUD /cart`, `POST /orders`, `PUT /orders/:id/status`, `CRUD /coupons` |
 | **D8** (30/03) | VNPay + Error handling + API polish | `POST /payments/vnpay`, `GET /payments/vnpay-return`, `POST /payments/vnpay-ipn` |
 
-### ✅ Tiêu chí hoàn thành Phase 2
-- [ ] Tất cả API endpoints hoạt động (Postman tested)
-- [ ] Auth flow hoàn chỉnh (register → login → JWT → protected routes)
-- [ ] CRUD hoạt động cho: Categories, Collections, Products, Users, Coupons
-- [ ] Cart → Checkout → Order flow chạy end-to-end
-- [ ] Order SNAPSHOT hoạt động (thay đổi product không ảnh hưởng order)
-- [ ] VNPay Sandbox tạo được URL thanh toán + verify return
-- [ ] Inventory auto: đặt hàng trừ kho, huỷ hoàn kho
-- [ ] Delete protection: không xoá category có products active
-- [ ] Error handling centralized, validation middleware
-- [ ] Forget/Reset password qua email
+### ✅ Tiêu chí hoàn thành Phase 2 — ALL DONE
+- [x] Tất cả API endpoints hoạt động (Postman tested)
+- [x] Auth flow hoàn chỉnh (register → login → JWT → protected routes)
+- [x] CRUD hoạt động cho: Categories, Collections, Products, Users, Coupons
+- [x] Cart → Checkout → Order flow chạy end-to-end
+- [x] Order SNAPSHOT hoạt động (thay đổi product không ảnh hưởng order)
+- [x] VNPay Sandbox tạo được URL thanh toán + verify return
+- [x] Inventory auto: đặt hàng trừ kho, huỷ hoàn kho
+- [x] Delete protection: không xoá category có products active
+- [x] Error handling centralized, validation middleware
+- [x] Forget/Reset password qua email
+
+> 📝 Phase 2 hoàn thành sớm! (Tất cả APIs DONE)
 
 ---
 
@@ -132,17 +134,22 @@ Xây dựng giao diện React hoàn chỉnh theo design system Luxury/Editorial.
 | **D11** (02/04) | Customer: Buy & Pay | Cart, Checkout, Orders, Profile |
 | **D12** (03/04) | Admin: Manage everything | Dashboard, Products, Orders, Users, Categories, Coupons |
 
-### ✅ Tiêu chí hoàn thành Phase 3
-- [ ] Design system Luxury/Editorial triển khai đúng (Playfair + Inter, warm palette, gold accent)
-- [ ] Grayscale images → slow color reveal hoạt động
-- [ ] Auth flow frontend hoàn chỉnh (login/register/forgot pw)
-- [ ] Home page có hero, featured products, collections
-- [ ] Product list: filter, search, sort, pagination hoạt động
-- [ ] Cart → Checkout → VNPay redirect hoạt động
-- [ ] Admin CRUD tables cho Products, Orders, Users, Categories
-- [ ] Responsive: Mobile + Tablet + Desktop
-- [ ] State management: Zustand + TanStack Query
-- [ ] Forms: React Hook Form + Zod validation
+### ✅ Tiêu chí hoàn thành Phase 3 — ALL DONE (24/03/2026)
+- [x] Design system Luxury/Editorial triển khai đúng (Playfair + Inter, warm palette, gold accent)
+- [x] Grayscale images → slow color reveal hoạt động
+- [x] Auth flow frontend hoàn chỉnh (login/register/forgot pw)
+- [x] Home page có hero, featured products, collections
+- [x] Product list: filter, search, sort, pagination hoạt động
+- [x] Cart → Checkout → VNPay redirect hoạt động
+- [x] Admin CRUD tables cho Products, Orders, Users, Categories
+- [x] Admin Settings: Categories + Collections + Coupons (3 tabs)
+- [x] Admin Inventory: inline edit stock + low-stock warning
+- [x] Admin Dashboard: 4 stats + 2 charts
+- [x] State management: Zustand + TanStack Query
+- [ ] Responsive: Mobile + Tablet + Desktop (Phase 4)
+- [ ] Forms: React Hook Form + Zod validation (Chưa dùng full Zod)
+
+> 📝 Phase 3 hoàn thành sớm! (D9-D12 xong trước 10 ngày so với kế hoạch)
 
 ---
 
@@ -154,6 +161,7 @@ Testing, bug fix, UI polish, documentation, chuẩn bị nộp.
 ### Modules liên quan
 | Module | Nội dung | Priority |
 |:-------|:---------|:---------|
+| **Supplementary Pages** | Collections, Brands, About pages | 🔴 P1 |
 | Testing | API testing (Postman), functional testing | 🔴 P1 |
 | Bug Fix | Fix bugs phát hiện từ testing | 🔴 P1 |
 | UI Polish | Animation, responsive fix, edge case UI | 🟡 P2 |
@@ -164,8 +172,8 @@ Testing, bug fix, UI polish, documentation, chuẩn bị nộp.
 ### Ngày chi tiết
 | Ngày | Task chính |
 |:-----|:-----------|
-| **D13** (04/04) | Code review, testing toàn bộ flows, bug fix, UI polish |
-| **D14** (05/04) | Final seed data, README hoàn chỉnh, docs, chuẩn bị nộp |
+| **D13** (24/03) | Supplementary Pages: Collections ✅ + Brands ✅ + About ☐ |
+| **D14** (TBD) | Testing, bug fix, UI polish, README, final seed, Docker |
 
 ### ✅ Tiêu chí hoàn thành Phase 4
 - [ ] Toàn bộ CRUD flows test pass
