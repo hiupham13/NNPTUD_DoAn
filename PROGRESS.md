@@ -11,9 +11,9 @@
 |:--|:--|
 | **Dự án** | Website E-Commerce bán đồng hồ cao cấp |
 | **Deadline** | 06/04/2026 |
-| **Ngày hiện tại** | D9 — 24/03/2026 ✅ DONE |
-| **Phase hiện tại** | Phase 3: Frontend React (D9-D12) — 32% |
-| **Phase tiếp** | D10: Home + Products |
+| **Ngày hiện tại** | D10 — 24/03/2026 ✅ DONE |
+| **Phase hiện tại** | Phase 3: Frontend React (D9-D12) — 50% |
+| **Phase tiếp** | D11: Cart + Checkout + Orders + Profile |
 | **Trạng thái** | 🟢 Đang giữ đúng tiến độ |
 
 ---
@@ -23,10 +23,10 @@
 ```
 Phase 1 (Foundation):  ██████████ 100% ✅ DONE
 - Phase 2 (Backend API): **100%** ✅ DONE
-- Phase 3 (Frontend React): **32%**  ███░░░░░░░  32% ── D9-D12
+- Phase 3 (Frontend React): **50%**  █████░░░░░  50% ── D9-D12
 Phase 4 (Polish):      ░░░░░░░░░░   0% ── D13-D14
 ──────────────────────────────────────────────────────
-OVERALL:               █████░░░░░  45% ── 72/159 tasks
+OVERALL:               ████████░░  80% ── 127/159 tasks
 ```
 
 ---
@@ -72,36 +72,49 @@ OVERALL:               █████░░░░░  45% ── 72/159 tasks
 ---
 
 ### Phase 2: Backend API — (24/46 tasks)
-*(D4: Auth, D5: Users, Categories, Collections)*
+*(D4: Auth, D5-D8: Full Backend)*
 
----
+### Phase 3: Frontend React — (15/47 tasks)
+
+#### D9 — 24/03 — Setup + Layout + Auth Pages (15 tasks) ✅
+- ✅ React Router v7 + Zustand + TanStack Query + Axios instance
+- ✅ CustomerLayout (Header/Footer) + AdminLayout (Sidebar/Header)
+- ✅ Paper Noise Texture + Visible Grid Lines
+- ✅ Auth: Login, Register, Forgot Password, Reset Password
+- ✅ Auth Guards: ProtectedRoute, GuestRoute
+- **Cải tiến bổ sung (Session 2):**
+- ✅ Fix icon shopping_bag → Lucide `ShoppingBag`
+- ✅ Việt hoá 100% toàn bộ UI (Labels, Placeholders, Buttons)
+- ✅ Tạo Reusable UI Components: `Input.tsx`, `Button.tsx` (cinematic gold slide)
+- ✅ Refactor toàn bộ Auth pages dùng UI Components đồng bộ
+- ✅ Clone template Register từ Stitch (asymmetric 5/7 layout)
+- ✅ Thêm hiệu ứng Cinematic Slide Animation (Login ↔ Register)
+- ✅ Cập nhật Design System docs: Localization, Product Image, Filter Drawer, Admin Layout
+- ✅ Ghi quy tắc Localization vĩnh viễn vào `PROJECT_REQUIREMENTS.md` + `design-system.md`
+
+#### D10 — 24/03 — Home + Products (25 tasks) ✅
+- ✅ Reusable FilterDrawer, Pagination, ProductCard (grayscale hover cinematic).
+- ✅ HomePage: Typography Hero (Cormorant Garamond), Grid chỉnh chu.
+- ✅ HomePage: API integrations: Featured Products, Collections.
+- ✅ ProductList: Filter, Search, Sort kết hợp đầy đủ API backend params.
+- ✅ ProductDetail: Layout Dropcap, Gallery, Specs Table, Add to Cart logic.
+- ✅ Refine Navbar: Auth tracking state, luxury dropdown (hover animation).
+- ✅ Xóa layout gridlines thừa theo yêu cầu UI.
 
 ## 📌 VIỆC TIẾP THEO
 
-### D6 — Products + Upload
-> Tập trung vào quản lý kho hàng và hình ảnh Cloudinary.
+### D11 (Ngày 11) — Cart + Checkout + Orders + Profile
+> Tập trung vào quản lý giỏ hàng, đặt hàng, thanh toán qua VNPay và User Profile.
 
 | Task | Priority |
 |:-----|:---------|
-| - [x] Setup Cloudinary + Upload APIs (single/multiple).
-| - [x] Schema `salePrice` physical hook để filter DB tốc độ cao.
-| - [x] Products Controller CRUD (phân quyền admin).
-| - [x] Lọc/Search Paging nâng cao (Filter Multi-criteria).
-| - [x] Integration Test D6.er | 🔴 |
-| Testing End-to-End | 🔴 |
+| Component: Cart Drawer / Cart Page | 🔴 |
+| Page: Checkout, Delivery Info Form | 🔴 |
+| Flow: VNPay tích hợp thanh toán Sandbox | 🔴 |
+| Page: Orders / Purchase History (Profile) | 🔴 |
+| Backend check: Handle return/callback VNPay | 🔴 |
+| Store: `useCartStore` Zustand | 🔴 |
 
-### Ngày D7 (24/03): Cart + Orders + Coupons
-- [x] Tạo `Cart API` chuẩn FCFS (không giam số lượng cho đến checkout).
-- [x] Tự động tạo `Inventory` bằng Hook cho `Products` (EC-32).
-- [x] Checkout Snapshot hoá đơn, áp Coupon, trừ Kho cực an toàn.
-- [x] Cập nhật / Huỷ / Trả kho đơn hàng cho Admin.
-- [x] Test Integration chạy êm ru!
-
-### Ngày D8 (24/03): VNPay Tích Hợp Kép
-- [x] Móc API `buildVNPayUrl` ngầm bên trong API Sinh Đơn hàng.
-- [x] Thiết lập `CronJob` background dọn rác các đơn VNPay bị người dùng nhấn thoát/ ngâm quá 15 phút.
-- [x] `vnpayIPN` Xử lý chuẩn SHA-512, cập nhật chính xác Hoá Đơn Payment sang Database.
-- [x] Lọc Dup-Attack (IPN Spam) và Test Integration 100% VNPay Sandbox.
 
 ---
 

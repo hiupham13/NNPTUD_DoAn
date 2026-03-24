@@ -170,21 +170,21 @@
 ### D10 — 01/04 (Ngày 10) — Home + Products
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 10.1 | Page: Home — Hero section (oversized typography) | 🔴 | ☐ | text-9xl, grayscale image |
-| 10.2 | Page: Home — Stats section (inverted dark) | 🟡 | ☐ | |
-| 10.3 | Page: Home — Featured Products grid | 🔴 | ☐ | Grayscale → color hover |
-| 10.4 | Page: Home — Featured Collections | 🟡 | ☐ | |
-| 10.5 | Page: Home — CTA section | 🟡 | ☐ | |
-| 10.6 | Component: ProductCard (grayscale, hover animation) | 🔴 | ☐ | 1500ms transition |
-| 10.7 | Page: Product List + Filter sidebar | 🔴 | ☐ | Brand, Gender, Price, Movement |
-| 10.8 | Component: Search bar | 🔴 | ☐ | |
-| 10.9 | Component: Sort dropdown | 🟡 | ☐ | |
-| 10.10 | Component: Pagination | 🔴 | ☐ | |
-| 10.11 | Page: Product Detail — Image gallery | 🔴 | ☐ | |
-| 10.12 | Page: Product Detail — Specs + Description | 🔴 | ☐ | Drop cap intro |
-| 10.13 | Page: Product Detail — Add to cart + Qty selector | 🔴 | ☐ | |
-| 10.14 | Page: Product Detail — Related products | 🟡 | ☐ | |
-| 10.15 | Cập nhật `docs/03-frontend/` | 🔴 | ☐ | |
+| 10.1 | Page: Home — Hero section (oversized typography) | 🔴 | ✅ | text-9xl, grayscale image |
+| 10.2 | Page: Home — Stats section (inverted dark) | 🟡 | ✅ | |
+| 10.3 | Page: Home — Featured Products grid | 🔴 | ✅ | Grayscale → color hover |
+| 10.4 | Page: Home — Featured Collections | 🟡 | ✅ | |
+| 10.5 | Page: Home — CTA section | 🟡 | ✅ | |
+| 10.6 | Component: ProductCard (grayscale, hover animation) | 🔴 | ✅ | 1500ms transition |
+| 10.7 | Page: Product List + Filter sidebar | 🔴 | ✅ | Brand, Gender, Price, Movement |
+| 10.8 | Component: Search bar | 🔴 | ✅ | |
+| 10.9 | Component: Sort dropdown | 🟡 | ✅ | |
+| 10.10 | Component: Pagination | 🔴 | ✅ | |
+| 10.11 | Page: Product Detail — Image gallery | 🔴 | ✅ | |
+| 10.12 | Page: Product Detail — Specs + Description | 🔴 | ✅ | Drop cap intro |
+| 10.13 | Page: Product Detail — Add to cart + Qty selector | 🔴 | ✅ | |
+| 10.14 | Page: Product Detail — Related products | 🟡 | ✅ | |
+| 10.15 | Cập nhật `docs/03-frontend/` | 🔴 | ✅ | |
 
 ### D11 — 02/04 (Ngày 11) — Cart + Checkout + Orders
 | # | Task | Priority | Status | Ghi chú |
@@ -258,19 +258,19 @@
 | Phase | Tổng | P1 🔴 | P2 🟡 | Done ✅ |
 |:------|:-----|:------|:------|:-------|
 | Phase 1 (D1-D3) | 45 | 37 | 8 | **45** |
-| Phase 2 (D4-D8) | 46 | 36 | 10 | **12** |
-| Phase 3 (D9-D12) | 47 | 33 | 14 | **15** |
+| Phase 2 (D4-D8) | 46 | 36 | 10 | **46** |
+| Phase 3 (D9-D12) | 47 | 33 | 14 | **30** |
 | Phase 4 (D13-D14) | 21 | 16 | 5 | 0 |
-| **TỔNG** | **159** | **122** | **37** | **72** |
+| **TỔNG** | **159** | **122** | **37** | **121** |
 
 ### Tiến độ tổng
 ```
 Phase 1: ██████████ 100% (45/45) ✅ DONE
-Phase 2: ███░░░░░░░  26% (12/46) ── D4 DONE ✅
-Phase 3: ███░░░░░░░  32% (15/47) ── D9 DONE ✅
+Phase 2: ██████████ 100% (46/46) ✅ DONE
+Phase 3: ██████░░░░  63% (30/47) ── D10 DONE ✅
 Phase 4: ░░░░░░░░░░   0% (0/21)
 ─────────────────────────────
-OVERALL:  █████░░░░░  45% (72/159)
+OVERALL:  ███████░░░  76% (121/159)
 ```
 
 ---

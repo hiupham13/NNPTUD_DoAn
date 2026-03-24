@@ -1,0 +1,56 @@
+/* ============================================
+   SearchBar — Luxury Minimal Style
+   ============================================ */
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar__icon {
+  position: absolute;
+  left: 14px;
+  color: #888888;
+  pointer-events: none;
+}
+
+.search-bar__input {
+  width: 100%;
+  padding: 12px 40px 12px 44px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: #2c2c2c;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar__input::placeholder {
+  color: #aaaaaa;
+  font-style: italic;
+}
+
+.search-bar__input:focus {
+  border-color: #2c2c2c;
+}
+
+.search-bar__clear {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: #888888;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.search-bar__clear:hover {
+  color: #2c2c2c;
+}

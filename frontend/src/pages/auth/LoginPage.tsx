@@ -27,7 +27,7 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       const res = await api.post('/auth/login', data);
-      const { user, token } = res.data;
+      const { user, token } = res.data.data;
       loginAction(user, token);
       toast.success('Xác thực thành công');
       navigate('/');

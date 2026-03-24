@@ -27,7 +27,7 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterFormValues) => {
     try {
       const res = await api.post('/auth/register', data);
-      const { user, token } = res.data;
+      const { user, token } = res.data.data;
       loginAction(user, token);
       toast.success('Đăng ký tài khoản thành công');
       navigate('/');

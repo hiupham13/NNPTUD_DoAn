@@ -1,7 +1,7 @@
 # 📅 Timeline — 14 Ngày
 
 > Xem chi tiết tại [`ke-hoach.md`](../../ke-hoach.md) và [`task.md`](../../task.md)
-> Cập nhật lần cuối: **24/03/2026 — 00:36**
+> Cập nhật lần cuối: **24/03/2026 — 13:00**
 
 ---
 
@@ -38,7 +38,7 @@
 | Ngày | Task | Status |
 |:-----|:-----|:-------|
 | D9 (28/03) | Setup + Layout + Design System + Auth pages | ✅ 15/15 |
-| D10 (29/03) | Home + Product List + Product Detail | ☐ |
+| D10 (29/03) | Home + Product List + Product Detail | ✅ 25/25 |
 | D11 (30/03) | Cart + Checkout + Orders + Profile | ☐ |
 | D12 (31/03) | Admin: Dashboard + Products + Orders + Users + Categories | ☐ |
 
@@ -55,10 +55,10 @@
 ```
 Phase 1: ██████████ 100% ✅
 Phase 2: ██████████ 100% ✅ ← XONG BACKEND
-Phase 3: ░░░░░░░░░░   0%
+Phase 3: █████░░░░░  50%
 Phase 4: ░░░░░░░░░░   0%
 ─────────────────────────
-OVERALL:  ███████░░░  65% (102/159 tasks)
+OVERALL:  ████████░░  80% (127/159 tasks)
 ```
 
 > 🎯 Vượt tiến độ ~3 ngày so với kế hoạch ban đầu!
