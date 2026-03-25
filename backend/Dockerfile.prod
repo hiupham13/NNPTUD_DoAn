@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies (production only)
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copy source code
+COPY . .
+
+# Create uploads directory
+RUN mkdir -p uploads
+
+EXPOSE 3000
+
+# Start with node (production — no nodemon)
+CMD ["node", "./bin/www"]
