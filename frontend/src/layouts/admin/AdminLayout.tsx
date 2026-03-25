@@ -2,7 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
 import {
   LayoutDashboard, Package, ShoppingCart, Users,
-  FolderTree, Layers, Ticket, Warehouse, Settings, LogOut, Watch
+  Warehouse, Settings, LogOut, Watch
 } from 'lucide-react';
 import './AdminLayout.css';
 

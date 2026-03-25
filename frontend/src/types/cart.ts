@@ -1,7 +1,7 @@
 // ============ CART TYPES ============
 // Khớp với backend/schemas/cart.js + controllers/cart.js
 
-import { Product } from './product';
+import type { Product } from './product';
 
 // --- Cart Item (populated product) ---
 export interface CartItem {
