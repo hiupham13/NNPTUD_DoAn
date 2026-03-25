@@ -1,0 +1,67 @@
+# ============================================
+# Docker Compose — PRODUCTION (VPS)
+# Usage: docker compose -f docker-compose.prod.yml up -d --build
+# ============================================
+
+services:
+  # === DATABASE ===
+  mongo:
+    image: mongo:8
+    container_name: luxury-watch-db
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+    restart: unless-stopped
+    # Không expose port 27017 ra ngoài (bảo mật)
+    # Giới hạn cache MongoDB cho VPS 2GB RAM
+    command: --wiredTigerCacheSizeGB 0.4
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # === BACKEND API ===
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    container_name: luxury-watch-api
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/luxury-watch-store
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # === FRONTEND (Nginx serve static) ===
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost/api/v1}
+    container_name: luxury-watch-web
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

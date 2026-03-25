@@ -4,7 +4,8 @@
   "description": "Luxury Watch Store — Backend API",
   "private": true,
   "scripts": {
-    "start": "nodemon --ignore uploads/ --ignore _backup_gv/ ./bin/www",
+    "start": "node ./bin/www",
+    "dev": "nodemon --ignore uploads/ --ignore _backup_gv/ ./bin/www",
     "seed": "node seeders/seed.js"
   },
   "dependencies": {
