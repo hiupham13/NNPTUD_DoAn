@@ -29,8 +29,8 @@ exports.buildVNPayUrl = (order, req) => {
   const vnpUrl = process.env.VNP_URL;
   const returnUrl = process.env.VNP_RETURNURL;
 
-  const createDate = require('moment')().format('YYYYMMDDHHmmss');
-  const expireDate = require('moment')().add(15, 'minutes').format('YYYYMMDDHHmmss');
+  const createDate = require('moment')().utcOffset('+07:00').format('YYYYMMDDHHmmss');
+  const expireDate = require('moment')().utcOffset('+07:00').add(15, 'minutes').format('YYYYMMDDHHmmss');
   let amount = order.finalAmount;
 
   let vnp_Params = {};
