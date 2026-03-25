@@ -1,4 +1,4 @@
-import { DollarSign, ShoppingCart, Users, Package, TrendingUp, TrendingDown } from 'lucide-react';
+import { DollarSign, ShoppingCart, Users, Package } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   AreaChart, Area, CartesianGrid
@@ -87,7 +87,7 @@ export default function DashboardPage() {
                   <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#adb5bd' }} />
                   <YAxis tickFormatter={formatVND} tick={{ fontSize: 11, fill: '#adb5bd' }} />
                   <Tooltip
-                    formatter={(value: number) => [new Intl.NumberFormat('vi-VN').format(value) + ' ₫', 'Doanh thu']}
+                    formatter={(value) => [new Intl.NumberFormat('vi-VN').format(Number(value)) + ' ₫', 'Doanh thu']}
                     contentStyle={{ fontSize: '0.8rem', borderRadius: 6 }}
                   />
                   <Area type="monotone" dataKey="revenue" stroke="#d4af37" fill="url(#revenueGrad)" strokeWidth={2} />
@@ -110,7 +110,7 @@ export default function DashboardPage() {
                   <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#adb5bd' }} interval="preserveStartEnd" />
                   <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#adb5bd' }} />
                   <Tooltip
-                    formatter={(value: number) => [value, 'Đơn hàng']}
+                    formatter={(value) => [Number(value), 'Đơn hàng']}
                     contentStyle={{ fontSize: '0.8rem', borderRadius: 6 }}
                   />
                   <Bar dataKey="orders" fill="#3b82f6" radius={[4, 4, 0, 0]} />
