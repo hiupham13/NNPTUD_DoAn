@@ -43,8 +43,17 @@ export const productAdminService = {
     const formData = new FormData();
     files.forEach(file => formData.append('images', file));
     const { data } = await api.post('/upload/multiple', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data' }
     });
     return data.data.urls as string[];
+  },
+
+  importExcel: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const { data } = await api.post('/products/import-excel', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return data;
   },
 };

@@ -6,12 +6,28 @@ export const settingsAdminService = {
   createCategory: async (payload: any) => { const { data } = await api.post('/categories', payload); return data; },
   updateCategory: async (id: string, payload: any) => { const { data } = await api.put(`/categories/${id}`, payload); return data; },
   deleteCategory: async (id: string) => { const { data } = await api.delete(`/categories/${id}`); return data; },
+  importCategoryExcel: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const { data } = await api.post('/categories/import-excel', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return data;
+  },
 
   // Collections
   getCollections: async () => { const { data } = await api.get('/collections'); return data.data; },
   createCollection: async (payload: any) => { const { data } = await api.post('/collections', payload); return data; },
   updateCollection: async (id: string, payload: any) => { const { data } = await api.put(`/collections/${id}`, payload); return data; },
   deleteCollection: async (id: string) => { const { data } = await api.delete(`/collections/${id}`); return data; },
+  importCollectionExcel: async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const { data } = await api.post('/collections/import-excel', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return data;
+  },
 
   // Coupons
   getCoupons: async () => { const { data } = await api.get('/coupons'); return data.data; },

@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Search, Edit, Trash2 } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, FileSpreadsheet } from 'lucide-react';
 import AdminTable, { type Column } from '../../components/admin/AdminTable';
-import { useAdminProducts, useDeleteProduct, useUpdateProduct } from '../../hooks/useProductAdmin';
+import { useAdminProducts, useDeleteProduct, useUpdateProduct, useImportExcelProduct } from '../../hooks/useProductAdmin';
 import toast from 'react-hot-toast';
 import '../../components/admin/AdminToggle.css';
 import './ProductListPage.css';
@@ -14,9 +14,28 @@ export default function ProductListPage() {
   const { data, isLoading } = useAdminProducts({ search, page, limit: 15 });
   const deleteMutation = useDeleteProduct();
   const updateMutation = useUpdateProduct();
+  const importMutation = useImportExcelProduct();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const products = data?.data || [];
   const pagination = data?.pagination;
+
+  const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    const toastId = toast.loading('Đang xử lý file Excel...');
+    importMutation.mutate(file, {
+      onSuccess: (res: any) => {
+        toast.success(res.message || 'Import thành công', { id: toastId });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      },
+      onError: (err: any) => {
+        toast.error(err.response?.data?.message || 'Lỗi khi import file Excel', { id: toastId });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
+    });
+  };
 
   const handleDelete = (id: string, name: string) => {
     if (!confirm(`Bạn có chắc muốn xóa "${name}"?`)) return;
@@ -89,10 +108,28 @@ export default function ProductListPage() {
     <div className="product-list">
       <div className="product-list__header">
         <h1 className="product-list__title">Quản lý sản phẩm</h1>
-        <Link to="/admin/products/new" className="product-list__add">
-          <Plus size={16} />
-          <span>Thêm sản phẩm</span>
-        </Link>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <input 
+            type="file" 
+            accept=".xlsx, .xls" 
+            ref={fileInputRef} 
+            onChange={handleImportExcel} 
+            style={{ display: 'none' }} 
+          />
+          <button 
+            className="product-list__add" 
+            style={{ backgroundColor: '#217346' }}
+            onClick={() => fileInputRef.current?.click()}
+            disabled={importMutation.isPending}
+          >
+             <FileSpreadsheet size={16} />
+             <span>{importMutation.isPending ? 'Đang Import...' : 'Import Excel'}</span>
+          </button>
+          <Link to="/admin/products/new" className="product-list__add">
+            <Plus size={16} />
+            <span>Thêm sản phẩm</span>
+          </Link>
+        </div>
       </div>
 
       <div className="product-list__toolbar">

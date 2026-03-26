@@ -29,4 +29,8 @@ router.put('/:id', [
 
 router.delete('/:id', productController.deleteProduct);
 
+const multer = require('multer');
+const uploadExcel = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+router.post('/import-excel', uploadExcel.single('file'), productController.importProductsFromExcel);
+
 module.exports = router;

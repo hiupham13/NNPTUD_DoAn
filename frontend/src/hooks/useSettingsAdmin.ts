@@ -15,6 +15,10 @@ export const useDeleteCategory = () => {
   const qc = useQueryClient();
   return useMutation({ mutationFn: settingsAdminService.deleteCategory, onSuccess: () => qc.invalidateQueries({ queryKey: ['categories'] }) });
 };
+export const useImportCategoryExcel = () => {
+  const qc = useQueryClient();
+  return useMutation({ mutationFn: settingsAdminService.importCategoryExcel, onSuccess: () => qc.invalidateQueries({ queryKey: ['categories'] }) });
+};
 
 // Collections
 export const useCollections = () => useQuery({ queryKey: ['collections'], queryFn: settingsAdminService.getCollections });
@@ -29,6 +33,10 @@ export const useUpdateCollection = () => {
 export const useDeleteCollection = () => {
   const qc = useQueryClient();
   return useMutation({ mutationFn: settingsAdminService.deleteCollection, onSuccess: () => qc.invalidateQueries({ queryKey: ['collections'] }) });
+};
+export const useImportCollectionExcel = () => {
+  const qc = useQueryClient();
+  return useMutation({ mutationFn: settingsAdminService.importCollectionExcel, onSuccess: () => qc.invalidateQueries({ queryKey: ['collections'] }) });
 };
 
 // Coupons

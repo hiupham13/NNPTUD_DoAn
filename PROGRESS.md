@@ -11,7 +11,7 @@
 |:--|:--|
 | **Dự án** | Website E-Commerce bán đồng hồ cao cấp |
 | **Deadline** | 06/04/2026 |
-| **Ngày hiện tại** | D13 — 24/03/2026 (buổi tối) |
+| **Ngày hiện tại** | D14 — 26/03/2026 |
 | **Phase hiện tại** | Phase 4: Polish + Submit 🔄 ĐÃ BẮT ĐẦU |
 | **Việc đang làm** | Supplementary Pages (Collections ✅, Brands ✅, About ☐) |
 | **Trạng thái** | 🟢 VƯỢT TIẾN ĐỘ — sớm 10 ngày! |
@@ -24,9 +24,9 @@
 Phase 1 (Foundation):  ██████████ 100% ✅ DONE (D1-D3)
 Phase 2 (Backend API): ██████████ 100% ✅ DONE (D4-D8)
 Phase 3 (Frontend):    ██████████ 100% ✅ DONE (D9-D12)
-Phase 4 (Polish):      ██░░░░░░░░  19% ── D13 🔄 ĐANG LÀM
+Phase 4 (Polish):      ███░░░░░░░  23% ── D14 🔄 ĐANG LÀM
 ──────────────────────────────────────────────────────
-OVERALL:               █████████░  89% ── 143/160 tasks
+OVERALL:               █████████░  88% ── 145/165 tasks
 ```
 
 ---
@@ -121,11 +121,16 @@ OVERALL:               █████████░  89% ── 143/160 tasks
 - ✅ **BrandsPage** (`/brands`): 5 sections (Hero, Philosophy, Heritage, Process dark, CTA)
 - ☐ **AboutPage** (`/about`): Chờ template từ user
 
+### D14 — 26/03 — Bulk Import & Seed Data 🔄
+- ✅ **Bulk Import Backend**: Endpoint `/import-excel` (Quy tắc 3A: auto-create Brands/Collections, Quy tắc 1A: ghi đè).
+- ✅ **Bulk Import Frontend**: Xử lý Multipart Form Data, React Query caching.
+- ✅ **Final Seed Data**: Dọn dẹp rác (xoá 78 products rỗng mô tả), bulk import 100 sản phẩm với đầy đủ mô tả Tiếng Việt cao cấp.
+
 ---
 
 ## 📌 VIỆC TIẾP THEO
 
-### Phase 4 (D13-D14) — Còn 17 tasks
+### Phase 4 (D13-D14) — Còn 15 tasks
 
 | Task | Priority |
 |:-----|:---------|
@@ -136,7 +141,6 @@ OVERALL:               █████████░  89% ── 143/160 tasks
 | Test: Order status flow + Cancel → hoàn kho | 🔴 |
 | Bug fix từ testing | 🔴 |
 | UI polish: responsive mobile | 🟡 |
-| Seed data final: 20+ watches, sample orders | 🔴 |
 | README.md hoàn chỉnh | 🔴 |
 | Docker Compose test: 1 lệnh chạy all | 🔴 |
 
@@ -169,7 +173,4 @@ OVERALL:               █████████░  89% ── 143/160 tasks
 
 ---
 
-> ⚠️ Cập nhật file này **cuối mỗi ngày** hoặc khi hoàn thành major task.
-> 📅 Cập nhật lần cuối: **24/03/2026 23:06** — D13 Supplementary Pages (Collections + Brands DONE)
-> Xem [`task.md`](./task.md) cho chi tiết từng task.
-> 📅 Cập nhật lần cuối: **24/03/2026 22:00** — Phase 3 DONE!
+> 📅 Cập nhật lần cuối: **26/03/2026** — D14 Bulk Import (Categories, Collections, Products). Seed thành công 100 sản phẩm.

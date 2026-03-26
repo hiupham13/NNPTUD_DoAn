@@ -173,13 +173,14 @@ Testing, bug fix, UI polish, documentation, chuẩn bị nộp.
 | Ngày | Task chính |
 |:-----|:-----------|
 | **D13** (24/03) | Supplementary Pages: Collections ✅ + Brands ✅ + About ☐ |
-| **D14** (TBD) | Testing, bug fix, UI polish, README, final seed, Docker |
+| **D14** (26/03) | Bulk Import Excel (Products, Brands, Collections) ✅, Seed data (100 watches) ✅, Testing... |
 
 ### ✅ Tiêu chí hoàn thành Phase 4
 - [ ] Toàn bộ CRUD flows test pass
 - [ ] Checkout flow end-to-end pass (COD + VNPay)
 - [ ] Edge cases đã xử lý (delete protection, snapshot, stock validation)
-- [ ] Seed data đầy đủ (brands, collections, 20+ products, sample orders)
+- [x] Seed data đầy đủ qua Excel Upload (10 brands, 10+ collections, 100 products)
+- [ ] Seed data: sample orders
 - [ ] README.md hoàn chỉnh (hướng dẫn setup, chạy, APIs)
 - [ ] Docker Compose chạy 1 lệnh
 - [ ] Responsive trên mobile/tablet/desktop
