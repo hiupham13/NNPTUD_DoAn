@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Search, Edit, Trash2, FileSpreadsheet, CheckSquare } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, FileSpreadsheet } from 'lucide-react';
 import AdminTable, { type Column } from '../../components/admin/AdminTable';
 import { useAdminProducts, useDeleteProduct, useUpdateProduct, useImportExcelProduct, useBulkDeleteProducts } from '../../hooks/useProductAdmin';
 import toast from 'react-hot-toast';
