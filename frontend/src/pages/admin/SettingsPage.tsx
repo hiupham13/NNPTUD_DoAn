@@ -2,8 +2,8 @@ import { useState, useRef } from 'react';
 import { Tags, FolderOpen, Ticket, Plus, Edit, Trash2, X, Save, FileSpreadsheet } from 'lucide-react';
 import AdminTable, { type Column } from '../../components/admin/AdminTable';
 import {
-  useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory, useImportCategoryExcel,
-  useCollections, useCreateCollection, useUpdateCollection, useDeleteCollection, useImportCollectionExcel,
+  useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory, useImportCategoryExcel, useBulkDeleteCategory,
+  useCollections, useCreateCollection, useUpdateCollection, useDeleteCollection, useImportCollectionExcel, useBulkDeleteCollection,
   useCoupons, useCreateCoupon, useUpdateCoupon, useDeleteCoupon,
 } from '../../hooks/useSettingsAdmin';
 import toast from 'react-hot-toast';
@@ -22,9 +22,11 @@ function CategoryTab() {
   const createMut = useCreateCategory();
   const updateMut = useUpdateCategory();
   const deleteMut = useDeleteCategory();
+  const bulkDeleteMut = useBulkDeleteCategory();
   const importMut = useImportCategoryExcel();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [modal, setModal] = useState<{ open: boolean; item?: any }>({ open: false });
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
   const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -64,10 +66,42 @@ function CategoryTab() {
 
   const handleDelete = (id: string, n: string) => {
     if (!confirm(`Xoá "${n}"?`)) return;
-    deleteMut.mutate(id, { onSuccess: () => toast.success('Đã xoá'), onError: () => toast.error('Xoá thất bại') });
+    deleteMut.mutate(id, { onSuccess: () => { toast.success('Đã xoá'); setSelectedIds(prev => { const n = new Set(prev); n.delete(id); return n; }); }, onError: () => toast.error('Xoá thất bại') });
+  };
+
+  const handleBulkDelete = () => {
+    if (selectedIds.size === 0) return;
+    if (!confirm(`Bạn có chắc muốn xoá ${selectedIds.size} thương hiệu đã chọn?`)) return;
+    bulkDeleteMut.mutate(Array.from(selectedIds), {
+      onSuccess: (res: any) => {
+        toast.success(res.message || `Đã xoá ${selectedIds.size} thương hiệu`);
+        setSelectedIds(new Set());
+      },
+      onError: (err: any) => {
+        toast.error(err.response?.data?.message || 'Xoá thất bại');
+      }
+    });
+  };
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) setSelectedIds(new Set(items.map((i: any) => i._id)));
+    else setSelectedIds(new Set());
+  };
+
+  const handleSelect = (id: string, checked: boolean) => {
+    const newSet = new Set(selectedIds);
+    if (checked) newSet.add(id);
+    else newSet.delete(id);
+    setSelectedIds(newSet);
   };
 
   const columns: Column<any>[] = [
+    {
+      key: 'checkbox',
+      title: <input type="checkbox" onChange={handleSelectAll} checked={items.length > 0 && selectedIds.size === items.length} />,
+      width: '40px',
+      render: (i: any) => <input type="checkbox" checked={selectedIds.has(i._id)} onChange={(e) => handleSelect(i._id, e.target.checked)} />
+    },
     { key: 'name', title: 'Tên' },
     { key: 'slug', title: 'Slug', width: '200px' },
     { key: 'description', title: 'Mô tả', render: (i) => i.description || '—' },
@@ -87,6 +121,11 @@ function CategoryTab() {
       <div className="stg-tab-header">
         <div style={{ display: 'flex', gap: '10px' }}>
           <input type="file" accept=".xlsx, .xls" ref={fileInputRef} onChange={handleImportExcel} style={{ display: 'none' }} />
+          {selectedIds.size > 0 && (
+            <button className="stg-add" style={{ backgroundColor: '#dc2626' }} onClick={handleBulkDelete} disabled={bulkDeleteMut.isPending}>
+              <Trash2 size={14} /> Xóa đã chọn ({selectedIds.size})
+            </button>
+          )}
           <button className="stg-add" style={{ backgroundColor: '#217346' }} onClick={() => fileInputRef.current?.click()} disabled={importMut.isPending}>
              <FileSpreadsheet size={14} /> Import Excel
           </button>
@@ -108,9 +147,11 @@ function CollectionTab() {
   const createMut = useCreateCollection();
   const updateMut = useUpdateCollection();
   const deleteMut = useDeleteCollection();
+  const bulkDeleteMut = useBulkDeleteCollection();
   const importMut = useImportCollectionExcel();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [modal, setModal] = useState<{ open: boolean; item?: any }>({ open: false });
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
   const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -150,10 +191,42 @@ function CollectionTab() {
 
   const handleDelete = (id: string, n: string) => {
     if (!confirm(`Xoá "${n}"?`)) return;
-    deleteMut.mutate(id, { onSuccess: () => toast.success('Đã xoá'), onError: () => toast.error('Xoá thất bại') });
+    deleteMut.mutate(id, { onSuccess: () => { toast.success('Đã xoá'); setSelectedIds(prev => { const n = new Set(prev); n.delete(id); return n; }); }, onError: () => toast.error('Xoá thất bại') });
+  };
+
+  const handleBulkDelete = () => {
+    if (selectedIds.size === 0) return;
+    if (!confirm(`Bạn có chắc muốn xoá ${selectedIds.size} bộ sưu tập đã chọn?`)) return;
+    bulkDeleteMut.mutate(Array.from(selectedIds), {
+      onSuccess: (res: any) => {
+        toast.success(res.message || `Đã xoá ${selectedIds.size} bộ sưu tập`);
+        setSelectedIds(new Set());
+      },
+      onError: (err: any) => {
+        toast.error(err.response?.data?.message || 'Xoá thất bại');
+      }
+    });
+  };
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) setSelectedIds(new Set(items.map((i: any) => i._id)));
+    else setSelectedIds(new Set());
+  };
+
+  const handleSelect = (id: string, checked: boolean) => {
+    const newSet = new Set(selectedIds);
+    if (checked) newSet.add(id);
+    else newSet.delete(id);
+    setSelectedIds(newSet);
   };
 
   const columns: Column<any>[] = [
+    {
+      key: 'checkbox',
+      title: <input type="checkbox" onChange={handleSelectAll} checked={items.length > 0 && selectedIds.size === items.length} />,
+      width: '40px',
+      render: (i: any) => <input type="checkbox" checked={selectedIds.has(i._id)} onChange={(e) => handleSelect(i._id, e.target.checked)} />
+    },
     { key: 'name', title: 'Tên' },
     { key: 'slug', title: 'Slug', width: '200px' },
     { key: 'description', title: 'Mô tả', render: (i) => i.description || '—' },
@@ -173,6 +246,11 @@ function CollectionTab() {
       <div className="stg-tab-header">
         <div style={{ display: 'flex', gap: '10px' }}>
           <input type="file" accept=".xlsx, .xls" ref={fileInputRef} onChange={handleImportExcel} style={{ display: 'none' }} />
+          {selectedIds.size > 0 && (
+            <button className="stg-add" style={{ backgroundColor: '#dc2626' }} onClick={handleBulkDelete} disabled={bulkDeleteMut.isPending}>
+              <Trash2 size={14} /> Xóa đã chọn ({selectedIds.size})
+            </button>
+          )}
           <button className="stg-add" style={{ backgroundColor: '#217346' }} onClick={() => fileInputRef.current?.click()} disabled={importMut.isPending}>
              <FileSpreadsheet size={14} /> Import Excel
           </button>

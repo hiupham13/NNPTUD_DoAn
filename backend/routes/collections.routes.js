@@ -22,6 +22,8 @@ router.put('/:id', [
   body('name').optional().notEmpty().withMessage('Tên bộ sưu tập không được để trống').trim()
 ], validate, collectionController.updateCollection);
 
+router.post('/bulk-delete', collectionController.bulkDeleteCollections);
+
 router.delete('/:id', collectionController.deleteCollection);
 
 const multer = require('multer');

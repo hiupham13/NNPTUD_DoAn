@@ -6,6 +6,7 @@ export const settingsAdminService = {
   createCategory: async (payload: any) => { const { data } = await api.post('/categories', payload); return data; },
   updateCategory: async (id: string, payload: any) => { const { data } = await api.put(`/categories/${id}`, payload); return data; },
   deleteCategory: async (id: string) => { const { data } = await api.delete(`/categories/${id}`); return data; },
+  bulkDeleteCategory: async (categoryIds: string[]) => { const { data } = await api.post('/categories/bulk-delete', { categoryIds }); return data; },
   importCategoryExcel: async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);
@@ -20,6 +21,7 @@ export const settingsAdminService = {
   createCollection: async (payload: any) => { const { data } = await api.post('/collections', payload); return data; },
   updateCollection: async (id: string, payload: any) => { const { data } = await api.put(`/collections/${id}`, payload); return data; },
   deleteCollection: async (id: string) => { const { data } = await api.delete(`/collections/${id}`); return data; },
+  bulkDeleteCollection: async (collectionIds: string[]) => { const { data } = await api.post('/collections/bulk-delete', { collectionIds }); return data; },
   importCollectionExcel: async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);

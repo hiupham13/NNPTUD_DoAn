@@ -130,6 +130,36 @@ exports.deleteCategory = async (req, res, next) => {
   }
 };
 
+// @desc    Bulk Delete (soft-delete) categories
+// @route   POST /api/v1/categories/bulk-delete
+// @access  Private/Admin
+exports.bulkDeleteCategories = async (req, res, next) => {
+  try {
+    const { categoryIds } = req.body;
+    if (!categoryIds || !Array.isArray(categoryIds) || categoryIds.length === 0) {
+      return next(new AppError('Vui lòng chọn ít nhất một danh mục để xóa', 400));
+    }
+
+    // EC-01: Delete Protection
+    const productCount = await Product.countDocuments({ category: { $in: categoryIds }, isDeleted: false });
+    if (productCount > 0) {
+      return next(new AppError(`Một hoặc nhiều danh mục được chọn đang chứa tổng cộng ${productCount} sản phẩm hoạt động. Không thể xóa, vui lòng dọn sạch hoặc chuyển sản phẩm trước.`, 400));
+    }
+
+    await Category.updateMany(
+      { _id: { $in: categoryIds } },
+      { $set: { isDeleted: true, isActive: false } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: `Xóa ${categoryIds.length} danh mục thành công`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Import categories from Excel
 // @route   POST /api/v1/categories/import-excel
 // @access  Private/Admin

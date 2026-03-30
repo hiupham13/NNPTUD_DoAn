@@ -22,6 +22,8 @@ router.put('/:id', [
   body('name').optional().notEmpty().withMessage('Tên danh mục không được để trống').trim()
 ], validate, categoryController.updateCategory);
 
+router.post('/bulk-delete', categoryController.bulkDeleteCategories);
+
 router.delete('/:id', categoryController.deleteCategory);
 
 const multer = require('multer');

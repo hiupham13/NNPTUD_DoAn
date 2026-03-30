@@ -130,6 +130,36 @@ exports.deleteCollection = async (req, res, next) => {
   }
 };
 
+// @desc    Bulk Delete collections (soft delete + EC-02)
+// @route   POST /api/v1/collections/bulk-delete
+// @access  Private/Admin
+exports.bulkDeleteCollections = async (req, res, next) => {
+  try {
+    const { collectionIds } = req.body;
+    if (!collectionIds || !Array.isArray(collectionIds) || collectionIds.length === 0) {
+      return next(new AppError('Vui lòng chọn ít nhất một bộ sưu tập để xóa', 400));
+    }
+
+    // EC-02: Remove reference from Products (Set product.collectionRef = null)
+    await Product.updateMany(
+      { collectionRef: { $in: collectionIds } },
+      { $set: { collectionRef: null } }
+    );
+
+    await Collection.updateMany(
+      { _id: { $in: collectionIds } },
+      { $set: { isDeleted: true, isActive: false } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: `Xóa ${collectionIds.length} bộ sưu tập và gỡ liên kết sản phẩm thành công`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Import collections from Excel
 // @route   POST /api/v1/collections/import-excel
 // @access  Private/Admin
