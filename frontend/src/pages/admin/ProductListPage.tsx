@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Search, Edit, Trash2, FileSpreadsheet } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, FileSpreadsheet, CheckSquare } from 'lucide-react';
 import AdminTable, { type Column } from '../../components/admin/AdminTable';
-import { useAdminProducts, useDeleteProduct, useUpdateProduct, useImportExcelProduct } from '../../hooks/useProductAdmin';
+import { useAdminProducts, useDeleteProduct, useUpdateProduct, useImportExcelProduct, useBulkDeleteProducts } from '../../hooks/useProductAdmin';
 import toast from 'react-hot-toast';
 import '../../components/admin/AdminToggle.css';
 import './ProductListPage.css';
@@ -13,9 +13,12 @@ export default function ProductListPage() {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useAdminProducts({ search, page, limit: 15 });
   const deleteMutation = useDeleteProduct();
+  const bulkDeleteMutation = useBulkDeleteProducts();
   const updateMutation = useUpdateProduct();
   const importMutation = useImportExcelProduct();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const products = data?.data || [];
   const pagination = data?.pagination;
@@ -40,15 +43,60 @@ export default function ProductListPage() {
   const handleDelete = (id: string, name: string) => {
     if (!confirm(`Bạn có chắc muốn xóa "${name}"?`)) return;
     deleteMutation.mutate(id, {
-      onSuccess: () => toast.success('Đã xóa sản phẩm'),
+      onSuccess: () => {
+         toast.success('Đã xóa sản phẩm');
+         setSelectedIds(prev => prev.filter(i => i !== id));
+      },
       onError: () => toast.error('Xóa thất bại'),
     });
+  };
+
+  const handleBulkDelete = () => {
+    if (selectedIds.length === 0) return;
+    if (!confirm(`Bạn có chắc muốn xóa ${selectedIds.length} sản phẩm đã chọn?`)) return;
+    bulkDeleteMutation.mutate(selectedIds, {
+      onSuccess: () => {
+        toast.success(`Đã xóa ${selectedIds.length} sản phẩm`);
+        setSelectedIds([]);
+      },
+      onError: () => toast.error('Xóa thất bại'),
+    });
+  };
+
+  const isAllSelected = products.length > 0 && selectedIds.length === products.length;
+  const handleSelectAll = () => {
+    if (isAllSelected) setSelectedIds([]);
+    else setSelectedIds(products.map((p: any) => p._id));
+  };
+
+  const handleSelectProduct = (id: string) => {
+    setSelectedIds(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
   };
 
   const formatVND = (v: number) =>
     new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(v);
 
   const columns: Column<any>[] = [
+    {
+      key: 'checkbox',
+      title: (
+        <input 
+          type="checkbox" 
+          checked={isAllSelected} 
+          onChange={handleSelectAll} 
+          disabled={products.length === 0}
+        />
+      ),
+      width: '40px',
+      render: (p) => (
+        <input 
+          type="checkbox" 
+          checked={selectedIds.includes(p._id)} 
+          onChange={() => handleSelectProduct(p._id)}
+          onClick={(e) => e.stopPropagation()}
+        />
+      ),
+    },
     {
       key: 'image',
       title: 'Ảnh',
@@ -125,6 +173,19 @@ export default function ProductListPage() {
              <FileSpreadsheet size={16} />
              <span>{importMutation.isPending ? 'Đang Import...' : 'Import Excel'}</span>
           </button>
+          
+          {selectedIds.length > 0 && (
+            <button 
+              className="product-list__add" 
+              style={{ backgroundColor: '#dc3545', display: 'flex', alignItems: 'center', gap: '8px' }}
+              onClick={handleBulkDelete}
+              disabled={bulkDeleteMutation.isPending}
+            >
+              <Trash2 size={16} />
+              <span>{bulkDeleteMutation.isPending ? 'Đang xóa...' : `Xóa ${selectedIds.length} dòng`}</span>
+            </button>
+          )}
+
           <Link to="/admin/products/new" className="product-list__add">
             <Plus size={16} />
             <span>Thêm sản phẩm</span>

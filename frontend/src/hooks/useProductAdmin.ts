@@ -43,6 +43,14 @@ export const useDeleteProduct = () => {
   });
 };
 
+export const useBulkDeleteProducts = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (ids: string[]) => productAdminService.bulkDelete(ids),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'products'] }),
+  });
+};
+
 export const useImportExcelProduct = () => {
   const qc = useQueryClient();
   return useMutation({

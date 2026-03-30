@@ -39,6 +39,11 @@ export const productAdminService = {
     return data;
   },
 
+  bulkDelete: async (productIds: string[]) => {
+    const { data } = await api.post('/products/bulk-delete', { productIds });
+    return data;
+  },
+
   uploadImages: async (files: File[]) => {
     const formData = new FormData();
     files.forEach(file => formData.append('images', file));
