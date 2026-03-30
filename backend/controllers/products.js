@@ -260,8 +260,9 @@ exports.importProductsFromExcel = async (req, res, next) => {
     let errorCount = 0;
     const errors = [];
 
-    const categories = await Category.find({});
-    const collections = await Collection.find({});
+    // Bỏ qua filter isDeleted của Mongoose schema hook
+    const categories = await Category.find({ isDeleted: { $in: [true, false] } });
+    const collections = await Collection.find({ isDeleted: { $in: [true, false] } });
 
     for (let i = 0; i < data.length; i++) {
       const row = data[i];
@@ -324,13 +325,17 @@ exports.importProductsFromExcel = async (req, res, next) => {
         if (row['Dây'] || row['strap']) productData.strapMaterial = row['Dây'] || row['strap'];
         if (row['Chống Nước'] || row['waterResistance']) productData.waterResistance = row['Chống Nước'] || row['waterResistance'];
         
-        // Find existing product (Rule 1A)
+        // Find existing product (kể cả những product đã bị soft-delete)
         let product;
         if (row['SKU'] || row['sku']) {
-           product = await Product.findOne({ sku: row['SKU'] || row['sku'] });
+           product = await Product.findOne({ sku: row['SKU'] || row['sku'], isDeleted: { $in: [true, false] } });
         } else {
-           product = await Product.findOne({ name: name.trim() });
+           product = await Product.findOne({ name: name.trim(), isDeleted: { $in: [true, false] } });
         }
+
+        // Khi import lại từ Excel, chắc chắn phục hồi (resurrect) sản phẩm để nó hiển thị lại
+        productData.isDeleted = false;
+        productData.isActive = true;
 
         if (product) {
            Object.assign(product, productData);
