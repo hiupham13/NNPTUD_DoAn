@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Tags, FolderOpen, Ticket, Plus, Edit, Trash2, X, Save } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Tags, FolderOpen, Ticket, Plus, Edit, Trash2, X, Save, FileSpreadsheet } from 'lucide-react';
 import AdminTable, { type Column } from '../../components/admin/AdminTable';
 import {
-  useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory,
-  useCollections, useCreateCollection, useUpdateCollection, useDeleteCollection,
+  useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory, useImportCategoryExcel,
+  useCollections, useCreateCollection, useUpdateCollection, useDeleteCollection, useImportCollectionExcel,
   useCoupons, useCreateCoupon, useUpdateCoupon, useDeleteCoupon,
 } from '../../hooks/useSettingsAdmin';
 import toast from 'react-hot-toast';
@@ -22,7 +22,25 @@ function CategoryTab() {
   const createMut = useCreateCategory();
   const updateMut = useUpdateCategory();
   const deleteMut = useDeleteCategory();
+  const importMut = useImportCategoryExcel();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [modal, setModal] = useState<{ open: boolean; item?: any }>({ open: false });
+
+  const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const toastId = toast.loading('Đang Import Excel...');
+    importMut.mutate(file, {
+      onSuccess: (res: any) => {
+        toast.success(res.message || 'Import thành công', { id: toastId });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      },
+      onError: (err: any) => {
+        toast.error(err.response?.data?.message || 'Lỗi khi import file Excel', { id: toastId });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
+    });
+  };
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -67,7 +85,13 @@ function CategoryTab() {
   return (
     <>
       <div className="stg-tab-header">
-        <button className="stg-add" onClick={openCreate}><Plus size={14} /> Thêm thương hiệu</button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <input type="file" accept=".xlsx, .xls" ref={fileInputRef} onChange={handleImportExcel} style={{ display: 'none' }} />
+          <button className="stg-add" style={{ backgroundColor: '#217346' }} onClick={() => fileInputRef.current?.click()} disabled={importMut.isPending}>
+             <FileSpreadsheet size={14} /> Import Excel
+          </button>
+          <button className="stg-add" onClick={openCreate}><Plus size={14} /> Thêm thương hiệu</button>
+        </div>
       </div>
       <AdminTable columns={columns} data={items} loading={isLoading} rowKey={(i: any) => i._id} emptyText="Chưa có thương hiệu" />
       {modal.open && <SettingsModal title={modal.item ? 'Sửa thương hiệu' : 'Thêm thương hiệu'} onClose={() => setModal({ open: false })} onSave={handleSave} saving={createMut.isPending || updateMut.isPending}>
@@ -84,7 +108,25 @@ function CollectionTab() {
   const createMut = useCreateCollection();
   const updateMut = useUpdateCollection();
   const deleteMut = useDeleteCollection();
+  const importMut = useImportCollectionExcel();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [modal, setModal] = useState<{ open: boolean; item?: any }>({ open: false });
+
+  const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const toastId = toast.loading('Đang Import Excel...');
+    importMut.mutate(file, {
+      onSuccess: (res: any) => {
+        toast.success(res.message || 'Import thành công', { id: toastId });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      },
+      onError: (err: any) => {
+        toast.error(err.response?.data?.message || 'Lỗi khi import file Excel', { id: toastId });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
+    });
+  };
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -129,7 +171,13 @@ function CollectionTab() {
   return (
     <>
       <div className="stg-tab-header">
-        <button className="stg-add" onClick={openCreate}><Plus size={14} /> Thêm bộ sưu tập</button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <input type="file" accept=".xlsx, .xls" ref={fileInputRef} onChange={handleImportExcel} style={{ display: 'none' }} />
+          <button className="stg-add" style={{ backgroundColor: '#217346' }} onClick={() => fileInputRef.current?.click()} disabled={importMut.isPending}>
+             <FileSpreadsheet size={14} /> Import Excel
+          </button>
+          <button className="stg-add" onClick={openCreate}><Plus size={14} /> Thêm bộ sưu tập</button>
+        </div>
       </div>
       <AdminTable columns={columns} data={items} loading={isLoading} rowKey={(i: any) => i._id} emptyText="Chưa có bộ sưu tập" />
       {modal.open && <SettingsModal title={modal.item ? 'Sửa bộ sưu tập' : 'Thêm bộ sưu tập'} onClose={() => setModal({ open: false })} onSave={handleSave} saving={createMut.isPending || updateMut.isPending}>

@@ -1,5 +1,6 @@
 const Category = require('../schemas/categories');
 const Product = require('../schemas/products');
+const xlsx = require('xlsx');
 const AppError = require('../utils/AppError');
 
 // @desc    Get all categories
@@ -127,4 +128,54 @@ exports.deleteCategory = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+// @desc    Import categories from Excel
+// @route   POST /api/v1/categories/import-excel
+// @access  Private/Admin
+exports.importCategoriesFromExcel = async (req, res, next) => {
+  try {
+    if (!req.file || !req.file.buffer) {
+      return next(new AppError('Không tìm thấy file tải lên', 400));
+    }
+    const workbook = xlsx.read(req.file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+    if (data.length === 0) return next(new AppError('File Excel rỗng', 400));
+    let successCount = 0;
+    let errorCount = 0;
+    const errors = [];
+    
+    for (let i = 0; i < data.length; i++) {
+       const row = data[i];
+       const name = row['Tên Thương Hiệu'] || row['name'] || row['Tên Danh Mục'];
+       const desc = row['Mô tả'] || row['description'] || '';
+       const image = row['Hình Ảnh (URL)'] || row['image'] || '';
+       
+       if (!name) {
+         errorCount++;
+         errors.push(`Dòng ${i+2}: Thiếu tên`);
+         continue;
+       }
+       
+       try {
+         let category = await Category.findOne({ name: name.trim() });
+         if (category) {
+            category.description = desc || category.description;
+            category.image = image || category.image;
+            category.isActive = true;
+            category.isDeleted = false;
+            await category.save();
+         } else {
+            await Category.create({ name: name.trim(), description: desc, image: image, isActive: true });
+         }
+         successCount++;
+       } catch (err) {
+         errorCount++;
+         errors.push(`Dòng ${i+2}: ${err.message}`);
+       }
+    }
+    
+    res.status(200).json({ success: true, message: `Thành công: ${successCount}. Lỗi: ${errorCount}`, data: {successCount, errorCount, errors} });
+  } catch (error) { next(error); }
 };

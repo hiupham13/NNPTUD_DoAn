@@ -3,7 +3,7 @@ import './AdminTable.css';
 
 export interface Column<T> {
   key: string;
-  title: string;
+  title: ReactNode | string;
   render?: (item: T) => ReactNode;
   width?: string;
   sortable?: boolean;

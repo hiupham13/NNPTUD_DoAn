@@ -238,10 +238,11 @@
 | 13.11 | UI polish: responsive mobile | 🟡 | ☐ | |
 | 13.12 | UI polish: animations, transitions | 🟡 | ☐ | |
 
-### D14 — 05/04 (Ngày 14) — Documentation + Submit
+### D14 — 05/04 (Ngày 14) — Documentation + Bulk Import + Submit
 | # | Task | Priority | Status | Ghi chú |
 |:--|:-----|:---------|:-------|:--------|
-| 14.1 | Seed data final: 8 brands, 4 collections, 20+ watches | 🔴 | ☐ | |
+| 14.1 | Bulk Import Excel: Products, Brands, Collections | 🔴 | ✅ | Map Mô tả, ghi đè (Rule 1A) |
+| 14.1a| Seed data final: 10 brands, 10 collections, 100 watches | 🔴 | ✅ | Thành công qua Upload Excel |
 | 14.2 | Seed data: sample orders, coupons | 🟡 | ☐ | |
 | 14.3 | README.md hoàn chỉnh (setup, chạy, demo) | 🔴 | ☐ | |
 | 14.4 | Cập nhật tất cả `docs/` files | 🔴 | ☐ | |
@@ -269,15 +270,17 @@
 | Phase 1 (D1-D3) | 45 | 37 | 8 | **45** |
 | Phase 2 (D4-D8) | 46 | 36 | 10 | **46** |
 | Phase 3 (D9-D12) | 48 | 34 | 14 | **48** |
-| Phase 4 (D13-D14) | 25 | 18 | 7 | **4** |
-| **TỔNG** | **164** | **125** | **39** | **143** |
+| Phase 4 (D13-D14) | 26 | 19 | 7 | **6** |
+| **TỔNG** | **165** | **126** | **39** | **145** |
 
 ### Tiến độ tổng
 ```
 Phase 1: ██████████ 100% (45/45) ✅ DONE
 Phase 2: ██████████ 100% (46/46) ✅ DONE
 Phase 3: ██████████ 100% (48/48) ✅ DONE
-Phase 4: ██░░░░░░░░  16% (4/25)  🔄 ĐANG LÀM
+Phase 4: ███░░░░░░░  23% (6/26)  🔄 ĐANG LÀM
+
+> 📅 Cập nhật lần cuối: **26/03/2026** — Đã hoàn tất Bulk Import Excel (Products, Categories, Collections) và nạp 100 sample data.
 ─────────────────────────────
 OVERALL:  █████████░  87% (143/164)
 ```

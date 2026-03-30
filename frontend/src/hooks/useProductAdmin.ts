@@ -28,7 +28,10 @@ export const useUpdateProduct = () => {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: ({ id, payload }: { id: string; payload: any }) => productAdminService.update(id, payload),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'products'] }),
+    onSuccess: (_, variables) => {
+      qc.invalidateQueries({ queryKey: ['admin', 'products'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'product', variables.id] });
+    },
   });
 };
 
@@ -37,5 +40,25 @@ export const useDeleteProduct = () => {
   return useMutation({
     mutationFn: (id: string) => productAdminService.delete(id),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'products'] }),
+  });
+};
+
+export const useBulkDeleteProducts = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (ids: string[]) => productAdminService.bulkDelete(ids),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'products'] }),
+  });
+};
+
+export const useImportExcelProduct = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (file: File) => productAdminService.importExcel(file),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['admin', 'products'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'product'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'inventory'] });
+    },
   });
 };
