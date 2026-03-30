@@ -288,6 +288,11 @@ exports.importProductsFromExcel = async (req, res, next) => {
         if (!category) {
           category = await Category.create({ name: brandName.trim() });
           categories.push(category);
+        } else if (category.isDeleted) {
+          // Phục hồi lại danh mục nếu nó đang trong thùng rác
+          category.isDeleted = false;
+          category.isActive = true;
+          await category.save();
         }
 
         // Resolve Collection (Optional)
@@ -297,6 +302,11 @@ exports.importProductsFromExcel = async (req, res, next) => {
           if (!collection) {
             collection = await Collection.create({ name: collectionName.trim() });
             collections.push(collection);
+          } else if (collection.isDeleted) {
+            // Phục hồi lại bộ sưu tập nếu nó đang trong thùng rác
+            collection.isDeleted = false;
+            collection.isActive = true;
+            await collection.save();
           }
           collectionId = collection._id;
         }
