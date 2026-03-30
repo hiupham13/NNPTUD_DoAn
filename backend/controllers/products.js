@@ -220,19 +220,19 @@ exports.deleteProduct = async (req, res, next) => {
 // @access  Private/Admin
 exports.bulkDeleteProducts = async (req, res, next) => {
   try {
-    const { ids } = req.body;
-    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+    const { productIds } = req.body;
+    if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
       return next(new AppError('Vui lòng chọn ít nhất một sản phẩm để xóa', 400));
     }
 
     await Product.updateMany(
-      { _id: { $in: ids } },
+      { _id: { $in: productIds } },
       { $set: { isDeleted: true, isActive: false } }
     );
 
     res.status(200).json({
       success: true,
-      message: `Xóa ${ids.length} sản phẩm thành công`
+      message: `Xóa ${productIds.length} sản phẩm thành công`
     });
   } catch (error) {
     next(error);
