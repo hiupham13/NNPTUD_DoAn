@@ -42,3 +42,8 @@ PROJECT_ARCHITECTURE_TEMPLATE.md
 upload_results.json
 uploadImages.js
 Đồng hồ/
+BaoCao_ChucNang_LuxuryWatch.md
+BaoCao_ChucNang_LuxuryWatch.pdf
+newman/
+LuxuryWatch.postman_collection.json
+generate-postman.js
