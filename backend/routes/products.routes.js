@@ -17,10 +17,10 @@ router.use(authorize('admin'));
 
 router.post('/', [
   body('name')
-    .notEmpty().withMessage('Tên sản phẩm là bắt buộc')
     .trim()
+    .notEmpty().withMessage('Tên sản phẩm là bắt buộc')
     .matches(/^[^~`!@#$%^&*()_+={}\[\]|\\:;"'<>,.?/]+$/).withMessage('Tên sản phẩm không được chứa ký tự đặc biệt'),
-  body('sku').notEmpty().withMessage('Mã SKU là bắt buộc').trim(),
+  body('sku').trim().notEmpty().withMessage('Mã SKU là bắt buộc'),
   body('price').isNumeric().withMessage('Giá bán phải là số hợp lệ').notEmpty()
     .custom(val => { if (val <= 0) throw new Error('Vui lòng nhập giá hợp lệ'); return true; }),
   body('category').notEmpty().withMessage('Mã danh mục không được để trống')

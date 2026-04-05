@@ -119,7 +119,7 @@ describe('UI Test Cases - Delete Product Endpoint (/api/v1/products/:id & /bulk-
 
     // Code backend controller báo "Vui lòng chọn ít nhất một sản phẩm để xóa" => status 400
     expect(res.status).toBe(400); 
-    expect(res.body.message).includes('Vui lòng chọn ít nhất một sản phẩm để xóa');
+    expect(res.body.message).toContain('Vui lòng chọn ít nhất một sản phẩm để xóa');
   });
 
   // Delete_7: Click Delete nhiều lần liên tiếp
@@ -148,7 +148,7 @@ describe('UI Test Cases - Delete Product Endpoint (/api/v1/products/:id & /bulk-
       });
 
     expect(res.status).toBe(200);
-    expect(res.body.message).includes('Xóa 2 sản phẩm thành công');
+    expect(res.body.message).toContain('Xóa 2 sản phẩm thành công');
   });
 
   // Delete_9: Xóa sản phẩm đang có trong đơn hàng

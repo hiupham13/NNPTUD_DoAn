@@ -72,7 +72,7 @@ describe('UI Test Cases - Add Product Endpoint (/api/v1/products)', () => {
       });
 
     expect(res.status).toBe(400); // 400 Bad Request since Express Validator blocks it
-    expect(res.body.errors.some(e => e.msg.includes('Tên sản phẩm'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Tên sản phẩm'))).toBe(true);
   });
 
   // Add_3: Bỏ trống SKU
@@ -89,7 +89,7 @@ describe('UI Test Cases - Add Product Endpoint (/api/v1/products)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Mã SKU'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Mã SKU'))).toBe(true);
   });
 
   // Add_4: Trùng SKU
@@ -117,7 +117,7 @@ describe('UI Test Cases - Add Product Endpoint (/api/v1/products)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.message).includes('SKU hoặc Tên sản phẩm đã tồn tại');
+    expect(res.body.message).toContain('SKU hoặc Tên sản phẩm đã tồn tại');
   });
 
   // Add_5: Giá = 0 (Requires logic update in API)
@@ -134,7 +134,7 @@ describe('UI Test Cases - Add Product Endpoint (/api/v1/products)', () => {
 
     // Dựa theo UI, kết quả phải lỗi 'Vui lòng nhập giá hợp lệ'
     expect(res.status).toBe(400); 
-    expect(res.body.errors ? res.body.errors.some(e => e.msg.includes('Giá')) : res.body.message.includes('Giá')).toBe(true);
+    expect(res.body.errors ? res.body.errors.some(e => e.message.toLowerCase().includes('giá')) : res.body.message.toLowerCase().includes('giá')).toBe(true);
   });
 
   // Add_6: Giá âm
@@ -150,7 +150,7 @@ describe('UI Test Cases - Add Product Endpoint (/api/v1/products)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors ? res.body.errors.some(e => e.msg.includes('Giá')) : res.body.message.includes('Giá')).toBe(true);
+    expect(res.body.errors ? res.body.errors.some(e => e.message.toLowerCase().includes('giá')) : res.body.message.toLowerCase().includes('giá')).toBe(true);
   });
 
   // Add_7: Giảm giá > 100%
@@ -194,7 +194,7 @@ describe('UI Test Cases - Add Product Endpoint (/api/v1/products)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Tên sản phẩm là bắt buộc'))).toBe(true); // Do đã gọi .trim() trong route
+    expect(res.body.errors.some(e => e.message.includes('Tên sản phẩm là bắt buộc'))).toBe(true); // Do đã gọi .trim() trong route
   });
 
   // Add_10: Special Characters => Cố tình viết expect Fail

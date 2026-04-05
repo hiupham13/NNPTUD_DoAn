@@ -51,7 +51,7 @@ describe('UI Test Cases - Login Endpoint (/api/v1/auth/login)', () => {
 
     expect(res.status).toBe(400); // Bad Request (Validation failed)
     expect(res.body.success).toBe(false);
-    expect(res.body.errors.some(e => e.msg === 'Email không hợp lệ')).toBe(true);
+    expect(res.body.errors.some(e => e.message === 'Email không hợp lệ')).toBe(true);
   });
 
   // Login_3: Wrong password
@@ -108,7 +108,7 @@ describe('UI Test Cases - Login Endpoint (/api/v1/auth/login)', () => {
     expect(res.status).toBe(400); // Validation error
     expect(res.body.success).toBe(false);
     // API validation returns both "Email là bắt buộc" and "Email không hợp lệ"
-    expect(res.body.errors.some(e => e.msg.includes('Email'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Email'))).toBe(true);
   });
 
   // Login_7: Empty password
@@ -122,7 +122,7 @@ describe('UI Test Cases - Login Endpoint (/api/v1/auth/login)', () => {
 
     expect(res.status).toBe(400); // Validation error
     expect(res.body.success).toBe(false);
-    expect(res.body.errors.some(e => e.msg === 'Mật khẩu là bắt buộc')).toBe(true);
+    expect(res.body.errors.some(e => e.message === 'Mật khẩu là bắt buộc')).toBe(true);
   });
 
   // Login_8: Empty email and password
@@ -137,8 +137,8 @@ describe('UI Test Cases - Login Endpoint (/api/v1/auth/login)', () => {
     expect(res.status).toBe(400); // Validation error
     expect(res.body.success).toBe(false);
     
-    expect(res.body.errors.some(e => e.msg.includes('Email'))).toBe(true);
-    expect(res.body.errors.some(e => e.msg === 'Mật khẩu là bắt buộc')).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Email'))).toBe(true);
+    expect(res.body.errors.some(e => e.message === 'Mật khẩu là bắt buộc')).toBe(true);
   });
 
   // Login_9: Email with spaces
@@ -152,7 +152,7 @@ describe('UI Test Cases - Login Endpoint (/api/v1/auth/login)', () => {
 
     expect(res.status).toBe(400); 
     expect(res.body.success).toBe(false);
-    expect(res.body.errors.some(e => e.msg === 'Email không hợp lệ')).toBe(true);
+    expect(res.body.errors.some(e => e.message === 'Email không hợp lệ')).toBe(true);
   });
 
   // Login_10: No internet (Skip for backend API test)

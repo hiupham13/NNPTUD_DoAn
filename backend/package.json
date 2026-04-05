@@ -7,7 +7,9 @@
     "start": "node ./bin/www",
     "dev": "nodemon --ignore uploads/ --ignore _backup_gv/ ./bin/www",
     "seed": "node seeders/seed.js",
-    "test": "jest"
+    "test": "jest --verbose",
+    "test:unit": "jest --selectProjects unit --verbose",
+    "test:integration": "jest --selectProjects integration --verbose"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

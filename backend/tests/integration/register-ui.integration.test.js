@@ -52,7 +52,7 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
 
     expect(res.status).toBe(400);
     expect(res.body.success).toBe(false);
-    expect(res.body.errors.some(e => e.msg === 'Email không hợp lệ')).toBe(true);
+    expect(res.body.errors.some(e => e.message === 'Email không hợp lệ')).toBe(true);
   });
 
   // Register_3: Email đã tồn tại
@@ -82,7 +82,7 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
 
     expect(res.status).toBe(400);
     expect(res.body.success).toBe(false);
-    expect(res.body.errors.some(e => e.msg.includes('Mật khẩu tối thiểu'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Mật khẩu tối thiểu'))).toBe(true);
   });
 
   // Register_5: Bỏ trống họ và tên
@@ -96,7 +96,7 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Họ và tên là bắt buộc')) || res.body.errors.some(e => e.msg.includes('Họ và tên từ 2-50 ký tự'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Họ và tên là bắt buộc')) || res.body.errors.some(e => e.message.includes('Họ và tên từ 2-50 ký tự'))).toBe(true);
   });
 
   // Register_6: Bỏ trống email
@@ -110,7 +110,7 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Email là bắt buộc'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Email là bắt buộc'))).toBe(true);
   });
 
   // Register_7: Bỏ trống mật khẩu
@@ -124,7 +124,7 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Mật khẩu là bắt buộc'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Mật khẩu là bắt buộc'))).toBe(true);
   });
 
   // Register_8: Bỏ trống tất cả các trường
@@ -151,7 +151,7 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Email không hợp lệ'))).toBe(true);
+    expect(res.body.errors.some(e => e.message.includes('Email không hợp lệ'))).toBe(true);
   });
 
   // Register_10: Họ tên chỉ chứa khoảng trắng
@@ -165,6 +165,6 @@ describe('UI Test Cases - Register Endpoint (/api/v1/auth/register)', () => {
       });
 
     expect(res.status).toBe(400);
-    expect(res.body.errors.some(e => e.msg.includes('Họ và tên là bắt buộc'))).toBe(true); // Controller đã chạy lệnh .trim() nên nó sẽ thành empty string
+    expect(res.body.errors.some(e => e.message.includes('Họ và tên là bắt buộc'))).toBe(true); // Controller đã chạy lệnh .trim() nên nó sẽ thành empty string
   });
 });
