@@ -47,3 +47,8 @@ BaoCao_ChucNang_LuxuryWatch.pdf
 newman/
 LuxuryWatch.postman_collection.json
 generate-postman.js
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
