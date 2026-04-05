@@ -16,15 +16,26 @@ router.use(auth);
 router.use(authorize('admin'));
 
 router.post('/', [
-  body('name').notEmpty().withMessage('Tên sản phẩm là bắt buộc').trim(),
+  body('name')
+    .notEmpty().withMessage('Tên sản phẩm là bắt buộc')
+    .trim()
+    .matches(/^[^~`!@#$%^&*()_+={}\[\]|\\:;"'<>,.?/]+$/).withMessage('Tên sản phẩm không được chứa ký tự đặc biệt'),
   body('sku').notEmpty().withMessage('Mã SKU là bắt buộc').trim(),
-  body('price').isNumeric().withMessage('Giá bán phải là số hợp lệ').notEmpty(),
+  body('price').isNumeric().withMessage('Giá bán phải là số hợp lệ').notEmpty()
+    .custom(val => { if (val <= 0) throw new Error('Vui lòng nhập giá hợp lệ'); return true; }),
   body('category').notEmpty().withMessage('Mã danh mục không được để trống')
 ], validate, productController.createProduct);
 
 router.put('/:id', [
-  body('name').optional().notEmpty().withMessage('Tên không được rỗng'),
-  body('price').optional().isNumeric().withMessage('Giá phải là số hợp lệ')
+  body('name')
+    .optional()
+    .trim()
+    .notEmpty().withMessage('Tên không được rỗng')
+    .matches(/^[^~`!@#$%^&*()_+={}\[\]|\\:;"'<>,.?/]+$/).withMessage('Tên sản phẩm không được chứa ký tự đặc biệt'),
+  body('price')
+    .optional()
+    .isNumeric().withMessage('Giá phải là số hợp lệ')
+    .custom(val => { if (val <= 0) throw new Error('Vui lòng nhập giá hợp lệ'); return true; })
 ], validate, productController.updateProduct);
 
 router.delete('/:id', productController.deleteProduct);
